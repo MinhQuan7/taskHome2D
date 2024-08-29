@@ -107,18 +107,14 @@
             height: 100vh;
             overflow: hidden; /* Hide scroll bar in house container */
             position: relative;
+            z-index: 0;
         }
-        .house-container .image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Ensure the image covers the entire container */
-            z-index: 0; /* Ensure image is behind the content */
-        }
+
         .image {
             width: 100%;
             height: 100%;
-            object-fit: cover; /*object-fit:over se fill 100% */
-            border-radius: 8px; 
+            object-fit: cover; /* Ensure the image fills the container without cropping */
+            overflow: hidden; /* Hide scroll bar in house container */
         }
         .overlay-content {
             position: absolute;
@@ -136,11 +132,11 @@
             text-shadow: 0 0 5px #0FF, 0 0 10px #0FF, 0 0 20px #0FF, 0 0 30px #00FFFF, 0 0 40px #00FFFF, 0 0 50px #00FFFF, 0 0 60px #00FFFF;
         }
         .back-button-container {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        z-index: 2;
-         }
+            position: absolute;
+            top: 20px; /* Adjusted to be more visible */
+            left: 20px;
+            z-index: 2;
+        }
 
         .back-button {
             padding: 10px 20px;
@@ -164,16 +160,6 @@
         .back-button:active {
             transform: translateY(0);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-
-        @keyframes neonGlow {
-            0% {
-                box-shadow: 0 0 10px #aa00ff, 0 0 20px #aa00ff, 0 0 30px #aa00ff, 0 0 40px #dd00ff;
-            }
-            100% {
-                box-shadow: 0 0 20px #dd00ff, 0 0 30px #dd00ff, 0 0 40px #aa00ff, 0 0 50px #aa00ff;
-            }
         }
     </style>
 </head>
@@ -202,7 +188,6 @@
         <div class="back-button-container">
             <button class="back-button" onclick="goBackToMenu()">Back to Home</button>
         </div>
-        
     </div>
 
     <!-- House 2 Container -->
@@ -236,7 +221,6 @@
             // Show the menu
             document.getElementById('menu').classList.add('active');
         }
-
         // Random value generator
         function getRandomValue(min, max) {
             return (Math.random() * (max - min) + min).toFixed(2);
