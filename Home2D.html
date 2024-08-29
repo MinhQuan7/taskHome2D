@@ -131,12 +131,12 @@
         }
 
         .image {
-        max-width: 100%;
-        max-height: 100%;
-        width: auto;
-        height: auto;
-        object-fit: contain; /* Ensure the image is fully contained within the container */
-        margin: auto; /* Center the image */
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Add a shadow around the image */
         }
 
         .overlay-content {
@@ -205,6 +205,12 @@
 
             // Show the selected house view
             document.getElementById(houseId).classList.add('active');
+
+            // Start updating values for house 1
+            if (houseId === 'house1') {
+                updateValues();
+                setInterval(updateValues, 2000); // Update every 2 seconds
+            }
         }
 
         function goBackToMenu() {
@@ -219,6 +225,17 @@
 
             // Show the menu
             document.getElementById('menu').classList.add('active');
+        }
+
+        // Generate random values for temperature, humidity, and power consumption
+        function getRandomValue(min, max) {
+            return (Math.random() * (max - min) + min).toFixed(2);
+        }
+
+        function updateValues() {
+            document.getElementById('temperature').textContent = getRandomValue(18, 30); // Temperature between 18°C and 30°C
+            document.getElementById('humidity').textContent = getRandomValue(30, 70); // Humidity between 30% and 70%
+            document.getElementById('power').textContent = getRandomValue(100, 500); // Power consumption between 100W and 500W
         }
     </script>
 </body>
