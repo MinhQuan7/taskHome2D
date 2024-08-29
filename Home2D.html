@@ -39,7 +39,7 @@
             z-index: -1;
         }
 
-        .menu-container, .house-container {
+        .menu-container {
             display: none;
             flex-direction: column;
             align-items: center;
@@ -52,6 +52,18 @@
             max-width: 600px; /* Adjusted max-width */
             text-align: center; /* Text centered in the menu */
             animation: fadeIn 1s ease-out; /* Fade-in effect */
+        }
+
+        .house-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+            background-color: black; /* Background color when viewing images */
+            margin: 0;
+            padding: 0;
         }
 
         .menu-container.active, .house-container.active {
@@ -118,16 +130,13 @@
             background-color: #4169e1; /* RoyalBlue color on hover */
         }
 
-        .house-container {
-            background-color: black; /* Background color when viewing images */
-        }
-
         .image {
             max-width: 100%;
             max-height: 100%;
             width: auto;
             height: auto;
             object-fit: contain;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Add a shadow around the image */
         }
 
         .overlay-content {
