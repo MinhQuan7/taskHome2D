@@ -190,6 +190,60 @@
             right: 20px;
             z-index: 2;
         }
+
+        /* Mũi tên và hình tròn */
+        .arrow {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 20px solid #0FF;
+            position: absolute;
+            z-index: 3;
+        }
+
+        .circle {
+            border: 2px solid #0FF;
+            border-radius: 50%;
+            position: absolute;
+            z-index: 2;
+            width: 50px;
+            height: 50px;
+        }
+
+        /* Vị trí cụ thể cho từng thành phần trong hình ảnh */
+        .arrow-temp {
+            top: 150px;
+            left: 120px;
+            transform: rotate(45deg);
+        }
+
+        .circle-temp {
+            top: 120px;
+            left: 180px;
+        }
+
+        .arrow-humid {
+            top: 300px;
+            left: 420px;
+            transform: rotate(-45deg);
+        }
+
+        .circle-humid {
+            top: 360px;
+            left: 470px;
+        }
+
+        .arrow-power {
+            top: 220px;
+            left: 310px;
+            transform: rotate(90deg);
+        }
+
+        .circle-power {
+            top: 280px;
+            left: 350px;
+        }
     </style>
 </head>
 <body>
@@ -207,6 +261,19 @@
 
     <div class="house-container" id="house1">
         <img src="home.jpg" alt="House 1 Image" class="image">
+        
+        <!-- Mũi tên và hình tròn cho Temperature -->
+        <div class="arrow arrow-temp"></div>
+        <div class="circle circle-temp"></div>
+        
+        <!-- Mũi tên và hình tròn cho Humidity -->
+        <div class="arrow arrow-humid"></div>
+        <div class="circle circle-humid"></div>
+        
+        <!-- Mũi tên và hình tròn cho Power Consumption -->
+        <div class="arrow arrow-power"></div>
+        <div class="circle circle-power"></div>
+
         <div class="overlay-content">
             <div class="parameter">Temperature: <span id="temperature">--</span> °C</div>
             <div class="parameter">Humidity: <span id="humidity">--</span> %</div>
