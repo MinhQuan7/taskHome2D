@@ -14,136 +14,163 @@
             align-items: center;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f3f3f3;
-            overflow: hidden;
+            overflow: hidden; /* Hide scroll bar for the body */
         }
-
         .background-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('background.png');
-            background-size: cover;
-            background-position: center;
-            z-index: -2;
+            background-image: url('background.png'); /* Replace with your background image */
+            background-size: cover; /* Make sure the image covers the entire container */
+            background-position: center; /* Center the image */
+            background-attachment: fixed; /* Keep the background image fixed while scrolling */
+            filter: blur(8px); /* Apply blur effect to the background image */
+            z-index: -2; /* Place the background behind the content */
         }
-
         .overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: -1;
+            background: rgba(0, 0, 0, 0.5); /* Black background with 50% opacity */
+            z-index: -1; /* Place the overlay behind the content */
         }
-
         .menu-container, .house-container {
             display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 100%;
-            height: 100%;
-            position: relative;
-            z-index: 1;
+            background-color: rgba(255, 255, 255, 0.9); /* White background with 90% opacity */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 80%; /* Adjust width as needed */
+            max-width: 800px; /* Adjust max-width as needed */
+            text-align: center; /* Center text */
+            position: relative; /* Ensure content is positioned above the overlay */
+            z-index: 1; /* Place the content above the overlay */
         }
-
         .menu-container.active, .house-container.active {
             display: flex;
         }
-
         .menu-header {
             font-size: 2.5em;
             margin-bottom: 20px;
             color: #333;
             font-weight: bold;
         }
-
         .menu-description {
             font-size: 1.2em;
             margin-bottom: 40px;
             color: #555;
         }
-
         .menu-buttons {
             display: flex;
             justify-content: space-around;
             width: 100%;
         }
-
         .menu-button, .back-button {
             padding: 20px 40px;
             font-size: 1.5em;
             font-weight: bold;
             color: white;
-            background-color: #ff6347;
+            background-color: #ff6347; /* Tomato color for buttons */
             border: none;
             border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
         }
-
         .menu-button:hover, .back-button:hover {
             transform: translateY(-5px);
-            background-color: #ff4500;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background-color: #ff4500; /* Darker tomato color on hover */
         }
-
         .menu-button:active, .back-button:active {
             transform: translateY(0);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-
         .menu-button:nth-child(2) {
+            background-color: #4682b4; /* SteelBlue color for second button */
+        }
+        .menu-button:nth-child(2):hover {
+            background-color: #4169e1; /* RoyalBlue color on hover */
+        }
+        .menu-button:nth-child(2):active {
             background-color: #4682b4;
         }
-
-        .menu-button:nth-child(2):hover {
-            background-color: #4169e1;
-        }
-
         .house-container {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden; /* Hide scroll bar in house container */
+            position: relative;
+            z-index: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: black;
         }
 
         .image {
             max-width: 100%;
             max-height: 100%;
-            width: auto;
-            height: auto;
-            object-fit: contain;
+            object-fit: contain; /* Ensure the image maintains its aspect ratio while fitting within the container */
+            overflow: hidden; /* Hide scroll bar in house container */
         }
-
         .overlay-content {
             position: absolute;
             top: 10%;
             left: 10%;
+            transform: translate(-10%, -10%);
             color: white;
-            font-size: 1.2em;
-            z-index: 2;
+            font-size: 1.2em; /* Adjusted font size */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            z-index: 1; /* Ensure text is above the image */
         }
-
         .parameter {
-            margin-bottom: 5px;
-            color: #0FF;
-            text-shadow: 0 0 5px #0FF, 0 0 10px #0FF, 0 0 20px #0FF;
+            margin-bottom: 5px; /* Reduced margin for better spacing */
+            color: #0FF; /* Neon cyan color */
+            text-shadow: 0 0 5px #0FF, 0 0 10px #0FF, 0 0 20px #0FF, 0 0 30px #00FFFF, 0 0 40px #00FFFF, 0 0 50px #00FFFF, 0 0 60px #00FFFF;
         }
-
         .back-button-container {
             position: absolute;
-            top: 20px;
-            left: 20px;
+            top: 50px; /* Adjusted to be more visible */
+            left: 50px; /* Adjusted to be more visible */
             z-index: 2;
+        }
+
+        .back-button {
+            padding: 10px 20px;
+            font-size: 1em;
+            font-weight: bold;
+            color: white;
+            background-color: #ff6347; /* Tomato color for buttons */
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .back-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background-color: #ff4500; /* Darker tomato color on hover */
+        }
+
+        .back-button:active {
+            transform: translateY(0);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
-    <div class="background-container"></div>
-    <div class="overlay"></div>
+    <div class="background-container"></div> <!-- Add background container with blur effect -->
+    <div class="overlay"></div> <!-- Add overlay behind the content -->
 
+    <!-- Menu Container -->
     <div class="menu-container active" id="menu">
         <div class="menu-header">Welcome to Your Smart Home</div>
         <div class="menu-description">Choose the home layout you would like to explore:</div>
@@ -153,6 +180,7 @@
         </div>
     </div>
 
+    <!-- House 1 Container -->
     <div class="house-container" id="house1">
         <img src="home.jpg" alt="House 1 Image" class="image">
         <div class="overlay-content">
@@ -165,6 +193,7 @@
         </div>
     </div>
 
+    <!-- House 2 Container -->
     <div class="house-container" id="house2">
         <img src="home2.jpg" alt="House 2 Image" class="image">
         <div class="back-button-container">
@@ -174,8 +203,13 @@
 
     <script>
         function loadHouse(houseId) {
+            // Hide the menu
             document.getElementById('menu').classList.remove('active');
+
+            // Show the selected house view
             document.getElementById(houseId).classList.add('active');
+
+            // If it's house 1, start updating the values
             if (houseId === 'house1') {
                 updateValues();
                 setInterval(updateValues, 5000);
@@ -183,20 +217,22 @@
         }
 
         function goBackToMenu() {
+            // Hide all house views
             document.querySelectorAll('.house-container').forEach(function(el) {
                 el.classList.remove('active');
             });
+            // Show the menu
             document.getElementById('menu').classList.add('active');
         }
-
+        // Random value generator
         function getRandomValue(min, max) {
             return (Math.random() * (max - min) + min).toFixed(2);
         }
 
         function updateValues() {
-            document.getElementById('temperature').textContent = getRandomValue(18, 30);
-            document.getElementById('humidity').textContent = getRandomValue(30, 70);
-            document.getElementById('power').textContent = getRandomValue(50, 500);
+            document.getElementById('temperature').textContent = getRandomValue(18, 35); // Random temperature between 18°C and 30°C
+            document.getElementById('humidity').textContent = getRandomValue(30, 70); // Random humidity between 30% and 70%
+            document.getElementById('power').textContent = getRandomValue(50, 500); // Random power consumption between 50W and 500W
         }
     </script>
 </body>
