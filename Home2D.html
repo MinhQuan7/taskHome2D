@@ -218,40 +218,66 @@
             right: -7px;
         }
 
+        .circle {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 2px solid #00f;
+            border-radius: 50%;
+        }
+
+        /* Temperature Label and Arrow */
         .label-temp {
-            top: 10%;
-            left: 20%;
+            top: 20px;
+            left: 20px;
         }
 
         .arrow-temp {
-            top: 20%;
-            left: 25%;
+            top: 80px;
+            left: 100px;
             height: 100px;
             transform: rotate(45deg);
         }
 
+        .circle-temp {
+            top: 250px;
+            left: 220px;
+        }
+
+        /* Humidity Label and Arrow */
         .label-humid {
-            bottom: 20%;
-            left: 10%;
+            bottom: 150px;
+            left: 40px;
         }
 
         .arrow-humid {
-            bottom: 30%;
-            left: 20%;
+            bottom: 200px;
+            left: 100px;
             height: 80px;
             transform: rotate(-45deg);
         }
 
+        .circle-humid {
+            bottom: 80px;
+            left: 280px;
+        }
+
+        /* Power Consumption Label and Arrow */
         .label-power {
-            bottom: 10%;
-            right: 10%;
+            bottom: 100px;
+            right: 20px;
         }
 
         .arrow-power {
-            bottom: 15%;
-            right: 15%;
+            bottom: 150px;
+            right: 120px;
             height: 80px;
             transform: rotate(-45deg);
+        }
+
+        .circle-power {
+            bottom: 90px;
+            right: 180px;
         }
     </style>
 </head>
@@ -282,15 +308,18 @@
             <button class="light-button" onclick="toggleLight()">Turn Off Light</button>
         </div>
 
-        <!-- Labels and Arrows for House 1 -->
-        <div class="label-container label-temp">Temp</div>
+        <!-- Labels, Arrows, and Circles for House 1 -->
+        <div class="label-container label-temp">Temperature</div>
         <div class="arrow arrow-temp"></div>
+        <div class="circle circle-temp"></div>
 
-        <div class="label-container label-humid">Humid</div>
+        <div class="label-container label-humid">Humidity</div>
         <div class="arrow arrow-humid"></div>
+        <div class="circle circle-humid"></div>
 
         <div class="label-container label-power">Power</div>
         <div class="arrow arrow-power"></div>
+        <div class="circle circle-power"></div>
     </div>
 
     <div class="house-container" id="house2">
@@ -307,15 +336,18 @@
             <button class="light-button" onclick="toggleLight()">Turn Off Light</button>
         </div>
 
-        <!-- Labels and Arrows for House 2 -->
-        <div class="label-container label-temp">Temp</div>
+        <!-- Labels, Arrows, and Circles for House 2 -->
+        <div class="label-container label-temp">Temperature</div>
         <div class="arrow arrow-temp"></div>
+        <div class="circle circle-temp"></div>
 
-        <div class="label-container label-humid">Humid</div>
+        <div class="label-container label-humid">Humidity</div>
         <div class="arrow arrow-humid"></div>
+        <div class="circle circle-humid"></div>
 
         <div class="label-container label-power">Power</div>
         <div class="arrow arrow-power"></div>
+        <div class="circle circle-power"></div>
     </div>
 
     <script>
