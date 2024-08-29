@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Selection Menu</title>
+    <style>
+        
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f3f3;
+            background-image: url('your-background-image.jpg'); /* Replace with your background image */
+            background-size: cover; /* Make sure the image covers the entire body */
+            background-position: center; /* Center the image */
+            background-attachment: fixed; /* Keep the background image fixed while scrolling */
+            overflow: hidden; /* Hide scroll bar for the body */
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Black background with 50% opacity */
+            z-index: -1; /* Place the overlay behind the content */
+        }
+        .menu-container, .house-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.9); /* White background with 90% opacity */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            height: 100%;
+            text-align: center; /* Center text */
+            position: relative; /* Ensure content is positioned above the overlay */
+            z-index: 1; /* Place the content above the overlay */
+        }
+        .menu-container.active, .house-container.active {
+            display: flex;
+        }
+        .menu-header {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: bold;
+        }
+        .menu-description {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            color: #555;
+        }
+        .menu-buttons {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+        .menu-button {
+            padding: 20px 40px;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+            background-color: #ff6347; /* Tomato color for buttons */
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .menu-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background-color: #ff4500; /* Darker tomato color on hover */
+        }
+        .menu-button:active {
+            transform: translateY(0);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .menu-button:nth-child(2) {
+            background-color: #4682b4; /* SteelBlue color for second button */
+        }
+        .menu-button:nth-child(2):hover {
+            background-color: #4169e1; /* RoyalBlue color on hover */
+        }
+        .menu-button:nth-child(2):active {
+            background-color: #4682b4;
+        }
+        .house-container {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden; /* Hide scroll bar in house container */
+            padding: 0;
+        }
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            box-shadow: 0 0 10px #aa00ff, 0 0 20px #aa00ff, 0 0 30px #aa00ff, 0 0 40px #dd00ff;
+            border-radius: 10px;
+            animation: neonGlow 3s infinite alternate;
+            background-color: white;
+            overflow: hidden; /* Hide any overflowing content */
+        }
+        .image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover the entire container */
+            border-radius: 8px;
+        }
+        .overlay-content {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            transform: translate(-10%, -10%);
+            color: white;
+            font-size: 1.2em; /* Adjusted font size */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        .parameter {
+            margin-bottom: 5px; /* Reduced margin for better spacing */
+            color: #0FF; /* Neon cyan color */
+            text-shadow: 0 0 5px #0FF, 0 0 10px #0FF, 0 0 20px #0FF, 0 0 30px #00FFFF, 0 0 40px #00FFFF, 0 0 50px #00FFFF, 0 0 60px #00FFFF;
+        }
+
+        @keyframes neonGlow {
+            0% {
+                box-shadow: 0 0 10px #aa00ff, 0 0 20px #aa00ff, 0 0 30px #aa00ff, 0 0 40px #dd00ff;
+            }
+            100% {
+                box-shadow: 0 0 20px #dd00ff, 0 0 30px #dd00ff, 0 0 40px #aa00ff, 0 0 50px #aa00ff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div> <!-- Add overlay behind the content -->
+
+    <!-- Menu Container -->
+    <div class="menu-container active" id="menu">
+        <div class="menu-header">Welcome to Your Smart Home</div>
+        <div class="menu-description">Choose the home layout you would like to explore:</div>
+        <div class="menu-buttons">
+            <button class="menu-button" onclick="loadHouse('house1')">House 1</button>
+            <button class="menu-button" onclick="loadHouse('house2')">House 2</button>
+        </div>
+    </div>
+
+    <!-- House 1 Container -->
+    <div class="house-container" id="house1">
+        <div class="container">
+            <img src="background.png" alt="Background Image" class="image">
+            <div class="overlay-content">
+                <div class="parameter">Temperature: <span id="temperature">--</span> °C</div>
+                <div class="parameter">Humidity: <span id="humidity">--</span> %</div>
+                <div class="parameter">Power Consumption: <span id="power">--</span> W</div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- House 2 Container -->
+    <div class="house-container" id="house2">
+        <div class="container">
+            <img src="home2.jpg" alt="House 2 Image" class="image">
+        </div>
+    </div>
+
+    <script>
+        function loadHouse(houseId) {
+            // Hide the menu
+            document.getElementById('menu').classList.remove('active');
+
+            // Show the selected house view
+            document.getElementById(houseId).classList.add('active');
+
+            // If it's house 1, start updating the values
+            if (houseId === 'house1') {
+                updateValues();
+                setInterval(updateValues, 5000);
+            }
+        }
+
+        // Random value generator
+        function getRandomValue(min, max) {
+            return (Math.random() * (max - min) + min).toFixed(2);
+        }
+
+        function updateValues() {
+            document.getElementById('temperature').textContent = getRandomValue(18, 30); // Random temperature between 18°C and 30°C
+            document.getElementById('humidity').textContent = getRandomValue(30, 70); // Random humidity between 30% and 70%
+            document.getElementById('power').textContent = getRandomValue(100, 500); // Random power consumption between 100W and 500W
+        }
+    </script>
+</body>
+</html>
