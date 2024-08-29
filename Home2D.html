@@ -64,7 +64,7 @@
             background-color: black; /* Background color when viewing images */
             margin: 0;
             padding: 0;
-            transition: filter 0.5s ease; /* Transition for the filter effect */
+            position: relative;
         }
 
         .menu-container.active, .house-container.active {
@@ -190,6 +190,69 @@
             right: 20px;
             z-index: 2;
         }
+
+        /* Arrow and Label Styling */
+        .label-container {
+            position: absolute;
+            font-size: 1em;
+            font-weight: bold;
+            color: #00f; /* Blue text for labels */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle shadow for text */
+        }
+
+        .arrow {
+            position: absolute;
+            width: 2px;
+            background-color: #00f;
+        }
+
+        .arrow::after {
+            content: '';
+            position: absolute;
+            border: solid #00f;
+            border-width: 6px 6px 0 0;
+            display: inline-block;
+            padding: 3px;
+            transform: rotate(45deg);
+            top: -7px;
+            right: -7px;
+        }
+
+        .label-temp {
+            top: 10%;
+            left: 20%;
+        }
+
+        .arrow-temp {
+            top: 20%;
+            left: 25%;
+            height: 100px;
+            transform: rotate(45deg);
+        }
+
+        .label-humid {
+            bottom: 20%;
+            left: 10%;
+        }
+
+        .arrow-humid {
+            bottom: 30%;
+            left: 20%;
+            height: 80px;
+            transform: rotate(-45deg);
+        }
+
+        .label-power {
+            bottom: 10%;
+            right: 10%;
+        }
+
+        .arrow-power {
+            bottom: 15%;
+            right: 15%;
+            height: 80px;
+            transform: rotate(-45deg);
+        }
     </style>
 </head>
 <body>
@@ -216,18 +279,43 @@
             <button class="back-button" onclick="goBackToMenu()">Back to Home</button>
         </div>
         <div class="light-button-container">
-            <button class="light-button" id="lightButton" onclick="toggleLight()">Toggle Light</button>
+            <button class="light-button" onclick="toggleLight()">Turn Off Light</button>
         </div>
+
+        <!-- Labels and Arrows for House 1 -->
+        <div class="label-container label-temp">Temp</div>
+        <div class="arrow arrow-temp"></div>
+
+        <div class="label-container label-humid">Humid</div>
+        <div class="arrow arrow-humid"></div>
+
+        <div class="label-container label-power">Power</div>
+        <div class="arrow arrow-power"></div>
     </div>
 
     <div class="house-container" id="house2">
         <img src="home2.jpg" alt="House 2 Image" class="image">
+        <div class="overlay-content">
+            <div class="parameter">Temperature: <span id="temperature2">--</span> °C</div>
+            <div class="parameter">Humidity: <span id="humidity2">--</span> %</div>
+            <div class="parameter">Power Consumption: <span id="power2">--</span> W</div>
+        </div>
         <div class="back-button-container">
             <button class="back-button" onclick="goBackToMenu()">Back to Home</button>
         </div>
         <div class="light-button-container">
-            <button class="light-button" id="lightButton" onclick="toggleLight()">Toggle Light</button>
+            <button class="light-button" onclick="toggleLight()">Turn Off Light</button>
         </div>
+
+        <!-- Labels and Arrows for House 2 -->
+        <div class="label-container label-temp">Temp</div>
+        <div class="arrow arrow-temp"></div>
+
+        <div class="label-container label-humid">Humid</div>
+        <div class="arrow arrow-humid"></div>
+
+        <div class="label-container label-power">Power</div>
+        <div class="arrow arrow-power"></div>
     </div>
 
     <script>
@@ -245,7 +333,7 @@
             document.getElementById(houseId).classList.add('active');
 
             // Start updating values for house 1
-            if (houseId === 'house1') {
+            if (houseId === 'house1' || houseId === 'house2') {
                 updateValues();
                 setInterval(updateValues, 2000); // Update every 2 seconds
             }
@@ -295,7 +383,6 @@
             document.getElementById('humidity').textContent = getRandomValue(30, 70); // Humidity between 30% and 70%
             document.getElementById('power').textContent = getRandomValue(100, 500); // Power consumption between 100W and 500W
         }
-        
     </script>
 </body>
 </html>
