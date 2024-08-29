@@ -64,6 +64,7 @@
             background-color: black; /* Background color when viewing images */
             margin: 0;
             padding: 0;
+            transition: filter 0.5s ease; /* Transition for the filter effect */
         }
 
         .menu-container.active, .house-container.active {
@@ -100,7 +101,7 @@
             width: 100%;
         }
 
-        .menu-button, .back-button {
+        .menu-button, .back-button, .light-button {
             padding: 15px 30px; /* Adjusted padding for a more compact look */
             font-size: 1.2em; /* Slightly smaller font size for a refined look */
             font-weight: bold;
@@ -109,16 +110,17 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s, color 0.3s;
+            margin: 10px; /* Add some margin between buttons */
         }
 
-        .menu-button:hover, .back-button:hover {
+        .menu-button:hover, .back-button:hover, .light-button:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
             background-color: #ff4500; /* Darker tomato color on hover */
         }
 
-        .menu-button:active, .back-button:active {
+        .menu-button:active, .back-button:active, .light-button:active {
             transform: translateY(0);
         }
 
@@ -128,6 +130,16 @@
 
         .menu-button:nth-child(2):hover {
             background-color: #4169e1; /* RoyalBlue color on hover */
+        }
+
+        .light-button {
+            background-color: #32cd32; /* Light green color when light is on */
+            box-shadow: 0 0 10px #32cd32; /* Green glow effect when light is on */
+        }
+
+        .light-button.off {
+            background-color: #555; /* Darker gray color when light is off */
+            box-shadow: 0 0 10px #555; /* Gray glow effect when light is off */
         }
 
         .image {
@@ -161,6 +173,13 @@
             left: 20px;
             z-index: 2;
         }
+
+        .light-button-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 2;
+        }
     </style>
 </head>
 <body>
@@ -186,6 +205,9 @@
         <div class="back-button-container">
             <button class="back-button" onclick="goBackToMenu()">Back to Home</button>
         </div>
+        <div class="light-button-container">
+            <button class="light-button" id="lightButton" onclick="toggleLight()">Toggle Light</button>
+        </div>
     </div>
 
     <div class="house-container" id="house2">
@@ -193,9 +215,14 @@
         <div class="back-button-container">
             <button class="back-button" onclick="goBackToMenu()">Back to Home</button>
         </div>
+        <div class="light-button-container">
+            <button class="light-button" id="lightButton" onclick="toggleLight()">Toggle Light</button>
+        </div>
     </div>
 
     <script>
+        let lightOn = true;
+
         function loadHouse(houseId) {
             // Hide the menu
             document.getElementById('menu').classList.remove('active');
@@ -226,6 +253,26 @@
 
             // Show the menu
             document.getElementById('menu').classList.add('active');
+        }
+
+        function toggleLight() {
+            lightOn = !lightOn;
+            const houseContainers = document.querySelectorAll('.house-container.active');
+            const lightButton = document.querySelector('.light-button');
+
+            houseContainers.forEach(container => {
+                if (lightOn) {
+                    container.style.filter = 'brightness(1)'; // Normal brightness
+                    lightButton.textContent = 'Turn Off Light';
+                    lightButton.classList.remove('off');
+                    lightButton.classList.add('on');
+                } else {
+                    container.style.filter = 'brightness(0.4)'; // Dim the image
+                    lightButton.textContent = 'Turn On Light';
+                    lightButton.classList.remove('on');
+                    lightButton.classList.add('off');
+                }
+            });
         }
 
         // Generate random values for temperature, humidity, and power consumption
