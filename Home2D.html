@@ -111,6 +111,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            background-color: #000; /* Set a black background to replace the cleared one */
         }
 
         .image {
@@ -206,6 +207,10 @@
             // Hide the menu
             document.getElementById('menu').classList.remove('active');
 
+            // Hide the background and overlay when entering the house view
+            document.querySelector('.background-container').style.display = 'none';
+            document.querySelector('.overlay').style.display = 'none';
+
             // Show the selected house view
             document.getElementById(houseId).classList.add('active');
 
@@ -223,6 +228,10 @@
             });
             // Show the menu
             document.getElementById('menu').classList.add('active');
+
+            // Restore the background and overlay
+            document.querySelector('.background-container').style.display = 'block';
+            document.querySelector('.overlay').style.display = 'block';
         }
         // Random value generator
         function getRandomValue(min, max) {
