@@ -106,7 +106,6 @@
             width: 100%;
             height: 100vh;
             overflow: hidden; /* Hide scroll bar in house container */
-            padding: 0;
             position: relative;
         }
         .house-container .image {
@@ -115,8 +114,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Make the image cover the entire container without distortion */
-            border-radius: 0; /* No border-radius to maintain full size */
+            object-fit: cover; /* Ensure the image covers the entire container */
             z-index: 0; /* Ensure image is behind the content */
         }
         .overlay-content {
@@ -161,7 +159,7 @@
 
     <!-- House 1 Container -->
     <div class="house-container" id="house1">
-        <img src="home.jpg" alt="Background Image" class="image">
+        <img src="home.jpg" alt="House 1 Image" class="image">
         <div class="overlay-content">
             <div class="parameter">Temperature: <span id="temperature">--</span> °C</div>
             <div class="parameter">Humidity: <span id="humidity">--</span> %</div>
