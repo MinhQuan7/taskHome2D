@@ -129,6 +129,7 @@
         .menu-button:nth-child(2):hover {
             background-color: #4169e1; /* RoyalBlue color on hover */
         }
+
         .image {
             max-width: 100%;
             max-height: 100%;
@@ -137,10 +138,12 @@
             object-fit: contain;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Add a shadow around the image */
         }
+
         .overlay-content {
             position: absolute;
-            top: 10%;
-            left: 10%;
+            bottom: 10px; /* Position near the bottom */
+            left: 10px; /* Position near the left side */
+            text-align: left; /* Align text to the left */
             color: white;
             font-size: 1.2em;
             z-index: 2;
@@ -158,7 +161,6 @@
             left: 20px;
             z-index: 2;
         }
-        
     </style>
 </head>
 <body>
