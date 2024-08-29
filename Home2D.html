@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Selection Menu</title>
     <style>
-        
         body {
             margin: 0;
             padding: 0;
@@ -15,11 +14,12 @@
             align-items: center;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f3f3f3;
-            background-image: url('your-background-image.jpg'); /* Replace with your background image */
+            background-image: url('background.png'); /* Replace with your background image */
             background-size: cover; /* Make sure the image covers the entire body */
             background-position: center; /* Center the image */
             background-attachment: fixed; /* Keep the background image fixed while scrolling */
             overflow: hidden; /* Hide scroll bar for the body */
+            filter: blur(5px); /* Apply blur effect to the background */
         }
         .overlay {
             position: absolute;
@@ -157,7 +157,7 @@
     <!-- House 1 Container -->
     <div class="house-container" id="house1">
         <div class="container">
-            <img src="background.png" alt="Background Image" class="image">
+            <img src="home.jpg" alt="Background Image" class="image">
             <div class="overlay-content">
                 <div class="parameter">Temperature: <span id="temperature">--</span> °C</div>
                 <div class="parameter">Humidity: <span id="humidity">--</span> %</div>
@@ -166,7 +166,6 @@
         </div>
     </div>
 
-    
     <!-- House 2 Container -->
     <div class="house-container" id="house2">
         <div class="container">
