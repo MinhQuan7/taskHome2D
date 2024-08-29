@@ -108,15 +108,12 @@
             overflow: hidden; /* Hide scroll bar in house container */
             position: relative;
             z-index: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         .image {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain; /* Ensure the image maintains its aspect ratio while fitting within the container */
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /*object-fit:over se fill 100% */
             overflow: hidden; /* Hide scroll bar in house container */
         }
         .overlay-content {
@@ -135,11 +132,11 @@
             text-shadow: 0 0 5px #0FF, 0 0 10px #0FF, 0 0 20px #0FF, 0 0 30px #00FFFF, 0 0 40px #00FFFF, 0 0 50px #00FFFF, 0 0 60px #00FFFF;
         }
         .back-button-container {
-            position: absolute;
-            top: 50px; /* Adjusted to be more visible */
-            left: 50px; /* Adjusted to be more visible */
-            z-index: 2;
-        }
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        z-index: 2;
+         }
 
         .back-button {
             padding: 10px 20px;
@@ -163,6 +160,16 @@
         .back-button:active {
             transform: translateY(0);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+
+        @keyframes neonGlow {
+            0% {
+                box-shadow: 0 0 10px #aa00ff, 0 0 20px #aa00ff, 0 0 30px #aa00ff, 0 0 40px #dd00ff;
+            }
+            100% {
+                box-shadow: 0 0 20px #dd00ff, 0 0 30px #dd00ff, 0 0 40px #aa00ff, 0 0 50px #aa00ff;
+            }
         }
     </style>
 </head>
@@ -191,6 +198,7 @@
         <div class="back-button-container">
             <button class="back-button" onclick="goBackToMenu()">Back to Home</button>
         </div>
+        
     </div>
 
     <!-- House 2 Container -->
@@ -206,13 +214,13 @@
             // Hide the menu
             document.getElementById('menu').classList.remove('active');
 
-            // Show the selected house view
+            // Show the selected house views
             document.getElementById(houseId).classList.add('active');
 
             // If it's house 1, start updating the values
             if (houseId === 'house1') {
                 updateValues();
-                setInterval(updateValues, 5000);
+                setInterval(updateValues, 2000);
             }
         }
 
@@ -224,13 +232,14 @@
             // Show the menu
             document.getElementById('menu').classList.add('active');
         }
+
         // Random value generator
         function getRandomValue(min, max) {
             return (Math.random() * (max - min) + min).toFixed(2);
         }
 
         function updateValues() {
-            document.getElementById('temperature').textContent = getRandomValue(18, 35); // Random temperature between 18°C and 30°C
+            document.getElementById('temperature').textContent = getRandomValue(18, 30); // Random temperature between 18°C and 30°C
             document.getElementById('humidity').textContent = getRandomValue(30, 70); // Random humidity between 30% and 70%
             document.getElementById('power').textContent = getRandomValue(50, 500); // Random power consumption between 50W and 500W
         }
