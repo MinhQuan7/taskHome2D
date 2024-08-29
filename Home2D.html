@@ -44,11 +44,13 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             width: 100%;
             height: 100%;
-            text-align: center;
-            position: relative;
-            z-index: 1;
+            text-align: center; /*Text nam o giua menu*/
         }
 
         .menu-container.active, .house-container.active {
@@ -152,7 +154,7 @@
     </div>
 
     <div class="house-container" id="house1">
-        <img src="home.png" alt="House 1 Image" class="image">
+        <img src="home.jpg" alt="House 1 Image" class="image">
         <div class="overlay-content">
             <div class="parameter">Temperature: <span id="temperature">--</span> °C</div>
             <div class="parameter">Humidity: <span id="humidity">--</span> %</div>
@@ -164,7 +166,7 @@
     </div>
 
     <div class="house-container" id="house2">
-        <img src="home2.png" alt="House 2 Image" class="image">
+        <img src="home2.jpg" alt="House 2 Image" class="image">
         <div class="back-button-container">
             <button class="back-button" onclick="goBackToMenu()">Back to Home</button>
         </div>
