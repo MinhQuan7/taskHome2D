@@ -14,12 +14,20 @@
             align-items: center;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f3f3f3;
+            overflow: hidden; /* Hide scroll bar for the body */
+        }
+        .background-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: url('background.png'); /* Replace with your background image */
-            background-size: cover; /* Make sure the image covers the entire body */
+            background-size: cover; /* Make sure the image covers the entire container */
             background-position: center; /* Center the image */
             background-attachment: fixed; /* Keep the background image fixed while scrolling */
-            overflow: hidden; /* Hide scroll bar for the body */
-            filter: blur(5px); /* Apply blur effect to the background */
+            filter: blur(8px); /* Apply blur effect to the background image */
+            z-index: -2; /* Place the background behind the content */
         }
         .overlay {
             position: absolute;
@@ -39,8 +47,8 @@
             padding: 40px;
             border-radius: 15px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            height: 100%;
+            width: 80%; /* Adjust width as needed */
+            max-width: 800px; /* Adjust max-width as needed */
             text-align: center; /* Center text */
             position: relative; /* Ensure content is positioned above the overlay */
             z-index: 1; /* Place the content above the overlay */
@@ -142,6 +150,7 @@
     </style>
 </head>
 <body>
+    <div class="background-container"></div> <!-- Add background container with blur effect -->
     <div class="overlay"></div> <!-- Add overlay behind the content -->
 
     <!-- Menu Container -->
@@ -196,7 +205,7 @@
         function updateValues() {
             document.getElementById('temperature').textContent = getRandomValue(18, 30); // Random temperature between 18°C and 30°C
             document.getElementById('humidity').textContent = getRandomValue(30, 70); // Random humidity between 30% and 70%
-            document.getElementById('power').textContent = getRandomValue(100, 500); // Random power consumption between 100W and 500W
+            document.getElementById('power').textContent = getRandomValue(50, 500); // Random power consumption between 50W and 500W
         }
     </script>
 </body>
