@@ -135,11 +135,21 @@
         .light-button {
             background-color: #32cd32; /* Light green color when light is on */
             box-shadow: 0 0 10px #32cd32; /* Green glow effect when light is on */
+            animation: neonGlow 2s infinite alternate; /* Neon glow effect */
         }
 
         .light-button.off {
             background-color: #555; /* Darker gray color when light is off */
             box-shadow: 0 0 10px #555; /* Gray glow effect when light is off */
+        }
+
+        @keyframes neonGlow {
+            from {
+                box-shadow: 0 0 5px #32cd32, 0 0 10px #32cd32, 0 0 15px #32cd32;
+            }
+            to {
+                box-shadow: 0 0 15px #32cd32, 0 0 20px #32cd32, 0 0 25px #32cd32;
+            }
         }
 
         .image {
@@ -285,6 +295,7 @@
             document.getElementById('humidity').textContent = getRandomValue(30, 70); // Humidity between 30% and 70%
             document.getElementById('power').textContent = getRandomValue(100, 500); // Power consumption between 100W and 500W
         }
+        
     </script>
 </body>
 </html>
