@@ -64,23 +64,15 @@
             background-color: black;
             margin: 0;
             padding: 0;
-            transition: filter 0.5s ease;
             position: relative;
         }
 
-        .menu-container.active, .house-container.active {
+        .house-container.active {
             display: flex;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+        .blur-effect {
+            filter: blur(5px);
         }
 
         .menu-header {
@@ -192,7 +184,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 300px;
+            width: 320px; /* Slightly adjusted width to accommodate the icon */
             padding: 20px;
             background-color: white;
             border-radius: 10px;
@@ -216,8 +208,10 @@
             }
         }
 
-        .house-container.blur {
-            filter: blur(5px);
+        .pop-up img {
+            width: 40px; /* Set the width of the icon */
+            height: 40px; /* Set the height of the icon */
+            margin-bottom: 15px; /* Space between the icon and the heading */
         }
 
         .pop-up h3 {
@@ -287,6 +281,7 @@
 
         <div class="pop-up" id="popUp">
             <button class="close-button" onclick="closePopUp()">&times;</button>
+            <img src="electricity.png" alt="Icon"> <!-- Replace 'icon.png' with your actual image path -->
             <h3>Power Consumption</h3>
             <div>
                 <p>Monday to Friday: <span id="powerStats">--</span> kWh</p>
@@ -326,13 +321,13 @@
 
         function showPopUp() {
             document.getElementById('popUp').classList.add('active');
-            document.getElementById('house1').classList.add('blur');
+            document.querySelector('.house-container.active').classList.add('blur-effect');
             document.getElementById('powerStats').textContent = '150'; // Example: 150 kWh
         }
 
         function closePopUp() {
             document.getElementById('popUp').classList.remove('active');
-            document.getElementById('house1').classList.remove('blur');
+            document.querySelector('.house-container.active').classList.remove('blur-effect');
         }
 
         function calculateCost() {
