@@ -371,6 +371,67 @@
         .h3{
             color: #fff;
         }
+
+        .weather-pop-up-container {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Màu nền tối bên ngoài pop-up */
+            z-index: 300; /* Đảm bảo pop-up nằm trên các phần tử khác */
+        }
+
+        .weather-pop-up {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .weather-pop-up h3 {
+            margin: 0;
+            padding-bottom: 10px;
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        .weather-pop-up .weather-detail {
+            margin: 10px 0;
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        .weather-pop-up .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: black;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .weather-pop-up .close-button:hover {
+            background-color: red;
+            color: white;
+        }
+
     </style>
 </head>
 <body>
@@ -403,6 +464,18 @@
             <div class="text-box" id="powerBox">
                 Power: <span id="power">--</span> W
             </div>
+        </div>
+
+        <!-- Pop-up weather -->
+        <div class="weather-pop-up-container" id="weatherPopUpContainer">
+        <div class="weather-pop-up">
+            <button class="close-button" onclick="closeWeatherPopUp()">&times;</button>
+            <h3>Weather Information</h3>
+            <div class="weather-detail">Temperature: <span id="weatherTemp">--</span> °C</div>
+            <div class="weather-detail">Humidity: <span id="weatherHumidity">--</span> %</div>
+            <div class="weather-detail">Wind Speed: <span id="weatherWind">--</span> m/s</div>
+            <div class="weather-detail">Description: <span id="weatherDesc">--</span></div>
+        </div>
         </div>
 
         <div class="pop-up-container" id="popUpContainer">
@@ -541,6 +614,32 @@
             }
         }
 
+        document.addEventListener("DOMContentLoaded", function() {
+            const humidElement = document.getElementById('humidBox');
+            humidElement.addEventListener('click', function() {
+                showWeatherPopUp();
+            });
+        });
+
+        function showWeatherPopUp() {
+            // Giả lập giá trị thời tiết
+            document.getElementById('weatherTemp').textContent = getRandomValue(18, 30); // Nhiệt độ giữa 18°C và 30°C
+            document.getElementById('weatherHumidity').textContent = getRandomValue(30, 70); // Độ ẩm giữa 30% và 70%
+            document.getElementById('weatherWind').textContent = getRandomValue(0.5, 10); // Tốc độ gió giữa 0.5m/s và 10m/s
+            document.getElementById('weatherDesc').textContent = "Clear Sky"; // Mô tả thời tiết
+
+            document.getElementById('weatherPopUpContainer').style.display = 'flex';
+        }
+
+        function closeWeatherPopUp() {
+            document.getElementById('weatherPopUpContainer').style.display = 'none';
+        }
+
+        // Hàm giả lập giá trị ngẫu nhiên
+        function getRandomValue(min, max) {
+            return (Math.random() * (max - min) + min).toFixed(2);
+        }
+        
         function goBackToMenu() {
             // Hide all house views
             document.querySelectorAll('.house-container').forEach(function(el) {
