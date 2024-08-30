@@ -613,6 +613,33 @@
 
     <script>
 
+        //___________________New Change___________________________
+        document.addEventListener("DOMContentLoaded", function() {
+            const powerElement = document.getElementById('powerBox');  
+            const humidElement = document.getElementById('humidBox');
+
+            powerElement.addEventListener('click', function() {
+                showPopUp();
+            });
+            
+            humidElement.addEventListener('click', function() {
+                updateWeather(); // Cập nhật thông tin thời tiết trước khi hiển thị pop-up
+                showWeatherPopUp();
+            });
+        });
+
+        function showWeatherPopUp() {
+            document.getElementById('popUpContainer-weather').style.display = 'flex';
+            document.getElementById('weatherApp').style.display = 'block';
+        }
+
+        function closeWeatherPopUp() {
+            document.getElementById('popUpContainer-weather').style.display = 'none';
+            document.getElementById('weatherApp').style.display = 'none';
+        }
+
+
+
         document.addEventListener("DOMContentLoaded", function() {
         const powerElement = document.getElementById('powerBox');  
         powerElement.addEventListener('click', function() {
