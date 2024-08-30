@@ -313,7 +313,7 @@
         <!-- Vị trí thông số Temp, Humid, Power -->
         <div class="parameter temp" id="temp">Temp: <span id="temperature">--</span> °C</div>
         <div class="parameter humid"  id="humid" >Humidity: <span id="humidity">--</span> %</div>
-        <div class="parameter power" id ="power">Power: <span id="power">--</span> W</div>
+        <div class="parameter power" id ="power-cost">Power: <span id="power">--</span> W</div>
     
         
         <div class="pop-up-container">
@@ -355,7 +355,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const tempElement = document.getElementById('power');
+            const tempElement = document.getElementById('power-cost');
             tempElement.addEventListener('click', function() {
                 showPopUp();
             });
