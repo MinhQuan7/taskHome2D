@@ -496,6 +496,21 @@
                     0 0 40px rgba(174, 24, 219, 0.2);
             }
         }
+        .weather-detail {
+            margin: 10px 0;
+            font-size: 1.2em;
+            font-weight: 300;
+            color: #ffffff;
+            position: relative; /* Để nội dung hiển thị trên nền */
+            padding: 20px;
+            text-align: center;
+            background-image: url('nature.jpg'); /* Đường dẫn tới hình ảnh của bạn */
+            background-size: contain; /* Đảm bảo hình ảnh không bị cắt */
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 10px; /* Bo tròn góc để phù hợp với giao diện tổng thể */
+}
+
     </style>
 </head>
 <body>
@@ -538,7 +553,7 @@
         <h3>HO CHI MINH </h3>
         <div class="weather-info">
             <div>
-                <div class="weather-temp" id="weatherTemp">9°C</div>
+                <div class="weather-detail" id="weatherTemp">23°C</div>
                 <div class="weather-detail" id="weatherDesc">Light Rain</div>
             </div>
             <img width="64" height="64" src="https://img.icons8.com/cute-clipart/64/cloud.png" alt="weather Icon"/>
