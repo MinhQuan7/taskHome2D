@@ -385,7 +385,7 @@
         }
 
         .weather-pop-up {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            background: rgba(255, 255, 255, 0.15); /* Nền trong suốt */
             border-radius: 15px;
             padding: 20px;
             width: 320px;
@@ -394,6 +394,60 @@
             text-align: center;
             position: relative;
             animation: fadeIn 0.5s ease-out;
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Đường viền mờ */
+
+            /* Thêm hiệu ứng neon */
+            box-shadow: 
+                0 0 10px rgba(255, 255, 204, 0.5),
+                0 0 20px rgba(255, 255, 204, 0.4),
+                0 0 30px rgba(255, 255, 204, 0.3),
+                0 0 40px rgba(255, 255, 204, 0.2);
+            border: 1px solid rgba(255, 255, 204, 0.5);
+        }
+
+        .weather-pop-up::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 204, 0.5); /* Viền neon bên ngoài */
+            box-shadow: 
+                0 0 15px rgba(255, 255, 204, 0.5),
+                0 0 30px rgba(255, 255, 204, 0.4),
+                0 0 45px rgba(255, 255, 204, 0.3),
+                0 0 60px rgba(255, 255, 204, 0.2);
+            pointer-events: none; /* Không tương tác được */
+            z-index: -1; /* Đưa lớp này xuống dưới */
+
+            /* Hiệu ứng di chuyển đèn neon */
+            animation: neonMove 3s linear infinite;
+        }
+
+        @keyframes neonMove {
+            0% {
+                box-shadow: 
+                    0 0 10px rgba(255, 255, 204, 0.5),
+                    0 0 20px rgba(255, 255, 204, 0.4),
+                    0 0 30px rgba(255, 255, 204, 0.3),
+                    0 0 40px rgba(255, 255, 204, 0.2);
+            }
+            50% {
+                box-shadow: 
+                    0 0 40px rgba(255, 255, 204, 0.2),
+                    0 0 30px rgba(255, 255, 204, 0.3),
+                    0 0 20px rgba(255, 255, 204, 0.4),
+                    0 0 10px rgba(255, 255, 204, 0.5);
+            }
+            100% {
+                box-shadow: 
+                    0 0 10px rgba(255, 255, 204, 0.5),
+                    0 0 20px rgba(255, 255, 204, 0.4),
+                    0 0 30px rgba(255, 255, 204, 0.3),
+                    0 0 40px rgba(255, 255, 204, 0.2);
+            }
         }
 
         .weather-pop-up h3 {
@@ -439,51 +493,6 @@
             color: white;
         }
 
-        /* Hiệu ứng Gradient cho phần thông tin thời tiết */
-        .weather-pop-up .weather-info {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 10px;
-            margin: 10px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .weather-pop-up .weather-info span {
-            font-size: 1em;
-            font-weight: bold;
-            color: #f0f0f0;
-        }
-
-        .weather-pop-up .weather-temp {
-            font-size: 3em;
-            font-weight: bold;
-            color: #ffffff;
-        }
-
-        .weather-pop-up .weather-icon {
-            width: 80px;
-            height: 80px;
-        }
-
-        .weather-pop-up .forecast {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-
-        .weather-pop-up .forecast-day {
-            text-align: center;
-            color: #ffffff;
-            font-size: 0.9em;
-        }
-
-        .weather-pop-up .forecast-day img {
-            width: 40px;
-            height: 40px;
-        }
-
     </style>
 </head>
 <body>
@@ -523,7 +532,7 @@
 <div class="weather-pop-up-container" id="weatherPopUpContainer">
     <div class="weather-pop-up">
         <button class="close-button" onclick="closeWeatherPopUp()">&times;</button>
-        <h3>Paris</h3>
+        <h3>HO CHI MINH </h3>
         <div class="weather-info">
             <div>
                 <div class="weather-temp" id="weatherTemp">9°C</div>
