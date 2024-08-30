@@ -200,7 +200,30 @@
             z-index: 100;
             animation: fadeIn 0.5s ease-out;
             box-shadow: 0 0 20px white; /* White neon glow effect */
+            position: relative; /* Đảm bảo nút close và icon định vị chính xác */
         }
+
+        .popup-icon {
+            width: 50px; /* Điều chỉnh kích thước icon */
+            height: 50px;
+            margin-bottom: 20px; /* Khoảng cách giữa icon và tiêu đề */
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .close-button:hover {
+            color: #ff4500; /* Thay đổi màu khi hover */
+        }
+
 
         .pop-up.active {
             display: block;
@@ -220,7 +243,7 @@
         /* Lớp mới để làm mờ background chỉ phía sau pop-up */
         .blur-background {
             filter: blur(5px);
-            z-index: -1;
+            z-index: -1; /*__________z-index: sẽ là giá trị xác định lớp nào trên lớp nào */
         }
 
         /* Lớp chứa pop-up và phần mờ */
@@ -300,6 +323,7 @@
             <div class="blur-background" id="blurBackground"></div> <!-- Lớp mờ background -->
             <div class="pop-up" id="popUp">
                 <button class="close-button" onclick="closePopUp()">&times;</button>
+                <img src="electricity.png" alt="icon">
                 <h3>Power Consumption</h3>
                 <div>
                     <p>Monday to Friday: <span id="powerStats">--</span> kWh</p>
