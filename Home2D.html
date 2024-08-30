@@ -186,24 +186,91 @@
             left: 800px;
         }
 
-        .pop-up {
+        .pop-up-container {
             display: none;
+            justify-content: center;
+            align-items: center;
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 10px;
-            text-align: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Màu nền tối bên ngoài pop-up */
             z-index: 100;
-            animation: fadeIn 0.3s ease-out;
-            box-shadow: 0 0 20px white; /* White neon glow effect */
-            position: relative; /* Đảm bảo nút close và icon định vị chính xác */
         }
 
+        .pop-up-table {
+            background-color: #2a2a2a;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            color: white;
+            width: 600px;
+            position: relative;
+            animation: fadeIn 0.5s ease-out;
+        }
 
+        .pop-up-table h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            color: #e0e0e0;
+        }
+
+        .pop-up-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .pop-up-table th,
+        .pop-up-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #444;
+        }
+
+        .pop-up-table th {
+            background-color: #333;
+            color: #ffa500;
+            font-weight: bold;
+        }
+
+        .pop-up-table td {
+            background-color: #1f1f1f;
+            color: #fff;
+        }
+
+        .input-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .input-container input {
+            width: 60%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1em;
+            background-color: #333;
+            color: white;
+        }
+
+        .input-container button {
+            padding: 10px 20px;
+            background-color: #ffa500;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        .input-container button:hover {
+            background-color: #ff8c00;
+        }
 
         .close-button {
             position: absolute;
@@ -213,83 +280,7 @@
             border: none;
             font-size: 20px;
             cursor: pointer;
-            color: #333;
-        }
-
-        .close-button:hover {
-            color: #ff4500; /* Thay đổi màu khi hover */
-        }
-
-
-        .pop-up.active {
-            display: block;
-            animation: neonGlowPopup 1.5s infinite alternate;
-        }
-
-        @keyframes neonGlowPopup {
-            from {
-                box-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
-            }
-            to {
-                box-shadow: 0 0 20px white, 0 0 30px white, 0 0 40px white;
-            }
-        }
-
-        
-        /* Lớp mới để làm mờ background chỉ phía sau pop-up */
-        .blur-background {
-            filter: blur(5px);
-            z-index: -1; /*__________z-index: sẽ là giá trị xác định lớp nào trên lớp nào */
-        }
-
-        /* Lớp chứa pop-up và phần mờ */
-        .pop-up-container {
-            position: relative;
-            z-index: 100; /* Đảm bảo pop-up nằm trên lớp mờ */
-        }
-
-
-        .pop-up h3 {
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .pop-up input {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 1em;
-        }
-
-        .pop-up button {
-            padding: 10px 20px;
-            border-radius: 5px;
-            border: none;
-            background-color: #ff6347;
             color: white;
-            font-size: 1em;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .pop-up button:hover {
-            background-color: #ff4500;
-        }
-
-        .back-button-container {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 2;
-        }
-
-        .light-button-container {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 2;
         }
     </style>
 </head>
@@ -312,24 +303,60 @@
         
         <!-- Vị trí thông số Temp, Humid, Power -->
         <div class="parameter temp" id="temp">Temp: <span id="temperature">--</span> °C</div>
-        <div class="parameter humid"  id="humid" >Humidity: <span id="humidity">--</span> %</div>
-        <div class="parameter power" id ="power-cost">Power: <span id="power">--</span> W</div>
+        <div class="parameter humid" id="humid">Humidity: <span id="humidity">--</span> %</div>
+        <div class="parameter power" id="power-cost">Power: <span id="power">--</span> W</div>
     
         
-        <div class="pop-up-container">
-            <div class="blur-background" id="blurBackground"></div> <!-- Lớp mờ background -->
-            <div class="pop-up" id="popUp">
+        <div class="pop-up-container" id="popUpContainer">
+            <div class="pop-up-table">
                 <button class="close-button" onclick="closePopUp()">&times;</button>
-                <img width="64" height="64" src="https://img.icons8.com/arcade/64/light.png" alt="light"/>
-                <h3>Power Consumption</h3>
-                <div>
-                    <p>Monday to Friday: <span id="powerStats">--</span> kWh</p>
-                </div>
-                <div>
+                <h3>Project Details</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Working Days</th>
+                            <th>Computers</th>
+                            <th>Total Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Manager: Huynh Hau</td>
+                            <td>5</td>
+                            <td>Computer 1: 20kw</td>
+                            <td id="total1">--</td>
+                        </tr>
+                        <tr>
+                            <td>Fullstack: Canh Nguyen</td>
+                            <td>5</td>
+                            <td>Computer 2: 30kw</td>
+                            <td id="total2">--</td>
+                        </tr>
+                        <tr>
+                            <td>Dev: Dai Nguyen</td>
+                            <td>5</td>
+                            <td>Computer 3: 40kw</td>
+                            <td id="total3">--</td>
+                        </tr>
+                        <tr>
+                            <td>Firmware: Minh Quan</td>
+                            <td>4</td>
+                            <td>Computer 4: 30kw</td>
+                            <td id="total4">--</td>
+                        </tr>
+                        <tr>
+                            <td>Firmware: Thuan Hoang</td>
+                            <td>4</td>
+                            <td>Computer 5: 30kw</td>
+                            <td id="total5">--</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="input-container">
                     <input type="number" id="pricePerKw" placeholder="Enter price per kWh">
+                    <button onclick="calculateTotal()">Calculate</button>
                 </div>
-                <button onclick="calculateCost()">Calculate</button>
-                <p>Total Cost: <span id="totalCost">--</span></p>
             </div>
         </div>
     
@@ -361,24 +388,29 @@
             });
         });
 
-        //_______________________Pop-UP________________________
         function showPopUp() {
-            document.getElementById('popUp').classList.add('active');
-            document.getElementById('blurBackground').classList.add('blur-background'); // Thêm lớp mờ chỉ cho background
-            document.getElementById('powerStats').textContent = '150'; // Example: 150 kWh
+            document.getElementById('popUpContainer').style.display = 'flex';
         }
 
         function closePopUp() {
-            document.getElementById('popUp').classList.remove('active');
-            document.getElementById('blurBackground').classList.remove('blur-background'); // Xóa lớp mờ chỉ cho background
+            document.getElementById('popUpContainer').style.display = 'none';
         }
 
-
-        function calculateCost() {
+        function calculateTotal() {
             const price = document.getElementById('pricePerKw').value;
-            const powerConsumption = 150; // Example: 150 kWh for Mon-Fri
-            const totalCost = price * powerConsumption;
-            document.getElementById('totalCost').textContent = totalCost ? totalCost.toFixed(2) + ' VND' : '--';
+
+            const totals = [
+                { id: 'total1', kw: 20, days: 5 },
+                { id: 'total2', kw: 30, days: 5 },
+                { id: 'total3', kw: 40, days: 5 },
+                { id: 'total4', kw: 30, days: 4 },
+                { id: 'total5', kw: 30, days: 4 }
+            ];
+
+            totals.forEach(total => {
+                const amount = total.kw * total.days * price;
+                document.getElementById(total.id).textContent = amount ? amount.toFixed(2) + ' VND' : '--';
+            });
         }
 
         function loadHouse(houseId) {
