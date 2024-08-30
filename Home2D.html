@@ -504,21 +504,20 @@
             position: relative; /* To position the background image within the div */
             padding: 20px;
             text-align: center;
-            background-size: contain; /* Ensures the background image fits within the div */
-            background-repeat: no-repeat;
-            background-position: center;
             border-radius: 10px; /* Rounded corners */
+            z-index: 1; /* Ensure this is above the background image */
         }
 
         .weather-background-image {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 0;
+            left: 0;
             width: 100%;
-            height: auto;
+            height: 100%;
             opacity: 0.4; /* Adjust transparency as needed */
-            z-index: -1; /* Place the image behind the text */
+            z-index: 0; /* Place the image behind the text */
+            border-radius: 10px; /* Match the parent border radius */
+            object-fit: cover; /* Ensure the image covers the entire div */
         }
 
 
