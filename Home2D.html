@@ -217,9 +217,18 @@
         }
 
         
-        .house-container.blur {
+        /* Lớp mới để làm mờ background chỉ phía sau pop-up */
+        .blur-background {
             filter: blur(5px);
+            z-index: -1;
         }
+
+        /* Lớp chứa pop-up và phần mờ */
+        .pop-up-container {
+            position: relative;
+            z-index: 100; /* Đảm bảo pop-up nằm trên lớp mờ */
+        }
+
 
         .pop-up h3 {
             margin-bottom: 20px;
@@ -278,6 +287,7 @@
         </div>
     </div>
 
+
     <div class="house-container" id="house1">
         <img src="home-1-component.png" alt="House 1 Image" class="image">
         
@@ -285,20 +295,23 @@
         <div class="parameter temp" id="temp">Temp: <span id="temperature">--</span> °C</div>
         <div class="parameter humid">Humid: <span id="humidity">--</span> %</div>
         <div class="parameter power">Power: <span id="power">--</span> W</div>
-
-        <div class="pop-up" id="popUp">
-            <button class="close-button" onclick="closePopUp()">&times;</button>
-            <h3>Power Consumption</h3>
-            <div>
-                <p>Monday to Friday: <span id="powerStats">--</span> kWh</p>
+    
+        <div class="pop-up-container">
+            <div class="blur-background" id="blurBackground"></div> <!-- Lớp mờ background -->
+            <div class="pop-up" id="popUp">
+                <button class="close-button" onclick="closePopUp()">&times;</button>
+                <h3>Power Consumption</h3>
+                <div>
+                    <p>Monday to Friday: <span id="powerStats">--</span> kWh</p>
+                </div>
+                <div>
+                    <input type="number" id="pricePerKw" placeholder="Enter price per kWh">
+                </div>
+                <button onclick="calculateCost()">Calculate</button>
+                <p>Total Cost: <span id="totalCost">--</span></p>
             </div>
-            <div>
-                <input type="number" id="pricePerKw" placeholder="Enter price per kWh">
-            </div>
-            <button onclick="calculateCost()">Calculate</button>
-            <p>Total Cost: <span id="totalCost">--</span></p>
         </div>
-
+    
         <div class="back-button-container">
             <button class="back-button" onclick="goBackToMenu()">Back to Home</button>
         </div>
@@ -306,6 +319,7 @@
             <button class="light-button" id="lightButton" onclick="toggleLight()">Toggle Light</button>
         </div>
     </div>
+    
 
     <div class="house-container" id="house2">
         <img src="home2.jpg" alt="House 2 Image" class="image">
@@ -325,16 +339,18 @@
             });
         });
 
+        //_______________________Pop-UP________________________
         function showPopUp() {
             document.getElementById('popUp').classList.add('active');
-            document.getElementById('house1').classList.add('blur');
+            document.getElementById('blurBackground').classList.add('blur-background'); // Thêm lớp mờ chỉ cho background
             document.getElementById('powerStats').textContent = '150'; // Example: 150 kWh
         }
 
         function closePopUp() {
             document.getElementById('popUp').classList.remove('active');
-            document.getElementById('house1').classList.remove('blur');
+            document.getElementById('blurBackground').classList.remove('blur-background'); // Xóa lớp mờ chỉ cho background
         }
+
 
         function calculateCost() {
             const price = document.getElementById('pricePerKw').value;
