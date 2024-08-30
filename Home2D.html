@@ -576,7 +576,7 @@
                 <h4>Wind: <span id="wind-weather">-- m/s</span></h4>
             </div>
         </div>
-        
+
         <div class="pop-up-container-weather" id="popUpContainer-weather">
             <div class="pop-up-table-weather">
                 <button class="close-button" onclick="closeWeatherPopUp()">&times;</button>
@@ -623,6 +623,12 @@
             updateWeather(); // Cập nhật thông tin thời tiết trước khi hiển thị pop-up
             showWeatherPopUp();
         });
+    });
+
+        humidElement.addEventListener('click', function() {
+        console.log('Humidity box clicked!');
+        updateWeather(); // Ensure this is being called correctly
+        showWeatherPopUp(); // Ensure this is being called correctly
     });
 
         function showPopUp() {
