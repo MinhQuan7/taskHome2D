@@ -209,15 +209,34 @@
             color: white;
             width: 600px;
             position: relative;
-            animation: fadeIn 0.5s ease-out;
+            animation: fadeIn 0.3s ease-out;
             border: 1px solid rgba(255, 255, 255, 0.3); /* Đường viền mờ */
+
+            /* Thêm hiệu ứng neon vàng nhạt */
+            box-shadow: 
+                0 0 10px rgba(255, 255, 204, 0.5),  /* Ánh sáng mờ nhẹ */
+                0 0 20px rgba(255, 255, 204, 0.4), 
+                0 0 30px rgba(255, 255, 204, 0.3), 
+                0 0 40px rgba(255, 255, 204, 0.2); /* Ánh sáng mạnh hơn */
+            border: 1px solid rgba(255, 255, 204, 0.5); /* Đường viền sáng vàng nhạt */
         }
 
-        .pop-up-table th,
-        .pop-up-table td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Đường kẻ dưới mờ */
+        .pop-up-table::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 15px; /* Bo tròn góc */
+            border: 2px solid rgba(255, 255, 204, 0.5); /* Viền neon bên ngoài */
+            box-shadow: 
+                0 0 15px rgba(255, 255, 204, 0.5), 
+                0 0 30px rgba(255, 255, 204, 0.4),
+                0 0 45px rgba(255, 255, 204, 0.3),
+                0 0 60px rgba(255, 255, 204, 0.2); /* Hiệu ứng neon vàng nhạt */
+            pointer-events: none; /* Không tương tác được */
+            z-index: -1; /* Đưa lớp này xuống dưới */
         }
 
         .pop-up-table th {
@@ -230,6 +249,7 @@
             background-color: rgba(31, 31, 31, 0.5); /* Nền mờ cho ô dữ liệu */
             color: #fff;
         }
+
 
         /* Nút Close cũng được thiết kế lại */
         .close-button {
