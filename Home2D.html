@@ -173,13 +173,13 @@
         }
 
         .temp {
-            top: 100px;
+            top: 98px;
             left: 137px;
         }
 
         .humid {
             top:  425px;
-            left: 566px;
+            left: 568px;
         }
 
         .power {
@@ -219,9 +219,22 @@
         <img src="home-1-component.png" alt="House 1 Image" class="image">
         
         <!-- Vị trí thông số Temp, Humid, Power -->
-        <div class="parameter temp">Temp: <span id="temperature">--</span> °C</div>
+        <div class="parameter temp" id="temp" onclick="showPopUp()">Temp: <span id="temperature">--</span> °C</div>
         <div class="parameter humid">Humid: <span id="humidity">--</span> %</div>
         <div class="parameter power">Power: <span id="power">--</span> W</div>
+
+        <div class="pop-up" id="popUp">
+            <button class="close-button" onclick="closePopUp()">&times;</button>
+            <h3>Power Consumption</h3>
+            <div>
+                <p>Monday to Friday: <span id="powerStats">--</span> kWh</p>
+            </div>
+            <div>
+                <input type="number" id="pricePerKw" placeholder="Enter price per kWh">
+            </div>
+            <button onclick="calculateCost()">Calculate</button>
+            <p>Total Cost: <span id="totalCost">--</span></p>
+        </div>
 
         <div class="back-button-container">
             <button class="back-button" onclick="goBackToMenu()">Back to Home</button>
@@ -243,6 +256,23 @@
 
     <script>
         let lightOn = true;
+        
+        function showPopUp() {
+            document.getElementById('popUp').classList.add('active');
+            // Assume the power consumption for simplicity
+            document.getElementById('powerStats').textContent = '150'; // Example: 150 kWh
+        }
+
+        function closePopUp() {
+            document.getElementById('popUp').classList.remove('active');
+        }
+
+        function calculateCost() {
+            const price = document.getElementById('pricePerKw').value;
+            const powerConsumption = 150; // Example: 150 kWh for Mon-Fri
+            const totalCost = price * powerConsumption;
+            document.getElementById('totalCost').textContent = totalCost ? totalCost.toFixed(2) + ' VND' : '--';
+        }
 
         function loadHouse(houseId) {
             // Hide the menu
