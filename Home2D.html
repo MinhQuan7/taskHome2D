@@ -199,7 +199,6 @@
             z-index: 100;
         }
 
-        /*___________________Can tham khao va hoc hoi ve ban thiet ke giao dienj pop-up nay________*/
         .pop-up-table {
             background-color: rgba(42, 42, 42, 0.8); /* Màu nền đen với độ trong suốt */
             border-radius: 15px; /* Bo tròn góc */
@@ -248,12 +247,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: background-color 0.3s ease, color 0.3s ease; /* Thêm hiệu ứng chuyển màu */
         }
 
         .close-button:hover {
-            background: rgba(236, 88, 88, 0.5); /* Màu nền thay đổi khi hover */
+            background-color: red; /* Màu nền khi hover */
+            color: white; /* Màu chữ khi hover */
         }
-
 
         .input-container {
             margin-top: 20px;
@@ -286,6 +286,7 @@
         .input-container button:hover {
             background-color: #ff8c00;
         }
+
         .text-box {
             background-color: rgba(0, 0, 0, 0.6); /* Nền bán trong suốt */
             padding: 10px 15px;
@@ -304,6 +305,19 @@
             color: black; /* Đổi màu chữ khi hover */
         }
 
+        .back-button-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 200; /* Đảm bảo nút nằm trên các phần tử khác */
+        }
+
+        .light-button-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 200; /* Đảm bảo nút nằm trên các phần tử khác */
+        }
     </style>
 </head>
 <body>
@@ -319,28 +333,25 @@
         </div>
     </div>
 
-
     <div class="house-container" id="house1">
         <img src="home-1-component.png" alt="House 1 Image" class="image">
         
         <div class="parameter temp">
-            <div class="text-box">
+            <div class="text-box" id="tempBox">
                 Temp: <span id="temperature">--</span> °C
             </div>
         </div>
         <div class="parameter humid">
-            <div class="text-box">
+            <div class="text-box" id="humidBox">
                 Humidity: <span id="humidity">--</span> %
             </div>
         </div>
         <div class="parameter power">
-            <div class="text-box" id = "power-box">
+            <div class="text-box" id="powerBox">
                 Power: <span id="power">--</span> W
             </div>
         </div>
-        
-    
-        
+
         <div class="pop-up-container" id="popUpContainer">
             <div class="pop-up-table">
                 <button class="close-button" onclick="closePopUp()">&times;</button>
@@ -394,7 +405,7 @@
                 </div>
             </div>
         </div>
-    
+
         <div class="back-button-container">
             <button class="back-button" onclick="goBackToMenu()">Back to Home</button>
         </div>
@@ -403,7 +414,6 @@
             <button class="light-button" id="lightButton" onclick="toggleLight()">Toggle Light</button>
         </div>
     </div>
-    
 
     <div class="house-container" id="house2">
         <img src="home2.jpg" alt="House 2 Image" class="image">
@@ -417,8 +427,8 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const tempElement = document.getElementById('power-box');
-            tempElement.addEventListener('click', function() {
+            const powerElement = document.getElementById('powerBox');
+            powerElement.addEventListener('click', function() {
                 showPopUp();
             });
         });
@@ -460,7 +470,6 @@
             document.getElementById('pricePerKw').value = ''; // Làm mới trường nhập liệu giá tiền
         }
 
-
         function loadHouse(houseId) {
             // Hide the menu
             document.getElementById('menu').classList.remove('active');
@@ -493,7 +502,6 @@
             document.getElementById('menu').classList.add('active');
         }
 
-        //Must have bien let lightOn de lam flag 
         let lightOn = true; // Biến để theo dõi trạng thái của đèn
 
         function toggleLight() {
@@ -516,7 +524,6 @@
                 lightButton.style.backgroundColor = '#555'; // Đổi màu nút sang màu tối khi đèn tắt
             }
         }
-
 
         function getRandomValue(min, max) {
             return (Math.random() * (max - min) + min).toFixed(2);
