@@ -198,6 +198,8 @@
             background: rgba(0, 0, 0, 0.5); /* Màu nền tối bên ngoài pop-up */
             z-index: 100;
         }
+
+        /*___________________Can tham khao va hoc hoi ve ban thiet ke giao dienj pop-up nay________*/
         .pop-up-table {
             background-color: rgba(42, 42, 42, 0.8); /* Màu nền đen với độ trong suốt */
             border-radius: 15px; /* Bo tròn góc */
@@ -249,7 +251,7 @@
         }
 
         .close-button:hover {
-            background: rgba(255, 255, 255, 0.5); /* Màu nền thay đổi khi hover */
+            background: rgba(236, 88, 88, 0.5); /* Màu nền thay đổi khi hover */
         }
 
 
@@ -284,6 +286,7 @@
         .input-container button:hover {
             background-color: #ff8c00;
         }
+
     </style>
 </head>
 <body>
@@ -358,6 +361,7 @@
                 <div class="input-container">
                     <input type="number" id="pricePerKw" placeholder="Enter price per kWh">
                     <button onclick="calculateTotal()">Calculate</button>
+                    <button onclick="refreshTotal()">Refresh</button> <!-- Nút Refresh -->
                 </div>
             </div>
         </div>
@@ -414,6 +418,19 @@
                 document.getElementById(total.id).textContent = amount ? amount.toFixed(2) + ' VND' : '--';
             });
         }
+
+        function refreshTotal() {
+            const totals = [
+                'total1', 'total2', 'total3', 'total4', 'total5'
+            ];
+
+            totals.forEach(id => {
+                document.getElementById(id).textContent = '--'; // Làm mới các giá trị tiền tệ
+            });
+
+            document.getElementById('pricePerKw').value = ''; // Làm mới trường nhập liệu giá tiền
+        }
+
 
         function loadHouse(houseId) {
             // Hide the menu
