@@ -286,6 +286,23 @@
         .input-container button:hover {
             background-color: #ff8c00;
         }
+        .text-box {
+            background-color: rgba(0, 0, 0, 0.6); /* Nền bán trong suốt */
+            padding: 10px 15px;
+            border-radius: 8px; /* Bo tròn các góc */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Bóng đổ mềm */
+            color: #FFD700; /* Màu chữ vàng */
+            font-weight: bold;
+            display: inline-block; /* Hiển thị khung xung quanh nội dung */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Đổ bóng chữ */
+            transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out; /* Thêm hiệu ứng khi hover */
+        }
+
+        .text-box:hover {
+            transform: scale(1.05); /* Phóng to khi hover */
+            background-color: rgba(255, 215, 0, 0.8); /* Đổi màu nền khi hover */
+            color: black; /* Đổi màu chữ khi hover */
+        }
 
     </style>
 </head>
@@ -306,10 +323,22 @@
     <div class="house-container" id="house1">
         <img src="home-1-component.png" alt="House 1 Image" class="image">
         
-        <!-- Vị trí thông số Temp, Humid, Power -->
-        <div class="parameter temp" id="temp">Temp: <span id="temperature">--</span> °C</div>
-        <div class="parameter humid" id="humid">Humidity: <span id="humidity">--</span> %</div>
-        <div class="parameter power" id="power-cost">Power: <span id="power">--</span> W</div>
+        <div class="parameter temp">
+            <div class="text-box">
+                Temp: <span id="temperature">--</span> °C
+            </div>
+        </div>
+        <div class="parameter humid">
+            <div class="text-box">
+                Humidity: <span id="humidity">--</span> %
+            </div>
+        </div>
+        <div class="parameter power">
+            <div class="text-box">
+                Power: <span id="power">--</span> W
+            </div>
+        </div>
+        
     
         
         <div class="pop-up-container" id="popUpContainer">
