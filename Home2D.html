@@ -334,7 +334,7 @@
             </div>
         </div>
         <div class="parameter power">
-            <div class="text-box">
+            <div class="text-box" id = "power-box">
                 Power: <span id="power">--</span> W
             </div>
         </div>
@@ -417,7 +417,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const tempElement = document.getElementById('power-cost');
+            const tempElement = document.getElementById('power-box');
             tempElement.addEventListener('click', function() {
                 showPopUp();
             });
