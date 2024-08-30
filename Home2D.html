@@ -186,7 +186,54 @@
             top: 284px;
             left: 800px;
         }
+        .pop-up {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            z-index: 100;
+            animation: fadeIn 0.5s ease-out;
+        }
 
+        .pop-up.active {
+            display: block;
+        }
+
+        .pop-up h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .pop-up input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+        }
+
+        .pop-up button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #ff6347;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .pop-up button:hover {
+            background-color: #ff4500;
+        }
         .back-button-container {
             position: absolute;
             top: 20px;
