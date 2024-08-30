@@ -184,7 +184,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 320px; /* Slightly adjusted width to accommodate the icon */
+            width: 300px;
             padding: 20px;
             background-color: white;
             border-radius: 10px;
@@ -206,12 +206,6 @@
             to {
                 box-shadow: 0 0 20px white, 0 0 30px white, 0 0 40px white;
             }
-        }
-
-        .pop-up img {
-            width: 40px; /* Set the width of the icon */
-            height: 40px; /* Set the height of the icon */
-            margin-bottom: 15px; /* Space between the icon and the heading */
         }
 
         .pop-up h3 {
@@ -281,7 +275,6 @@
 
         <div class="pop-up" id="popUp">
             <button class="close-button" onclick="closePopUp()">&times;</button>
-            <img src="electricity.png" alt="Icon"> <!-- Replace 'icon.png' with your actual image path -->
             <h3>Power Consumption</h3>
             <div>
                 <p>Monday to Friday: <span id="powerStats">--</span> kWh</p>
