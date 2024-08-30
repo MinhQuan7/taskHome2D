@@ -501,15 +501,27 @@
             font-size: 1.2em;
             font-weight: 700;
             color: #ffffff;
-            position: relative; /* Để nội dung hiển thị trên nền */
+            position: relative; /* To position the background image within the div */
             padding: 20px;
             text-align: center;
-            background-image: url('nature.jpg'); /* Đường dẫn tới hình ảnh của bạn */
-            background-size: contain; /* Đảm bảo hình ảnh không bị cắt */
+            background-size: contain; /* Ensures the background image fits within the div */
             background-repeat: no-repeat;
             background-position: center;
-            border-radius: 10px; /* Bo tròn góc để phù hợp với giao diện tổng thể */
-}
+            border-radius: 10px; /* Rounded corners */
+        }
+
+        .weather-background-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: auto;
+            opacity: 0.4; /* Adjust transparency as needed */
+            z-index: -1; /* Place the image behind the text */
+            pointer-events: none; /* Prevent interaction with the image */
+        }
+
 
     </style>
 </head>
@@ -556,7 +568,9 @@
                 <div class="weather-temp" id="weatherTemp">23°C</div>
                 <div class="weather-back" id="weatherDesc">
                     Light Rain
+                    <img src="nature.jpg" alt="weather background" class="weather-background-image">
                 </div>
+                
             </div>
             <img width="64" height="64" src="https://img.icons8.com/cute-clipart/64/cloud.png" alt="weather Icon"/>
         </div>
