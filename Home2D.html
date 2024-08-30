@@ -430,7 +430,7 @@
         width: 100%;
         height: 100%;
         background: rgba(0, 0, 0, 0.8);
-        z-index: 300; /* Đảm bảo giá trị z-index này cao hơn các phần tử khác */
+        z-index: 400; /* Đảm bảo giá trị z-index này cao hơn các phần tử khác */
         }
 
 
@@ -620,27 +620,16 @@
 
             powerElement.addEventListener('click', function() {
                 showPopUp();
+                console.log('pressed click power!!');
             });
             
             humidElement.addEventListener('click', function() {
-                updateWeather(); // Cập nhật thông tin thời tiết trước khi hiển thị pop-up
+                console.log('pressed click humid!!');
+                updateWeather(); 
                 showWeatherPopUp();
             });
         });
 
-        document.addEventListener("DOMContentLoaded", function() {
-        const powerElement = document.getElementById('powerBox');  
-        const humidElement = document.getElementById('humidBox');
-
-        powerElement.addEventListener('click', function() {
-            showPopUp();
-        });
-        
-        humidElement.addEventListener('click', function() {
-            updateWeather(); // Update weather information before displaying the pop-up
-            showWeatherPopUp();
-        });
-    });
 
         function showPopUp() {
             document.getElementById('popUpContainer').style.display = 'flex';
