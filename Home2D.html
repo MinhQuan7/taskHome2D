@@ -64,15 +64,23 @@
             background-color: black;
             margin: 0;
             padding: 0;
+            transition: filter 0.5s ease;
             position: relative;
         }
 
-        .house-container.active {
+        .menu-container.active, .house-container.active {
             display: flex;
         }
 
-        .blur-effect {
-            filter: blur(5px);
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .menu-header {
@@ -208,6 +216,11 @@
             }
         }
 
+        
+        .house-container.blur {
+            filter: blur(5px);
+        }
+
         .pop-up h3 {
             margin-bottom: 20px;
             color: #333;
@@ -314,13 +327,13 @@
 
         function showPopUp() {
             document.getElementById('popUp').classList.add('active');
-            document.querySelector('.house-container.active').classList.add('blur-effect');
+            document.getElementById('house1').classList.add('blur');
             document.getElementById('powerStats').textContent = '150'; // Example: 150 kWh
         }
 
         function closePopUp() {
             document.getElementById('popUp').classList.remove('active');
-            document.querySelector('.house-container.active').classList.remove('blur-effect');
+            document.getElementById('house1').classList.remove('blur');
         }
 
         function calculateCost() {
