@@ -371,7 +371,6 @@
         .h3{
             color: #fff;
         }
-
         .weather-pop-up-container {
             display: none;
             justify-content: center;
@@ -381,16 +380,17 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Màu nền tối bên ngoài pop-up */
-            z-index: 300; /* Đảm bảo pop-up nằm trên các phần tử khác */
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 300;
         }
 
         .weather-pop-up {
-            background-color: rgba(255, 255, 255, 0.9);
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             border-radius: 15px;
             padding: 20px;
-            width: 300px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            width: 320px;
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             text-align: center;
             position: relative;
             animation: fadeIn 0.5s ease-out;
@@ -400,24 +400,31 @@
             margin: 0;
             padding-bottom: 10px;
             font-size: 1.5em;
-            color: #333;
+            color: #ffffff;
+            font-weight: bold;
         }
 
         .weather-pop-up .weather-detail {
             margin: 10px 0;
             font-size: 1.2em;
-            color: #555;
+            font-weight: 300;
+            color: #ffffff;
+        }
+
+        .weather-pop-up .weather-detail span {
+            font-weight: bold;
+            font-size: 1.4em;
         }
 
         .weather-pop-up .close-button {
             position: absolute;
             top: 10px;
             right: 10px;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.2);
             border: none;
             font-size: 20px;
             cursor: pointer;
-            color: black;
+            color: white;
             border-radius: 50%;
             width: 30px;
             height: 30px;
@@ -430,6 +437,51 @@
         .weather-pop-up .close-button:hover {
             background-color: red;
             color: white;
+        }
+
+        /* Hiệu ứng Gradient cho phần thông tin thời tiết */
+        .weather-pop-up .weather-info {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 10px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .weather-pop-up .weather-info span {
+            font-size: 1em;
+            font-weight: bold;
+            color: #f0f0f0;
+        }
+
+        .weather-pop-up .weather-temp {
+            font-size: 3em;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .weather-pop-up .weather-icon {
+            width: 80px;
+            height: 80px;
+        }
+
+        .weather-pop-up .forecast {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .weather-pop-up .forecast-day {
+            text-align: center;
+            color: #ffffff;
+            font-size: 0.9em;
+        }
+
+        .weather-pop-up .forecast-day img {
+            width: 40px;
+            height: 40px;
         }
 
     </style>
@@ -467,16 +519,47 @@
         </div>
 
         <!-- Pop-up weather -->
-        <div class="weather-pop-up-container" id="weatherPopUpContainer">
-        <div class="weather-pop-up">
-            <button class="close-button" onclick="closeWeatherPopUp()">&times;</button>
-            <h3>Weather Information</h3>
-            <div class="weather-detail">Temperature: <span id="weatherTemp">--</span> °C</div>
-            <div class="weather-detail">Humidity: <span id="weatherHumidity">--</span> %</div>
-            <div class="weather-detail">Wind Speed: <span id="weatherWind">--</span> m/s</div>
-            <div class="weather-detail">Description: <span id="weatherDesc">--</span></div>
+<!-- Pop-up weather -->
+<div class="weather-pop-up-container" id="weatherPopUpContainer">
+    <div class="weather-pop-up">
+        <button class="close-button" onclick="closeWeatherPopUp()">&times;</button>
+        <h3>Paris</h3>
+        <div class="weather-info">
+            <div>
+                <div class="weather-temp" id="weatherTemp">9°C</div>
+                <div class="weather-detail" id="weatherDesc">Light Rain</div>
+            </div>
+            <img src="weather-icon.png" alt="Weather Icon" class="weather-icon">
         </div>
+        <div class="weather-info">
+            <div class="weather-detail">Humidity: <span id="weatherHumidity">88%</span></div>
+            <div class="weather-detail">Wind: <span id="weatherWind">4.06 m/s</span></div>
         </div>
+        <div class="forecast">
+            <div class="forecast-day">
+                <div>Saturday</div>
+                <img src="weather-icon.png" alt="Icon">
+                <div>8° / 9°</div>
+            </div>
+            <div class="forecast-day">
+                <div>Sunday</div>
+                <img src="weather-icon.png" alt="Icon">
+                <div>8° / 10°</div>
+            </div>
+            <div class="forecast-day">
+                <div>Monday</div>
+                <img src="weather-icon.png" alt="Icon">
+                <div>5° / 11°</div>
+            </div>
+            <div class="forecast-day">
+                <div>Tuesday</div>
+                <img src="weather-icon.png" alt="Icon">
+                <div>6° / 11°</div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
         <div class="pop-up-container" id="popUpContainer">
             <div class="pop-up-table">
@@ -622,14 +705,15 @@
         });
 
         function showWeatherPopUp() {
-            // Giả lập giá trị thời tiết
-            document.getElementById('weatherTemp').textContent = getRandomValue(18, 30); // Nhiệt độ giữa 18°C và 30°C
-            document.getElementById('weatherHumidity').textContent = getRandomValue(30, 70); // Độ ẩm giữa 30% và 70%
-            document.getElementById('weatherWind').textContent = getRandomValue(0.5, 10); // Tốc độ gió giữa 0.5m/s và 10m/s
-            document.getElementById('weatherDesc').textContent = "Clear Sky"; // Mô tả thời tiết
+        // Giả lập giá trị thời tiết hoặc sử dụng OpenWeatherMap API
+        document.getElementById('weatherTemp').textContent = "9°C"; // Nhiệt độ thực tế
+        document.getElementById('weatherHumidity').textContent = "88%"; // Độ ẩm thực tế
+        document.getElementById('weatherWind').textContent = "4.06 m/s"; // Tốc độ gió thực tế
+        document.getElementById('weatherDesc').textContent = "Light Rain"; // Mô tả thời tiết thực tế
 
-            document.getElementById('weatherPopUpContainer').style.display = 'flex';
+        document.getElementById('weatherPopUpContainer').style.display = 'flex';
         }
+
 
         function closeWeatherPopUp() {
             document.getElementById('weatherPopUpContainer').style.display = 'none';
@@ -639,7 +723,7 @@
         function getRandomValue(min, max) {
             return (Math.random() * (max - min) + min).toFixed(2);
         }
-        
+
         function goBackToMenu() {
             // Hide all house views
             document.querySelectorAll('.house-container').forEach(function(el) {
