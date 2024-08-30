@@ -198,47 +198,60 @@
             background: rgba(0, 0, 0, 0.5); /* Màu nền tối bên ngoài pop-up */
             z-index: 100;
         }
-
         .pop-up-table {
-            background-color: #2a2a2a;
-            border-radius: 10px;
+            background-color: rgba(42, 42, 42, 0.8); /* Màu nền đen với độ trong suốt */
+            border-radius: 15px; /* Bo tròn góc */
             padding: 20px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Bóng đổ mềm */
+            backdrop-filter: blur(10px); /* Hiệu ứng làm mờ nền phía sau */
+            -webkit-backdrop-filter: blur(10px); /* Hỗ trợ cho trình duyệt Webkit */
             color: white;
             width: 600px;
             position: relative;
             animation: fadeIn 0.5s ease-out;
-        }
-
-        .pop-up-table h3 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.5em;
-            color: #e0e0e0;
-        }
-
-        .pop-up-table table {
-            width: 100%;
-            border-collapse: collapse;
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Đường viền mờ */
         }
 
         .pop-up-table th,
         .pop-up-table td {
             padding: 10px;
             text-align: left;
-            border-bottom: 1px solid #444;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Đường kẻ dưới mờ */
         }
 
         .pop-up-table th {
-            background-color: #333;
+            background-color: rgba(51, 51, 51, 0.5); /* Nền mờ cho tiêu đề cột */
             color: #ffa500;
             font-weight: bold;
         }
 
         .pop-up-table td {
-            background-color: #1f1f1f;
+            background-color: rgba(31, 31, 31, 0.5); /* Nền mờ cho ô dữ liệu */
             color: #fff;
         }
+
+        /* Nút Close cũng được thiết kế lại */
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.3); /* Nền trong suốt */
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: white;
+            border-radius: 50%; /* Bo tròn nút */
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-button:hover {
+            background: rgba(255, 255, 255, 0.5); /* Màu nền thay đổi khi hover */
+        }
+
 
         .input-container {
             margin-top: 20px;
@@ -270,17 +283,6 @@
 
         .input-container button:hover {
             background-color: #ff8c00;
-        }
-
-        .close-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            color: white;
         }
     </style>
 </head>
@@ -445,6 +447,7 @@
             document.getElementById('menu').classList.add('active');
         }
 
+        //Must have bien let lightOn de lam flag 
         let lightOn = true; // Biến để theo dõi trạng thái của đèn
 
         function toggleLight() {
