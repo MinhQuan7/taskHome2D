@@ -214,7 +214,6 @@
                 0 0 30px rgba(255, 255, 204, 0.3),
                 0 0 40px rgba(255, 255, 204, 0.2);
             border: 1px solid rgba(255, 255, 204, 0.5);
-            color: white;
         }
 
         .pop-up-table::before {
@@ -268,7 +267,6 @@
             text-align: left;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Đường kẻ dưới mờ */
             line-height: 1; /* Tăng chiều cao dòng để làm cho các hàng thoáng hơn */
-            color: white; /* Text color to white */
         }
 
         .pop-up-table th {
@@ -373,110 +371,6 @@
         .h3{
             color: #fff;
         }
-
-        .weather-app {
-            width: 350px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            background: linear-gradient(135deg, #3a3a3a 50%, #111111 100%);
-            color: #fff;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .weather-app .weather-header {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .weather-app .weather-header h1 {
-            margin: 0;
-            font-size: 3em;
-        }
-
-        .weather-app .weather-header h3 {
-            margin: 5px 0;
-            font-size: 1.5em;
-        }
-
-        .weather-app .weather-header p {
-            margin: 5px 0;
-            font-size: 1em;
-            color: #bbbbbb;
-        }
-
-        .weather-app .weather-details {
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 0 0 20px 20px;
-        }
-
-        .weather-app .weather-details h4 {
-            margin: 10px 0;
-            font-size: 1em;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .popUpContainer-weather {
-        display: none;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        z-index: 400; /* Đảm bảo giá trị z-index này cao hơn các phần tử khác */
-        }
-
-
-        .pop-up-table-weather {
-            background: #202020;
-            border-radius: 15px;
-            padding: 20px;
-            color: #fff;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        .pop-up-table-weather h3 {
-            margin-top: 0;
-            font-size: 1.5em;
-            text-align: center;
-        }
-
-        .pop-up-table-weather .table {
-            margin-top: 20px;
-        }
-
-        .pop-up-table-weather .table tr {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #333;
-        }
-
-        .pop-up-table-weather .table tr:last-child {
-            border-bottom: none;
-        }
-
-        .close-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 1.5em;
-            color: #fff;
-            cursor: pointer;
-        }
-
     </style>
 </head>
 <body>
@@ -565,33 +459,6 @@
             </div>
         </div>
 
-
-        <div class="weather-app" id="weatherApp" style="display:none;">
-            <div class="weather-header">
-                <h1 id="temperature-weather">--°C</h1>
-                <h3 id="weather">--</h3>
-                <p id="date-weather">--</p>
-                <p id="location-weather">--</p>
-            </div>
-            <div class="weather-details">
-                <h4>Humidity: <span id="humidity-weather">--%</span></h4>
-                <h4>Wind: <span id="wind-weather">-- m/s</span></h4>
-            </div>
-        </div>
-
-        <div class="pop-up-container-weather" id="popUpContainer-weather">
-            <div class="pop-up-table-weather">
-                <button class="close-button" onclick="closeWeatherPopUp()">&times;</button>
-                <h3>Humidity Details</h3>
-                <div class="table">
-                    <tr>
-                        <td>Saturday</td>
-                        <td id="popup-humidity">88%</td>
-                    </tr>
-                </div>
-            </div>
-        </div>
-        
         <div class="back-button-container">
             <button class="back-button" onclick="goBackToMenu()">Back to Home</button>
         </div>
@@ -612,59 +479,12 @@
     </div>
 
     <script>
-
-        //___________________New Change___________________________
         document.addEventListener("DOMContentLoaded", function() {
-            const powerElement = document.getElementById('powerBox');  
-            const humidElement = document.getElementById('humidBox');
-
+            const powerElement = document.getElementById('powerBox');
             powerElement.addEventListener('click', function() {
                 showPopUp();
-                console.log('pressed click power!!');
-            });
-            
-            humidElement.addEventListener('click', function() {
-                console.log('pressed click humid!!');
-                updateWeather(); 
-                showWeatherPopUp();
             });
         });
-
-
-        function showPopUp() {
-            document.getElementById('popUpContainer').style.display = 'flex';
-        }
-
-        function closePopUp() {
-            document.getElementById('popUpContainer').style.display = 'none';
-        }
-
-        function showWeatherPopUp() {
-            document.getElementById('popUpContainer-weather').style.display = 'flex';
-            document.getElementById('weatherApp').style.display = 'block';
-        }
-
-        function closeWeatherPopUp() {
-            document.getElementById('popUpContainer-weather').style.display = 'none';
-            document.getElementById('weatherApp').style.display = 'none';
-        }
-
-        function updateWeather() {
-            const location = "Your Location"; // Replace with actual location if needed
-            const temperature = getRandomValue(15, 30); // Temperature between 15°C and 30°C
-            const humidity = getRandomValue(40, 90);    // Humidity between 40% and 90%
-            const wind = getRandomValue(2, 10);         // Wind speed between 2 m/s and 10 m/s
-
-            document.getElementById('temperature-weather').innerText = `${temperature}°C`;
-            document.getElementById('weather').innerText = 'Light Rain';
-            document.getElementById('humidity-weather').innerText = `${humidity}%`;
-            document.getElementById('wind-weather').innerText = `${wind} m/s`;
-            document.getElementById('date-weather').innerText = new Date().toLocaleDateString();
-            document.getElementById('location-weather').innerText = location;
-
-            document.getElementById('popup-humidity').innerText = `${humidity}%`;
-        }
-
 
         function showPopUp() {
             document.getElementById('popUpContainer').style.display = 'flex';
@@ -767,37 +587,6 @@
             document.getElementById('humidity').textContent = getRandomValue(30, 70); // Humidity between 30% and 70%
             document.getElementById('power').textContent = getRandomValue(100, 500); // Power consumption between 100W and 500W
         }
-
-        function showWeatherPopUp() {
-            document.getElementById('popUpContainer-weather').style.display = 'flex';
-            document.getElementById('weatherApp').style.display = 'block';
-        }
-
-        function closeWeatherPopUp() {
-            document.getElementById('popUpContainer-weather').style.display = 'none';
-            document.getElementById('weatherApp').style.display = 'none';
-        }
-
-
-        function updateWeather() {
-            const location = "Your Location"; // Bạn có thể thay thế bằng giá trị thực từ input nếu cần
-            // Generate random values for temperature, humidity, and wind
-            const temperature = getRandomValue(15, 30); // Temperature between 15°C and 30°C
-            const humidity = getRandomValue(40, 90);    // Humidity between 40% and 90%
-            const wind = getRandomValue(2, 10);         // Wind speed between 2 m/s and 10 m/s
-
-            // Update the UI with the new values
-            document.getElementById('temperature-weather').innerText = `${temperature}°C`;
-            document.getElementById('weather').innerText = 'Light Rain';
-            document.getElementById('humidity-weather').innerText = `${humidity}%`;
-            document.getElementById('wind-weather').innerText = `${wind} m/s`;
-            document.getElementById('date-weather').innerText = new Date().toLocaleDateString();
-            document.getElementById('location-weather').innerText = location;
-
-            // Update the humidity in the pop-up
-            document.getElementById('popup-humidity').innerText = `${humidity}%`;
-    }
-
     </script>
 </body>
 </html>
