@@ -613,23 +613,18 @@
     <script>
 
         document.addEventListener("DOMContentLoaded", function() {
-        const powerElement = document.getElementById('powerBox');
-        const humidElement = document.getElementById('humidBox');
-        
+        const powerElement = document.getElementById('powerBox');  
         powerElement.addEventListener('click', function() {
             showPopUp();
         });
-        
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const humidElement = document.getElementById('humidBox');      
         humidElement.addEventListener('click', function() {
             updateWeather(); // Cập nhật thông tin thời tiết trước khi hiển thị pop-up
             showWeatherPopUp();
         });
-    });
-
-        humidElement.addEventListener('click', function() {
-        console.log('Humidity box clicked!');
-        updateWeather(); // Ensure this is being called correctly
-        showWeatherPopUp(); // Ensure this is being called correctly
     });
 
         function showPopUp() {
