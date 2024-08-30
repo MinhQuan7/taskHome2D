@@ -628,6 +628,28 @@
             });
         });
 
+        document.addEventListener("DOMContentLoaded", function() {
+        const powerElement = document.getElementById('powerBox');  
+        const humidElement = document.getElementById('humidBox');
+
+        powerElement.addEventListener('click', function() {
+            showPopUp();
+        });
+        
+        humidElement.addEventListener('click', function() {
+            updateWeather(); // Update weather information before displaying the pop-up
+            showWeatherPopUp();
+        });
+    });
+
+        function showPopUp() {
+            document.getElementById('popUpContainer').style.display = 'flex';
+        }
+
+        function closePopUp() {
+            document.getElementById('popUpContainer').style.display = 'none';
+        }
+
         function showWeatherPopUp() {
             document.getElementById('popUpContainer-weather').style.display = 'flex';
             document.getElementById('weatherApp').style.display = 'block';
@@ -638,22 +660,22 @@
             document.getElementById('weatherApp').style.display = 'none';
         }
 
+        function updateWeather() {
+            const location = "Your Location"; // Replace with actual location if needed
+            const temperature = getRandomValue(15, 30); // Temperature between 15°C and 30°C
+            const humidity = getRandomValue(40, 90);    // Humidity between 40% and 90%
+            const wind = getRandomValue(2, 10);         // Wind speed between 2 m/s and 10 m/s
 
+            document.getElementById('temperature-weather').innerText = `${temperature}°C`;
+            document.getElementById('weather').innerText = 'Light Rain';
+            document.getElementById('humidity-weather').innerText = `${humidity}%`;
+            document.getElementById('wind-weather').innerText = `${wind} m/s`;
+            document.getElementById('date-weather').innerText = new Date().toLocaleDateString();
+            document.getElementById('location-weather').innerText = location;
 
-        document.addEventListener("DOMContentLoaded", function() {
-        const powerElement = document.getElementById('powerBox');  
-        powerElement.addEventListener('click', function() {
-            showPopUp();
-        });
-    });
+            document.getElementById('popup-humidity').innerText = `${humidity}%`;
+        }
 
-    document.addEventListener("DOMContentLoaded", function() {
-        const humidElement = document.getElementById('humidBox');      
-        humidElement.addEventListener('click', function() {
-            updateWeather(); // Cập nhật thông tin thời tiết trước khi hiển thị pop-up
-            showWeatherPopUp();
-        });
-    });
 
         function showPopUp() {
             document.getElementById('popUpContainer').style.display = 'flex';
@@ -767,9 +789,9 @@
             document.getElementById('weatherApp').style.display = 'none';
         }
 
+
         function updateWeather() {
             const location = "Your Location"; // Bạn có thể thay thế bằng giá trị thực từ input nếu cần
-            
             // Generate random values for temperature, humidity, and wind
             const temperature = getRandomValue(15, 30); // Temperature between 15°C and 30°C
             const humidity = getRandomValue(40, 90);    // Humidity between 40% and 90%
