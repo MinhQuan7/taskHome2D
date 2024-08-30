@@ -303,23 +303,32 @@
 
     <script>
         let lightOn = true;
-        
-        function showPopUp() {
-            document.getElementById('popUp').classList.add('active');
-            // Assume the power consumption for simplicity
-            document.getElementById('powerStats').textContent = '150'; // Example: 150 kWh
-        }
+        document.addEventListener("DOMContentLoaded", function() {
+        // Ensure the DOM is fully loaded before attaching the event listener
+        const tempElement = document.getElementById('temp');
 
-        function closePopUp() {
-            document.getElementById('popUp').classList.remove('active');
-        }
+        // Add a click event listener to the temp element
+        tempElement.addEventListener('click', function() {
+            showPopUp();
+        });
+    });
 
-        function calculateCost() {
-            const price = document.getElementById('pricePerKw').value;
-            const powerConsumption = 150; // Example: 150 kWh for Mon-Fri
-            const totalCost = price * powerConsumption;
-            document.getElementById('totalCost').textContent = totalCost ? totalCost.toFixed(2) + ' VND' : '--';
-        }
+    function showPopUp() {
+        document.getElementById('popUp').classList.add('active');
+        document.getElementById('powerStats').textContent = '150'; // Example: 150 kWh
+    }
+
+    function closePopUp() {
+        document.getElementById('popUp').classList.remove('active');
+    }
+
+    function calculateCost() {
+        const price = document.getElementById('pricePerKw').value;
+        const powerConsumption = 150; // Example: 150 kWh for Mon-Fri
+        const totalCost = price * powerConsumption;
+        document.getElementById('totalCost').textContent = totalCost ? totalCost.toFixed(2) + ' VND' : '--';
+    }
+
 
         function loadHouse(houseId) {
             // Hide the menu
