@@ -203,22 +203,17 @@
             background-color: rgba(42, 42, 42, 0.8); /* Màu nền đen với độ trong suốt */
             border-radius: 15px; /* Bo tròn góc */
             padding: 20px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Bóng đổ mềm */
-            backdrop-filter: blur(10px); /* Hiệu ứng làm mờ nền phía sau */
-            -webkit-backdrop-filter: blur(10px); /* Hỗ trợ cho trình duyệt Webkit */
-            color: white;
-            width: 600px;
             position: relative;
-            animation: fadeIn 0.3s ease-out;
+            animation: fadeIn 0.5s ease-out;
             border: 1px solid rgba(255, 255, 255, 0.3); /* Đường viền mờ */
 
-            /* Thêm hiệu ứng neon vàng nhạt */
+            /* Thêm hiệu ứng neon */
             box-shadow: 
-                0 0 10px rgba(255, 255, 204, 0.5),  /* Ánh sáng mờ nhẹ */
-                0 0 20px rgba(255, 255, 204, 0.4), 
-                0 0 30px rgba(255, 255, 204, 0.3), 
-                0 0 40px rgba(255, 255, 204, 0.2); /* Ánh sáng mạnh hơn */
-            border: 1px solid rgba(255, 255, 204, 0.5); /* Đường viền sáng vàng nhạt */
+                0 0 10px rgba(255, 255, 204, 0.5),
+                0 0 20px rgba(255, 255, 204, 0.4),
+                0 0 30px rgba(255, 255, 204, 0.3),
+                0 0 40px rgba(255, 255, 204, 0.2);
+            border: 1px solid rgba(255, 255, 204, 0.5);
         }
 
         .pop-up-table::before {
@@ -228,16 +223,44 @@
             left: -5px;
             right: -5px;
             bottom: -5px;
-            border-radius: 15px; /* Bo tròn góc */
+            border-radius: 15px;
             border: 2px solid rgba(255, 255, 204, 0.5); /* Viền neon bên ngoài */
             box-shadow: 
-                0 0 15px rgba(255, 255, 204, 0.5), 
+                0 0 15px rgba(255, 255, 204, 0.5),
                 0 0 30px rgba(255, 255, 204, 0.4),
                 0 0 45px rgba(255, 255, 204, 0.3),
-                0 0 60px rgba(255, 255, 204, 0.2); /* Hiệu ứng neon vàng nhạt */
+                0 0 60px rgba(255, 255, 204, 0.2);
             pointer-events: none; /* Không tương tác được */
             z-index: -1; /* Đưa lớp này xuống dưới */
+
+            /* Hiệu ứng di chuyển đèn neon */
+            animation: neonMove 5s linear infinite;
         }
+
+        @keyframes neonMove {
+            0% {
+                box-shadow: 
+                    0 0 10px rgba(255, 255, 204, 0.5),
+                    0 0 20px rgba(255, 255, 204, 0.4),
+                    0 0 30px rgba(255, 255, 204, 0.3),
+                    0 0 40px rgba(255, 255, 204, 0.2);
+            }
+            50% {
+                box-shadow: 
+                    0 0 40px rgba(255, 255, 204, 0.2),
+                    0 0 30px rgba(255, 255, 204, 0.3),
+                    0 0 20px rgba(255, 255, 204, 0.4),
+                    0 0 10px rgba(255, 255, 204, 0.5);
+            }
+            100% {
+                box-shadow: 
+                    0 0 10px rgba(255, 255, 204, 0.5),
+                    0 0 20px rgba(255, 255, 204, 0.4),
+                    0 0 30px rgba(255, 255, 204, 0.3),
+                    0 0 40px rgba(255, 255, 204, 0.2);
+            }
+        }
+
         .pop-up-table th,
         .pop-up-table td {
             padding: 9px 9px; /* Tăng khoảng cách giữa nội dung và viền ô */
