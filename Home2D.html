@@ -203,11 +203,7 @@
             position: relative; /* Đảm bảo nút close và icon định vị chính xác */
         }
 
-        .popup-icon {
-            width: 3px; /* Điều chỉnh kích thước icon */
-            height: 3px;
-            margin-bottom: 3px; /* Khoảng cách giữa icon và tiêu đề */
-        }
+
 
         .close-button {
             position: absolute;
@@ -324,7 +320,7 @@
             <div class="blur-background" id="blurBackground"></div> <!-- Lớp mờ background -->
             <div class="pop-up" id="popUp">
                 <button class="close-button" onclick="closePopUp()">&times;</button>
-                <img src="electricity.png" alt="icon">
+                <img width="64" height="64" src="https://img.icons8.com/arcade/64/light.png" alt="light"/>
                 <h3>Power Consumption</h3>
                 <div>
                     <p>Monday to Friday: <span id="powerStats">--</span> kWh</p>
