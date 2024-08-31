@@ -497,19 +497,25 @@
             }
         }
 /* Updated CSS */
-    .weather-left-container {
-        background-image: url('nature.jpg');
-        background-size: cover;
-        background-position: center;
+.weather-left-container {
+    background-image: url('nature.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 50%; /* Điều chỉnh độ rộng */
+    padding: 20px; /* Điều chỉnh padding */
+    color: #ffffff; /* Màu chữ trắng để dễ đọc */
+    border-radius: 15px; /* Bo tròn 4 góc */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng khi di chuột */
+}
 
-        width: 50%; /* Adjust this to fit your design */
-        padding: 20px; /* Adjust padding as needed */
-        color: #ffffff; /* Ensure text is readable */
-        border-radius: 10px 0 0 10px; /* Rounded corners for left side */
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
+.weather-left-container:hover {
+    transform: translateY(-5px); /* Nâng khối lên một chút khi di chuột */
+    box-shadow: 0 8px 20px rgba(
+}
 
     .weather-details h3, .weather-temp, .weather-back {
         margin: 0;
