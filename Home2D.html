@@ -57,13 +57,22 @@
             z-index: 110;
         }
         
-        .menu-image {
-            max-width: 40%; /* Điều chỉnh để hình ảnh chiếm 80% chiều rộng của menu-container */
-            height: auto; /* Chiều cao tự động điều chỉnh theo tỷ lệ */
-            object-fit: contain; /* Giữ nguyên tỷ lệ của hình ảnh */
-            border-radius: 10px; /* Bo tròn góc của hình ảnh nếu muốn */
-            margin-bottom: 20px; /* Tạo khoảng cách giữa hình ảnh và nội dung bên dưới */
+        .image-container {
+            width: 100px; /* Chiều rộng của khung chứa hình ảnh */
+            height: 100px; /* Chiều cao của khung chứa hình ảnh */
+            margin: 0 auto 20px; /* Canh giữa khung chứa và tạo khoảng cách với nội dung dưới */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+
+        .menu-image {
+            max-width: 100%; /* Hình ảnh sẽ thu nhỏ để vừa khít với chiều rộng của .image-container */
+            max-height: 100%; /* Hình ảnh sẽ thu nhỏ để vừa khít với chiều cao của .image-container */
+            object-fit: contain; /* Giữ nguyên tỷ lệ của hình ảnh và không bị cắt */
+            border-radius: 10px; /* Bo tròn các góc của hình ảnh nếu cần */
+        }
+
 
         .house-container {
             display: none;
@@ -574,7 +583,9 @@
     <div class="overlay"></div>
 
     <div class="menu-container active" id="menu">
-        <img src="3d-casual-life-office-building.png" alt="menu-container-icon">
+        <div class="image-container">
+            <img src="3d-casual-life-office-building.png" alt="Menu Image" class="menu-image">
+        </div>
         <div class="menu-header">Welcome to Your Smart Home</div>
         <div class="menu-description">Choose the home layout you would like to explore:</div>
         <div class="menu-buttons">
