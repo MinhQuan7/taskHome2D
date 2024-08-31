@@ -32,6 +32,7 @@
             background-position: center;
             background-attachment: fixed;
             filter: blur(8px);
+            z-index: 105;
         }
 
         .overlay {
@@ -729,7 +730,7 @@
               // Show the back and light buttons when a house is selected
             document.querySelector('.back-button-container').style.display = 'block';
             document.querySelector('.light-button-container').style.display = 'block';
-            
+
             // Show the selected house view
             document.getElementById(houseId).classList.add('active');
 
