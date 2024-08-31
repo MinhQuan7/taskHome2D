@@ -45,14 +45,14 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: white;
+            background: linear-gradient(145deg, #ffffff, #e6e6e6); /* Thêm hiệu ứng gradient */
             padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            width: 60%;
-            max-width: 600px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 50%;
+            max-width: 500px;
             text-align: center;
-            animation: fadeIn 1s ease-out;
+            animation: slideIn 0.5s ease-out;
             z-index: 110;
         }
 
@@ -84,26 +84,56 @@
                 transform: scale(1);
             }
         }
-
         .menu-header {
-            font-size: 2.5em;
+            font-size: 3em; /* Tăng kích thước chữ */
             margin-bottom: 20px;
-            color: #333;
-            font-weight: bold;
+            color: #444;
+            font-weight: 700;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Thêm hiệu ứng đổ bóng chữ */
         }
 
         .menu-description {
-            font-size: 1.2em;
+            font-size: 1.4em; /* Tăng kích thước chữ */
             margin-bottom: 40px;
-            color: #555;
+            color: #666;
+            line-height: 1.5; /* Tăng khoảng cách giữa các dòng */
         }
 
         .menu-buttons {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-evenly; /* Điều chỉnh khoảng cách giữa các nút */
             width: 100%;
         }
 
+        .menu-button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(145deg, #ff6347, #e53e30); /* Sử dụng gradient cho nút */
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            margin: 10px;
+        }
+
+        .menu-button:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(145deg, #ff4500, #e53e30); /* Thay đổi gradient khi hover */
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
         .menu-button, .back-button, .light-button {
             padding: 12px 25px;
             font-size: 1em;
