@@ -57,11 +57,14 @@
             z-index: 110;
         }
         
-        .menu-container-icon {
-            max-width: 60%; /* Đảm bảo hình ảnh không vượt quá chiều rộng của menu-container */
-            height: auto; /* Đặt chiều cao tối đa để vừa khít trong menu-container */
-            object-fit: contain; /* Giữ nguyên tỷ lệ hình ảnh và cắt nếu cần thiết */
+        .menu-image {
+            max-width: 40%; /* Điều chỉnh để hình ảnh chiếm 80% chiều rộng của menu-container */
+            height: auto; /* Chiều cao tự động điều chỉnh theo tỷ lệ */
+            object-fit: contain; /* Giữ nguyên tỷ lệ của hình ảnh */
+            border-radius: 10px; /* Bo tròn góc của hình ảnh nếu muốn */
+            margin-bottom: 20px; /* Tạo khoảng cách giữa hình ảnh và nội dung bên dưới */
         }
+
         .house-container {
             display: none;
             flex-direction: column;
