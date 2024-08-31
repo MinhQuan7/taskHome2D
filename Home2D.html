@@ -496,21 +496,34 @@
                     0 0 40px rgba(174, 24, 219, 0.2);
             }
         }
-        .weather-img {
-            margin: 10px 0;
-            font-size: 1.2em;
-            font-weight: 700;
-            color: #ffffff;
-            position: relative;
-            padding: 20px;
-            text-align: center;
-            border-radius: 10px;
-            z-index: 400; 
-            background-image: url('nature.jpg'); /* Set the image as background */
-            background-size: cover; /* Cover the entire div */
-            background-position: center; /* Center the image */
-            background-repeat: no-repeat; /* Prevent the image from repeating */
-        }
+/* Updated CSS */
+    .weather-left-container {
+        background-image: url('nature.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 50%; /* Adjust this to fit your design */
+        padding: 20px; /* Adjust padding as needed */
+        color: #ffffff; /* Ensure text is readable */
+        border-radius: 10px 0 0 10px; /* Rounded corners for left side */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+.weather-details h3, .weather-temp, .weather-back {
+    margin: 0;
+    padding: 10px 0;
+}
+
+/* Style the right container to match */
+.weather-right-container {
+    background-color: rgba(0, 0, 0, 0.8); /* Dark background for contrast */
+    width: 50%; /* Adjust this to fit your design */
+    padding: 20px;
+    border-radius: 0 10px 10px 0; /* Rounded corners for right side */
+}
+
 
 
         .weather-background-image {
@@ -566,13 +579,10 @@
     <div class="weather-pop-up">
         <button class="close-button" onclick="closeWeatherPopUp()">&times;</button>
         <h3>HO CHI MINH </h3>
-        <div class="weather-info">
-            <div>
-                <div class="weather-img" id="weatherTemp">23°C
+        <div class="weather-left-container">
+                <div class="weather-temp" id="weatherTemp">23°C
                 <div class="weather-back" id="weatherDesc">
                     Light Rain
-                    <img src="nature.jpg" alt="weather background" class="weather-background-image">
-                </div>
                 </div>
             </div>
             <img width="64" height="64" src="https://img.icons8.com/cute-clipart/64/cloud.png" alt="weather Icon"/>
