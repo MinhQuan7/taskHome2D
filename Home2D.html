@@ -850,6 +850,7 @@
                 lightButton.classList.remove('off');
                 lightButton.classList.add('on');
                 lightButton.style.backgroundColor = '#32cd32'; // Đổi màu nút sang màu sáng khi đèn bật
+
             } else {
                 houseContainer.style.filter = 'brightness(0.15)'; // Giảm độ sáng trang
                 lightButton.textContent = 'Turn On Light';
@@ -857,6 +858,8 @@
                 lightButton.classList.add('off');
                 lightButton.style.backgroundColor = '#555'; // Đổi màu nút sang màu tối khi đèn tắt
             }
+            // Cập nhật giá trị của ID 52438 lên nền tảng
+            eraWidget.setValue(config.id, lightOn ? 1 : 0);
         }
 
         function getRandomValue(min, max) {
@@ -870,25 +873,25 @@
         }
 
         //___________________________ERA CONFIG_______________________________________
-        const eraWidget = new EraWidget();
-        let config = { id: 52438 };
-        eraWidget.onConfiguration((configuration) => {
-            config = configuration.realtime_configs.find(cfg => cfg.id === 52438);
-            console.log("Received configuration:", config);
-        });
+        function ERAevent() {
+            const eraWidget = new EraWidget();
+            let config = { id: 52438 };
+            eraWidget.onConfiguration((configuration) => {
+                config = configuration.realtime_configs.find(cfg => cfg.id === 52438);
+                console.log("Received configuration:", config);
+            });
 
-        eraWidget.onValues((values) => {
-            console.log("Received values onValues function:", values);
-            if (values[config.id]) {
-                const value = values[config.id].value;
-                if (value !== (lightOn ? 1 : 0)) {
-                    toggleLight(); // Toggle the light if the value changes
+            eraWidget.onValues((values) => {
+                console.log("Received values onValues function:", values);
+                if (values[config.id]) {
+                    const value = values[config.id].value;
+                    if (value !== (lightOn ? 1 : 0)) {
+                        toggleLight(); // Toggle the light if the value changes
+                    }
                 }
-            }
-        });
-
+            });
         eraWidget.ready();
-                
+        }   
     </script>
 </body>
 </html>
