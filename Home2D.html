@@ -858,14 +858,15 @@
                 lightButton.classList.add('off');
                 lightButton.style.backgroundColor = '#555'; // Đổi màu nút sang màu tối khi đèn tắt
             }
-            // Cập nhật giá trị của ID 52438 lên nền tảng
+
+            // Gán giá trị trực tiếp tới ID 52438
             if (config) {
-                eraWidget.updateValue(config.id, lightOn ? 1 : 0);
-                console.log(`Sent value: ${lightOn ? 1 : 0} to ID: ${config.id}`);
+                config.value = lightOn ? 1 : 0;
+                console.log(`Set value: ${config.value} to ID: ${config.id}`);
             } else {
                 console.error("Config is not available yet.");
             }
-                }
+    }
 
         function getRandomValue(min, max) {
             return (Math.random() * (max - min) + min).toFixed(2);
