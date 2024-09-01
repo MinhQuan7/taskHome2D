@@ -839,56 +839,26 @@
         }
 
         //_________________________Function : Toggle Light ____________________
-      // Hàm cập nhật trạng thái đèn trong giao diện
-        function updateLightState(lightOn) {
+        let lightOn = true; // Biến để theo dõi trạng thái của đèn
+        function toggleLight() {
+            lightOn = !lightOn; // Đảo ngược trạng thái đèn
             const houseContainer = document.getElementById('house1');
             const lightButton = document.getElementById('lightButton');
-
             if (lightOn) {
-                houseContainer.style.filter = 'brightness(1)';
+                houseContainer.style.filter = 'brightness(1)'; // Đặt lại độ sáng bình thường
                 lightButton.textContent = 'Turn Off Light';
                 lightButton.classList.remove('off');
                 lightButton.classList.add('on');
-                lightButton.style.backgroundColor = '#32cd32';
+                lightButton.style.backgroundColor = '#32cd32'; // Đổi màu nút sang màu sáng khi đèn bật
             } else {
-                houseContainer.style.filter = 'brightness(0.15)';
+                houseContainer.style.filter = 'brightness(0.15)'; // Giảm độ sáng trang
                 lightButton.textContent = 'Turn On Light';
                 lightButton.classList.remove('on');
                 lightButton.classList.add('off');
-                lightButton.style.backgroundColor = '#555';
+                lightButton.style.backgroundColor = '#555'; // Đổi màu nút sang màu tối khi đèn tắt
             }
         }
 
-        // Khởi tạo EraWidget và lắng nghe cấu hình
-        const eraWidget = new EraWidget();
-        let config = null;
-        let lightOn = true;
-
-        eraWidget.onConfiguration((configuration) => {
-            config = configuration.realtime_configs.find(cfg => cfg.id === 'Light_Home2D');
-        });
-
-        eraWidget.onValues((values) => {
-            if (config && values[config.id] !== undefined) {
-                lightOn = values[config.id].value === 1; // Cập nhật trạng thái đèn từ nền tảng
-                updateLightState(lightOn); // Cập nhật giao diện với trạng thái mới
-            }
-        });
-
-        function toggleLight() {
-            lightOn = !lightOn;
-            updateLightState(lightOn);
-            
-            // Gửi giá trị mới lên nền tảng IoT
-            if (config) {
-                eraWidget.setValue(config.id, lightOn ? 1 : 0);
-            }
-        }
-
-        eraWidget.ready();
-
-        // Lắng nghe sự kiện click trên nút đèn
-        document.getElementById('lightButton').addEventListener('click', toggleLight);
         function getRandomValue(min, max) {
             return (Math.random() * (max - min) + min).toFixed(2);
         }
@@ -899,6 +869,26 @@
             document.getElementById('power').textContent = getRandomValue(100, 500); // Power consumption between 100W and 500W
         }
 
+        //___________________________ERA CONFIG_______________________________________
+        const eraWidget = new EraWidget();
+        let config = { id: 52438 };
+        eraWidget.onConfiguration((configuration) => {
+            config = configuration.realtime_configs.find(cfg => cfg.id === 52438);
+            console.log("Received configuration:", config);
+        });
+
+        eraWidget.onValues((values) => {
+            console.log("Received values onValues function:", values);
+            if (values[config.id]) {
+                const value = values[config.id].value;
+                if (value !== (lightOn ? 1 : 0)) {
+                    toggleLight(); // Toggle the light if the value changes
+                }
+            }
+        });
+
+        eraWidget.ready();
+                
     </script>
 </body>
 </html>
