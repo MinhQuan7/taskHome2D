@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://www.unpkg.com/@eohjsc/era-widget@1.0.14/src/index.js"></script>
     <title>Home Selection Menu</title>
     <style>
         body {
@@ -138,7 +139,7 @@
         .menu-button:hover {
             transform: translateY(-7px);
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(145deg, #e6a992, #e09018); /* Thay đổi gradient khi hover */
+            background: linear-gradient(145deg, #eb7323, #f3a530); /* Thay đổi gradient khi hover */
         }
 
         .menu-container:hover {
@@ -588,8 +589,8 @@
         <div class="menu-header">Welcome to Your Smart Home</div>
         <div class="menu-description">Choose the home layout you would like to explore:</div>
         <div class="menu-buttons">
-            <button class="menu-button" onclick="loadHouse('house1')">House 1</button>
-            <button class="menu-button" onclick="loadHouse('house2')">House 2</button>
+            <button class="menu-button" onclick="loadHouse('house1')">Home 1</button>
+            <button class="menu-button" onclick="loadHouse('house2')">Home 2</button>
         </div>
     </div>
 
@@ -837,8 +838,8 @@
             document.getElementById('menu').classList.add('active');
         }
 
+        //_________________________Function : Toggle Light ____________________
         let lightOn = true; // Biến để theo dõi trạng thái của đèn
-
         function toggleLight() {
             lightOn = !lightOn; // Đảo ngược trạng thái đèn
 
@@ -869,6 +870,19 @@
             document.getElementById('humidity').textContent = getRandomValue(30, 70); // Humidity between 30% and 70%
             document.getElementById('power').textContent = getRandomValue(100, 500); // Power consumption between 100W and 500W
         }
+
+        //___________________________ERA CONFIG_______________________________________
+        const eraWidget = new EraWidget();
+        let config = null;
+        eraWidget.onConfiguration((configuration) => {
+            config = configuration.realtime_configs[0];
+        })
+        eraWidget.onValues((values) => {
+            const input = document.getElementById('Light_Home2D');
+            input.checked = values[config.id].value;
+        });
+        eraWidget.ready();
+        
     </script>
 </body>
 </html>
