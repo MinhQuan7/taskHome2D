@@ -839,36 +839,46 @@
         }
 
         //_________________________Function : Toggle Light ____________________
-        let lightOn = true; // Biến để theo dõi trạng thái của đèn
+        const eraWidget = new EraWidget();
+        let config = null;
+        let lightOn = true;
+        eraWidget.onConfiguration((configuration) => {
+            config = configuration.realtime_configs.find(cfg => cfg.id === 'Light_Home2D');
+        });
+
+        eraWidget.onValues((values) => {
+            const input = document.getElementById('lightButton');
+            input.checked = values[config.id].value;
+            updateLightState(values[config.id].value);
+        });
+
         function toggleLight() {
-            lightOn = !lightOn; // Đảo ngược trạng thái đèn
-            const eraWidget = new EraWidget();
+            lightOn = !lightOn;
+            updateLightState(lightOn);
+            // Gửi giá trị mới lên nền tảng IoT
+            eraWidget.setValue(config.id, lightOn ? 1 : 0);
+        }
+
+        function updateLightState(lightOn) {
             const houseContainer = document.getElementById('house1');
             const lightButton = document.getElementById('lightButton');
-            let checkLight = true;
-            checkLight = lightOn;
+
             if (lightOn) {
-                houseContainer.style.filter = 'brightness(1)'; // Đặt lại độ sáng bình thường
-                lightButton.textContent = 'Turn Off Light';
-                lightButton.classList.remove('off');
-                lightButton.classList.add('on');
-                lightButton.style.backgroundColor = '#32cd32'; // Đổi màu nút sang màu sáng khi đèn bật
-                eraWidget.onConfiguration((configuration) => {
-                checkLight = configuration.realtime_configs[0];
-                })
-                eraWidget.onValues((values) => {
-                const input = document.getElementById('Light_Home2D');
-                input.checked = values[checkLight.id].value;
-                });
-                eraWidget.ready();
+            houseContainer.style.filter = 'brightness(1)';
+            lightButton.textContent = 'Turn Off Light';
+            lightButton.classList.remove('off');
+            lightButton.classList.add('on');
+            lightButton.style.backgroundColor = '#32cd32';
             } else {
-                houseContainer.style.filter = 'brightness(0.6)'; // Giảm độ sáng trang
-                lightButton.textContent = 'Turn On Light';
-                lightButton.classList.remove('on');
-                lightButton.classList.add('off');
-                lightButton.style.backgroundColor = '#555'; // Đổi màu nút sang màu tối khi đèn tắt
+            houseContainer.style.filter = 'brightness(0.15)';
+            lightButton.textContent = 'Turn On Light';
+            lightButton.classList.remove('on');
+            lightButton.classList.add('off');
+            lightButton.style.backgroundColor = '#555';
             }
         }
+
+        eraWidget.ready();
 
         function getRandomValue(min, max) {
             return (Math.random() * (max - min) + min).toFixed(2);
