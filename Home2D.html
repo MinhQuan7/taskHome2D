@@ -842,18 +842,27 @@
         let lightOn = true; // Biến để theo dõi trạng thái của đèn
         function toggleLight() {
             lightOn = !lightOn; // Đảo ngược trạng thái đèn
-
+            const eraWidget = new EraWidget();
             const houseContainer = document.getElementById('house1');
             const lightButton = document.getElementById('lightButton');
-
+            let checkLight = true;
+            checkLight = lightOn;
             if (lightOn) {
                 houseContainer.style.filter = 'brightness(1)'; // Đặt lại độ sáng bình thường
                 lightButton.textContent = 'Turn Off Light';
                 lightButton.classList.remove('off');
                 lightButton.classList.add('on');
                 lightButton.style.backgroundColor = '#32cd32'; // Đổi màu nút sang màu sáng khi đèn bật
+                eraWidget.onConfiguration((configuration) => {
+                checkLight = configuration.realtime_configs[0];
+                })
+                eraWidget.onValues((values) => {
+                const input = document.getElementById('Light_Home2D');
+                input.checked = values[checkLight.id].value;
+                });
+                eraWidget.ready();
             } else {
-                houseContainer.style.filter = 'brightness(0.4)'; // Giảm độ sáng trang
+                houseContainer.style.filter = 'brightness(0.6)'; // Giảm độ sáng trang
                 lightButton.textContent = 'Turn On Light';
                 lightButton.classList.remove('on');
                 lightButton.classList.add('off');
@@ -871,18 +880,6 @@
             document.getElementById('power').textContent = getRandomValue(100, 500); // Power consumption between 100W and 500W
         }
 
-        //___________________________ERA CONFIG_______________________________________
-        const eraWidget = new EraWidget();
-        let config = null;
-        eraWidget.onConfiguration((configuration) => {
-            config = configuration.realtime_configs[0];
-        })
-        eraWidget.onValues((values) => {
-            const input = document.getElementById('Light_Home2D');
-            input.checked = values[config.id].value;
-        });
-        eraWidget.ready();
-        
     </script>
 </body>
 </html>
