@@ -860,12 +860,9 @@
             }
 
             // Gán giá trị trực tiếp tới ID 52438
-            if (config) {
-                config.value = lightOn ? 1 : 0;
-                console.log(`Set value: ${config.value} to ID: ${config.id}`);
-            } else {
-                console.error("Config is not available yet.");
-            }
+            const value = values[config.id].value;
+            value = lightOn ; 
+            eraWidget.ready();
     }
 
         function getRandomValue(min, max) {
@@ -889,7 +886,7 @@
         eraWidget.onValues((values) => {
             console.log("Received values onValues function:", values);
             if (values[config.id]) {
-                const value = values[config.id].value;
+                //const value = values[config.id].value;
                 if (value !== (lightOn ? 1 : 0)) {
                     toggleLight(); // Toggle the light if the value changes
                 }
