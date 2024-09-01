@@ -838,6 +838,29 @@
             document.getElementById('menu').classList.add('active');
         }
 
+        //_________________________Function : Toggle Light ____________________
+        let lightOn = true; // Biến để theo dõi trạng thái của đèn
+        function toggleLight() {
+            lightOn = !lightOn; // Đảo ngược trạng thái đèn
+            const houseContainer = document.getElementById('house1');
+            const lightButton = document.getElementById('lightButton');
+            if (lightOn) {
+                houseContainer.style.filter = 'brightness(1)'; // Đặt lại độ sáng bình thường
+                lightButton.textContent = 'Turn Off Light';
+                lightButton.classList.remove('off');
+                lightButton.classList.add('on');
+                lightButton.style.backgroundColor = '#32cd32'; // Đổi màu nút sang màu sáng khi đèn bật
+
+            } else {
+                houseContainer.style.filter = 'brightness(0.15)'; // Giảm độ sáng trang
+                lightButton.textContent = 'Turn On Light';
+                lightButton.classList.remove('on');
+                lightButton.classList.add('off');
+                lightButton.style.backgroundColor = '#555'; // Đổi màu nút sang màu tối khi đèn tắt
+            }
+
+    }
+
         function getRandomValue(min, max) {
             return (Math.random() * (max - min) + min).toFixed(2);
         }
@@ -849,63 +872,23 @@
         }
 
         //___________________________ERA CONFIG_______________________________________
-        let lightOn = true; // Biến để theo dõi trạng thái của đèn
+        const eraWidget = new EraWidget();
         let config = { id: 52438 };
-
-        // Cập nhật giao diện và trạng thái đèn từ phía server
-        function updateLightState(isOn) {
-            const houseContainer = document.getElementById('house1');
-            const lightButton = document.getElementById('lightButton');
-
-            if (isOn) {
-                houseContainer.style.filter = 'brightness(1)'; // Đặt lại độ sáng bình thường
-                lightButton.textContent = 'Turn Off Light';
-                lightButton.classList.remove('off');
-                lightButton.classList.add('on');
-                lightButton.style.backgroundColor = '#32cd32'; // Đổi màu nút sang màu sáng khi đèn bật
-            } else {
-                houseContainer.style.filter = 'brightness(0.15)'; // Giảm độ sáng trang
-                lightButton.textContent = 'Turn On Light';
-                lightButton.classList.remove('on');
-                lightButton.classList.add('off');
-                lightButton.style.backgroundColor = '#555'; // Đổi màu nút sang màu tối khi đèn tắt
-            }
-            lightOn = isOn; // Cập nhật trạng thái đèn
-        }
-
-        // Khi người dùng nhấn vào nút toggleLight
-        function toggleLight() {
-            const newLightState = !lightOn; // Đảo ngược trạng thái đèn
-            updateLightState(newLightState);
-
-            // Gửi giá trị cập nhật đến server
-            if (config && config.id) {
-                eraWidget.setValue(config.id, newLightState ? 1 : 0); // Cập nhật giá trị cho id 52438
-            }
-        }
-
-        // Nhận cấu hình từ server
         eraWidget.onConfiguration((configuration) => {
             config = configuration.realtime_configs.find(cfg => cfg.id === 52438);
             console.log("Received configuration:", config);
         });
 
-        // Nhận giá trị từ server và cập nhật giao diện
         eraWidget.onValues((values) => {
             console.log("Received values onValues function:", values);
             if (values[config.id]) {
                 const value = values[config.id].value;
                 if (value !== (lightOn ? 1 : 0)) {
-                    updateLightState(value === 1); // Cập nhật giao diện khi giá trị từ server thay đổi
+                    toggleLight(); // Toggle the light if the value changes
                 }
             }
         });
-
-        eraWidget.ready();
-
-        // Gắn sự kiện click cho nút lightButton
-        document.getElementById('lightButton').addEventListener('click', toggleLight);
-
+    eraWidget.ready();
         
     </script>
 </body>
