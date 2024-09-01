@@ -851,7 +851,6 @@
             input.checked = values[config.id].value;
             updateLightState(values[config.id].value);
         });
-        eraWidget.ready();
         function toggleLight() {
             lightOn = !lightOn;
             updateLightState(lightOn);
@@ -877,7 +876,7 @@
             lightButton.style.backgroundColor = '#555';
             }
         }
-
+        eraWidget.ready();
         function getRandomValue(min, max) {
             return (Math.random() * (max - min) + min).toFixed(2);
         }
