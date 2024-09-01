@@ -860,7 +860,7 @@
             }
             // Cập nhật giá trị của ID 52438 lên nền tảng
             if (config) {
-                eraWidget.setValue(config.id, lightOn ? 1 : 0);
+                eraWidget.updateValue(config.id, lightOn ? 1 : 0);
                 console.log(`Sent value: ${lightOn ? 1 : 0} to ID: ${config.id}`);
             } else {
                 console.error("Config is not available yet.");
