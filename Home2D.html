@@ -839,44 +839,56 @@
         }
 
         //_________________________Function : Toggle Light ____________________
-        const eraWidget = new EraWidget();
-        let config = null;
-        let lightOn = true;
-        eraWidget.onConfiguration((configuration) => {
-            config = configuration.realtime_configs.find(cfg => cfg.id === 'Light_Home2D');
-        });
-
-        eraWidget.onValues((values) => {
-            const input = document.getElementById('lightButton');
-            input.checked = values[config.id].value;
-            updateLightState(values[config.id].value);
-        });
-        function toggleLight() {
-            lightOn = !lightOn;
-            updateLightState(lightOn);
-            // Gửi giá trị mới lên nền tảng IoT
-            eraWidget.setValue(config.id, lightOn ? 1 : 0);
-        }
-
+      // Hàm cập nhật trạng thái đèn trong giao diện
         function updateLightState(lightOn) {
             const houseContainer = document.getElementById('house1');
             const lightButton = document.getElementById('lightButton');
 
             if (lightOn) {
-            houseContainer.style.filter = 'brightness(1)';
-            lightButton.textContent = 'Turn Off Light';
-            lightButton.classList.remove('off');
-            lightButton.classList.add('on');
-            lightButton.style.backgroundColor = '#32cd32';
+                houseContainer.style.filter = 'brightness(1)';
+                lightButton.textContent = 'Turn Off Light';
+                lightButton.classList.remove('off');
+                lightButton.classList.add('on');
+                lightButton.style.backgroundColor = '#32cd32';
             } else {
-            houseContainer.style.filter = 'brightness(0.15)';
-            lightButton.textContent = 'Turn On Light';
-            lightButton.classList.remove('on');
-            lightButton.classList.add('off');
-            lightButton.style.backgroundColor = '#555';
+                houseContainer.style.filter = 'brightness(0.15)';
+                lightButton.textContent = 'Turn On Light';
+                lightButton.classList.remove('on');
+                lightButton.classList.add('off');
+                lightButton.style.backgroundColor = '#555';
             }
         }
+
+        // Khởi tạo EraWidget và lắng nghe cấu hình
+        const eraWidget = new EraWidget();
+        let config = null;
+        let lightOn = true;
+
+        eraWidget.onConfiguration((configuration) => {
+            config = configuration.realtime_configs.find(cfg => cfg.id === 'Light_Home2D');
+        });
+
+        eraWidget.onValues((values) => {
+            if (config && values[config.id] !== undefined) {
+                lightOn = values[config.id].value === 1; // Cập nhật trạng thái đèn từ nền tảng
+                updateLightState(lightOn); // Cập nhật giao diện với trạng thái mới
+            }
+        });
+
+        function toggleLight() {
+            lightOn = !lightOn;
+            updateLightState(lightOn);
+            
+            // Gửi giá trị mới lên nền tảng IoT
+            if (config) {
+                eraWidget.setValue(config.id, lightOn ? 1 : 0);
+            }
+        }
+
         eraWidget.ready();
+
+        // Lắng nghe sự kiện click trên nút đèn
+        document.getElementById('lightButton').addEventListener('click', toggleLight);
         function getRandomValue(min, max) {
             return (Math.random() * (max - min) + min).toFixed(2);
         }
