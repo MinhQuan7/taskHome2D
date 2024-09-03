@@ -841,25 +841,32 @@
         //_________________________Function : Toggle Light ____________________
         let lightOn = true; // Biến để theo dõi trạng thái của đèn
         function toggleLight() {
-            lightOn = !lightOn; // Đảo ngược trạng thái đèn
-            const houseContainer = document.getElementById('house1');
-            const lightButton = document.getElementById('lightButton');
-            if (lightOn) {
-                houseContainer.style.filter = 'brightness(1)'; // Đặt lại độ sáng bình thường
-                lightButton.textContent = 'Turn Off Light';
-                lightButton.classList.remove('off');
-                lightButton.classList.add('on');
-                lightButton.style.backgroundColor = '#32cd32'; // Đổi màu nút sang màu sáng khi đèn bật
-
-            } else {
-                houseContainer.style.filter = 'brightness(0.15)'; // Giảm độ sáng trang
-                lightButton.textContent = 'Turn On Light';
-                lightButton.classList.remove('on');
-                lightButton.classList.add('off');
-                lightButton.style.backgroundColor = '#555'; // Đổi màu nút sang màu tối khi đèn tắt
-            }
-
+        lightOn = !lightOn; // Đảo ngược trạng thái đèn
+        const houseContainer = document.getElementById('house1');
+        const lightButton = document.getElementById('lightButton');
+        if (lightOn) {
+            houseContainer.style.filter = 'brightness(1)'; // Đặt lại độ sáng bình thường
+            lightButton.textContent = 'Turn Off Light';
+            lightButton.classList.remove('off');
+            lightButton.classList.add('on');
+            lightButton.style.backgroundColor = '#32cd32'; // Đổi màu nút sang màu sáng khi đèn bật
+            sendLightStatus(1); // Gửi trạng thái bật (1)
+        } else {
+            houseContainer.style.filter = 'brightness(0.15)'; // Giảm độ sáng trang
+            lightButton.textContent = 'Turn On Light';
+            lightButton.classList.remove('on');
+            lightButton.classList.add('off');
+            lightButton.style.backgroundColor = '#555'; // Đổi màu nút sang màu tối khi đèn tắt
+            sendLightStatus(0); // Gửi trạng thái tắt (0)
+        }
     }
+
+    // Hàm để gửi trạng thái đèn tới ERA Widget
+    function sendLightStatus(status) {
+        eraWidget.setValue({ id: 52881, value: status });
+        console.log("Light status sent:", status);
+    }
+
 
         function getRandomValue(min, max) {
             return (Math.random() * (max - min) + min).toFixed(2);
