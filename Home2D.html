@@ -861,11 +861,19 @@
         }
     }
 
-    // Hàm để gửi trạng thái đèn tới ERA Widget
+    // _________Hàm để gửi trạng thái đèn tới ERA Widget________________
     function sendLightStatus(status) {
-        eraWidget.setValue({ id: 52881, value: status });
-        console.log("Light status sent:", status);
+        eraWidget.sendRequest({
+            id: 52881, // ID bạn muốn thay đổi
+            value: status, // Giá trị muốn cập nhật
+            method: 'PUT', // Phương thức gửi yêu cầu (thường là PUT hoặc POST)
+        }).then(response => {
+            console.log("Light status sent successfully:", response);
+        }).catch(error => {
+            console.error("Error sending light status:", error);
+        });
     }
+
 
 
         function getRandomValue(min, max) {
