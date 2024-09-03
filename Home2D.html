@@ -861,42 +861,18 @@
         }
     }
 
-    // _________Hàm để gửi trạng thái đèn tới ERA Widget________________
-    const express = require('express');
-    const fs = require('fs');
-    const app = express();
-    const port = 3000;
-
-    app.use(express.urlencoded({ extended: true }));
-
-    app.post('/toggleLight', (req, res) => {
-        const status = req.body.status;
-        fs.writeFileSync('lightStatus.txt', status); // Ghi trạng thái vào file .txt
-        res.send('Light status updated');
-    });
-
-    app.listen(port, () => {
-        console.log(`Server listening at http://192.168.4.112:${port}`);
-    });
-
-    function sendLightStatus(status) {
-    fetch('http://192.168.4.112:3000/toggleLight', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: `status=${status}`
-    })
-    .then(response => response.text())
-    .then(data => {
-        console.log("Light status sent:", data);
-    })
-    .catch(error => {
-        console.error("Error sending light status:", error);
-    });
-}
-
-
+    // Hàm để gửi trạng thái đèn tới ERA Widget
+    // function sendLightStatus(status) {
+    //     eraWidget.sendRequest({
+    //         id: 52881, // ID bạn muốn thay đổi
+    //         value: status, // Giá trị muốn cập nhật
+    //         method: 'PUT', // Phương thức gửi yêu cầu (thường là PUT hoặc POST)
+    //     }).then(response => {
+    //         console.log("Light status sent successfully:", response);
+    //     }).catch(error => {
+    //         console.error("Error sending light status:", error);
+    //     });
+    // }
 
 
 
