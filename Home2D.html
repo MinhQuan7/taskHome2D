@@ -873,9 +873,9 @@
 
         //___________________________ERA CONFIG_______________________________________
         const eraWidget = new EraWidget();
-        let config = { id: 52855 };
+        let config = { id: 52881 };
         eraWidget.onConfiguration((configuration) => {
-            config = configuration.realtime_configs.find(cfg => cfg.id === 52855);
+            config = configuration.realtime_configs.find(cfg => cfg.id === 52881);
             console.log("Received configuration:", config);
         });
 
