@@ -208,14 +208,6 @@
         }
 
         .image {
-            /* max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            position: absolute; */
-
             width: 100vw; /* Đảm bảo ảnh rộng toàn màn hình */
             height: 100vh; /* Đảm bảo ảnh cao toàn màn hình */
             object-fit: cover; /* Ảnh tự động điều chỉnh để phủ kín mà không làm méo ảnh */
@@ -225,6 +217,7 @@
             left: 0; /* Đặt ảnh ở góc trái */
         }
 
+        
         .parameter {
             position: absolute;
             color: #FFD700;
@@ -584,6 +577,14 @@
             padding: 10px 0;
         }
 
+
+        .house-container#house2 .light-button-container {
+            position: absolute;
+            top: 20px; /* Điều chỉnh khoảng cách từ phía trên */
+            right: 20px; /* Điều chỉnh khoảng cách từ phía phải */
+            z-index: 100;
+        }
+
     </style>
 </head>
 <body>
@@ -729,13 +730,13 @@
     </div>
 
     <div class="house-container" id="house2">
-        <img src="home2.jpg" alt="House 2 Image" class="image">
+        <img src="home2.jpg" alt="House 2 Image" class="image-2">
         <div class="back-button-container">
             <button class="back-button" onclick="goBackToMenu()">Back to Home</button>
         </div>
-        <!-- <div class="light-button-container">
+        <div class="light-button-container">
             <button class="light-button" id="lightButton" onclick="toggleLight()">Toggle Light</button>
-        </div> -->
+        </div>
     </div>
 
     <script>
