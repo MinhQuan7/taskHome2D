@@ -208,13 +208,23 @@
         }
 
         .image {
-            max-width: 100%;
+            /* max-width: 100%;
             max-height: 100%;
             width: auto;
             height: auto;
             object-fit: contain;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            position: absolute;
+            position: absolute; */
+
+            width: 100vw; /* Đảm bảo ảnh rộng toàn màn hình */
+            height: 100vh; /* Đảm bảo ảnh cao toàn màn hình */
+            object-fit: cover; /* Ảnh tự động điều chỉnh để phủ kín mà không làm méo ảnh */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            position: absolute; /* Giữ nguyên vị trí */
+            top: 0; /* Đặt ảnh ở góc trên cùng */
+            left: 0; /* Đặt ảnh ở góc trái */
+
+
         }
 
         .parameter {
