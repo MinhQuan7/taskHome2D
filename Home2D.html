@@ -859,23 +859,7 @@
             lightButton.style.backgroundColor = '#555'; // Đổi màu nút sang màu tối khi đèn tắt
             sendLightStatus(0); // Gửi trạng thái tắt (0)
         }
-    }
-
-    // Hàm để gửi trạng thái đèn tới ERA Widget
-    // function sendLightStatus(status) {
-    //     eraWidget.sendRequest({
-    //         id: 52881, // ID bạn muốn thay đổi
-    //         value: status, // Giá trị muốn cập nhật
-    //         method: 'PUT', // Phương thức gửi yêu cầu (thường là PUT hoặc POST)
-    //     }).then(response => {
-    //         console.log("Light status sent successfully:", response);
-    //     }).catch(error => {
-    //         console.error("Error sending light status:", error);
-    //     });
-    // }
-
-
-
+        }
         function getRandomValue(min, max) {
             return (Math.random() * (max - min) + min).toFixed(2);
         }
@@ -903,10 +887,8 @@
                 }
             }
         });
-    eraWidget.ready();
-        
+        eraWidget.ready();
+
     </script>
 </body>
 </html>
-
-
