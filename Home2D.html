@@ -726,9 +726,9 @@
         <div class="back-button-container">
             <button class="back-button" onclick="goBackToMenu()">Back to Home</button>
         </div>
-        <div class="light-button-container">
+        <!-- <div class="light-button-container">
             <button class="light-button" id="lightButton" onclick="toggleLight()">Toggle Light</button>
-        </div>
+        </div> -->
     </div>
 
     <script>
@@ -853,14 +853,12 @@
             lightButton.classList.remove('off');
             lightButton.classList.add('on');
             lightButton.style.backgroundColor = '#32cd32'; // Đổi màu nút sang màu sáng khi đèn bật
-            sendLightStatus(1); // Gửi trạng thái bật (1)
         } else {
             houseContainer.style.filter = 'brightness(0.15)'; // Giảm độ sáng trang
             lightButton.textContent = 'Turn On Light';
             lightButton.classList.remove('on');
             lightButton.classList.add('off');
             lightButton.style.backgroundColor = '#555'; // Đổi màu nút sang màu tối khi đèn tắt
-            sendLightStatus(0); // Gửi trạng thái tắt (0)
         }
         }
         function getRandomValue(min, max) {
