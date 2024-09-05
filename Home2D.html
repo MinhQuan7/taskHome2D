@@ -723,6 +723,7 @@
                 font-size: 18px;
             }
         }
+        
         .temperature-section h2 {
         display: flex;
         align-items: center;
@@ -731,7 +732,9 @@
         font-weight: bold;
         color: #ff4500;
         }
+
         .temperature-section {
+            position: relative; /* Ensure that child elements are positioned relative to this container */
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -739,16 +742,18 @@
             width: 100%;
             height: 100%;
         }
+
         .widget h2 {
-        font-size: 28px;
-        color: #130f0f;
-        display: flex;
-        align-items: center;
-        position: absolute; /* Giúp cố định h2 ở góc trên cùng */
-        top: 0; /* Căn lên đầu */
-        left: 0; /* Căn sang trái */
-        margin: 15px; /* Khoảng cách với viền trái và trên */
-    }
+            font-size: 28px;
+            color: #130f0f;
+            display: flex;
+            align-items: center;
+            position: absolute; /* Absolute position within the parent container */
+            top: 10px; /* Adjust the top distance */
+            left: 10px; /* Adjust the left distance */
+            margin: 0; /* Ensure no extra margin */
+            z-index: 10; /* Ensure it's on top */
+        }
 
         .icon-temp {
             width: 34px;
@@ -1231,7 +1236,7 @@ function showView(view) {
                     <img src="temperature.png" alt="icon" class="icon-temp">
                     Temperature
                 </h2>
-                <div class="temperature" id="temperature">20.0 °C</div>
+                <div class="temperature-value" id="temperature-value">20.0 °C</div>
                 <div class="temp-change" id="temp-change">Real-time updated data</div>
             </div>
 
@@ -1273,6 +1278,7 @@ function showView(view) {
 
     function updateTemperature() {
     const temperatureElement = document.getElementById('temperature');
+    const temperatureVal = document.getElementById('temperatu-value');
     const barIndicator = document.getElementById('bar-indicator');
     const barContainer = document.querySelector('.bar-container-with-labels'); 
 
