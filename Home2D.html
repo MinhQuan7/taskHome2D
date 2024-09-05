@@ -584,8 +584,8 @@
             right: 10px;
             }
 
-            .menu-button {
-            font-size: 30px;
+            .menu-button-home2 {
+            font-size: 20px;
             cursor: pointer;
             }
 
@@ -767,7 +767,7 @@
     
         <!-- Menu button and dropdown -->
         <div class="menu-container-dropdown">
-            <div class="menu-button" onclick="toggleMenu()">
+            <div class="menu-button-home2" onclick="toggleMenu()">
                 &#9776; <!-- 3-line menu icon -->
             </div>
             <div id="menuDropdown" class="dropdown-content">
@@ -833,19 +833,24 @@
             document.querySelector('.background-container').style.display = 'none';
             document.querySelector('.overlay').style.display = 'none';
 
-              // Show the back and light buttons when a house is selected
-            document.querySelector('.back-button-container').style.display = 'block';
-            document.querySelector('.light-button-container').style.display = 'block';
-
             // Show the selected house view
             document.getElementById(houseId).classList.add('active');
 
-            // Start updating values for house 1
+            // For Home 1, show the light button and start updating values
             if (houseId === 'house1') {
+                document.querySelector('.light-button-container').style.display = 'block';
                 updateValues();
                 setInterval(updateValues, 2000); // Update every 2 seconds
+            } 
+            // For Home 2, hide the light button
+            else if (houseId === 'house2') {
+                document.querySelector('.light-button-container').style.display = 'none';
             }
+
+            // Show the back button when a house is selected
+            document.querySelector('.back-button-container').style.display = 'block';
         }
+
 
         document.addEventListener("DOMContentLoaded", function() {
             const humidElement = document.getElementById('humidBox');
@@ -893,7 +898,6 @@
         function toggleLight() {
         lightOn = !lightOn; // Đảo ngược trạng thái đèn
         const houseContainer = document.getElementById('house1');
-        const houseContainer2 = document.getElementById('house2');
         const lightButton = document.getElementById('lightButton');
         
         if (lightOn) {
