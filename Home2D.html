@@ -585,10 +585,22 @@
             }
 
             .menu-button-home2 {
-            font-size: 40px;
-            cursor: pointer;
+                font-size: 30px;
+                cursor: pointer;
+                background: linear-gradient(145deg, #20b8b0, #0e3f5c); /* Same gradient as your button */
+                color: white;
+                border: none;
+                padding: 10px;
+                border-radius: 8px;
+                transition: transform 0.3s, box-shadow 0.3s;
             }
 
+            .menu-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(145deg, #eb7323, #f3a530); /* Hover gradient */
+            }
+            
             .dropdown-content {
             display: none;
             position: absolute;
@@ -607,9 +619,8 @@
             }
 
             .dropdown-content a:hover {
-            background-color: #575757;
-            }
-
+            background-color: rgba(255, 99, 71, 0.8); /* Hover color */
+        }
 
 
     </style>
