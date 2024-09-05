@@ -675,16 +675,24 @@
 
         /* Temperature Widget Styles */
         .widget {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9); /* Adjust background for better contrast */
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            margin: 0 auto; /* Center the widget */
+            position: relative; /* Ensure content stays inside */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Add shadow for a floating effect */
+        }
+
+        .temperature-section h2 {
             display: flex;
-            flex-direction: row;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            padding: 15px;
-            width: 80%; /* Use viewport width */
-            height: 80%; /* Use viewport height */
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-            color: #000000;
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            align-items: center;
+            margin: 0;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #ff4500;
         }
 
         .widget:hover {
@@ -744,10 +752,9 @@
     }
 
         .icon-temp {
-            width: 34px;
-            height: 34px;
-            margin-right: 8px;
-            vertical-align: middle;
+            width: 24px;
+            height: 24px;
+            margin-right: 10px; /* Space between icon and text */
         }
 
         .temperature {
@@ -763,7 +770,7 @@
 
         /* Temperature bar container with labels */
         .bar-container-with-labels {
-            position: relative;
+            /* position: relative;
             height: 100%;
             width: 120px;
             margin: 0 auto;
@@ -772,7 +779,11 @@
             justify-content: center;
             transition: box-shadow 0.3s ease;
             border-radius: 15px;
-            overflow: hidden;
+            overflow: hidden; */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
         }
 
         /* Row for each label and segment */
@@ -1267,10 +1278,7 @@ function showView(view) {
     modal.style.display = 'flex';
 }
 
-//_________________JS Temp Widget__________________________
- function getRandomTemperature(min, max) {
-        return (Math.random() * (max - min) + min).toFixed(1);
-    }
+//_________________JS Temp Widget_________________________
 
     function updateTemperature() {
     const temperatureElement = document.getElementById('temperature');
