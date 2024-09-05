@@ -885,72 +885,57 @@
             font-weight: bold;
         }
 
-        /*___________________Garage_____________________*/
         .garage-container {
             position: relative;
-            width: 100%;
-            height: 400px; /* Điều chỉnh chiều cao cho khung garage */
+            width: 800px; /* Đặt kích thước cố định cho container */
+            height: 450px; /* Đặt chiều cao cố định */
             margin: auto;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Đổ bóng */
-            border-radius: 15px; /* Bo tròn các góc */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
         }
 
         .carousel {
-        display: flex;
-        transition: transform 0.5s ease-in-out;
-        width: 400%; /* Tổng chiều rộng của carousel với 4 hình ảnh */
-    }
+            display: flex;
+            transition: transform 0.5s ease-in-out; /* Chuyển động mượt mà */
+            width: calc(800px * 4); /* Tổng chiều rộng của tất cả các items */
+        }
+
         .carousel-item {
-        width: 100%;
-        flex-shrink: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+            flex: 0 0 800px; /* Mỗi item sẽ chiếm 800px chiều rộng */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .carousel-item img {
-        width: 100%; /* Đảm bảo ảnh phủ kín chiều rộng */
-        height: 100%; /* Đảm bảo ảnh phủ kín chiều cao */
-        object-fit: contain; /* Sử dụng object-fit để căn chỉnh ảnh theo khung */
-        border-radius: 15px;
-        transition: transform 0.5s ease, box-shadow 0.5s ease;
-    }
+        .carousel-item img {
+            width: 100%;
+            height: auto; 
+            object-fit: contain; /* Giữ nguyên tỷ lệ của hình ảnh */
+        }
 
-    .carousel-item img:hover {
-        transform: scale(1.05); /* Phóng to ảnh khi hover */
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Hiệu ứng đổ bóng khi hover */
-    }
+        .navigation {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
 
-    .navigation {
-        position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
-        display: flex;
-        justify-content: space-between;
-        padding: 0 10px;
-        transform: translateY(-50%);
-    }
+        .navigation button {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            font-size: 24px;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
 
-    .navigation button {
-        padding: 12px 18px;
-        font-size: 16px;
-        cursor: pointer;
-        background-color: rgba(0, 0, 0, 0.5); /* Nền đen trong suốt */
-        color: white;
-        border: none;
-        border-radius: 50%; /* Nút tròn */
-        transition: background-color 0.3s ease;
-    }
-
-    .navigation button:hover {
-        background-color: rgba(0, 0, 0, 0.8); /* Đổi màu nền khi hover */
-    }
-
-    .navigation button:focus {
-        outline: none;
-    }
+        .navigation button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
 
     </style>
 </head>
@@ -1352,21 +1337,21 @@ function showView(view) {
         </div>
         `;
     }
-    if(view === 'Garage') {
+    if (view === 'Garage') {
         viewContent.innerHTML = `
         <div class="garage-container">
             <div class="carousel">
-                <div class="carousel-item" id="item1">
-                    <img src="xe1.png" alt="Car Front View">
+                <div class="carousel-item">
+                    <img src="car_front.jpg" alt="Car Front View">
                 </div>
-                <div class="carousel-item" id="item2">
-                    <img src="xe2.png" alt="Car Back View">
+                <div class="carousel-item">
+                    <img src="car_back.jpg" alt="Car Back View">
                 </div>
-                <div class="carousel-item" id="item3">
-                    <img src="xe3.png" alt="Car Left Side View">
+                <div class="carousel-item">
+                    <img src="car_left.jpg" alt="Car Left Side View">
                 </div>
-                <div class="carousel-item" id="item4">
-                    <img src="xe4.png" alt="Car Right Side View">
+                <div class="carousel-item">
+                    <img src="car_right.jpg" alt="Car Right Side View">
                 </div>
             </div>
             <div class="navigation">
@@ -1376,26 +1361,28 @@ function showView(view) {
         </div>
         `;
 
-        // Javascript to handle carousel navigation
+        // Carousel navigation logic
         let currentIndex = 0; 
         const items = document.querySelectorAll('.carousel-item');
         const totalItems = items.length;
 
         document.getElementById('nextButton').addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % totalItems;
+            currentIndex = (currentIndex + 1) % totalItems; // Chuyển tới ảnh tiếp theo
             updateCarousel();
         });
 
         document.getElementById('prevButton').addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+            currentIndex = (currentIndex - 1 + totalItems) % totalItems; // Quay về ảnh trước
             updateCarousel();
         });
 
         function updateCarousel() {
-            const offset = -currentIndex * 100;
+            const offset = -currentIndex * 100; // Di chuyển theo phần trăm chiều rộng
             document.querySelector('.carousel').style.transform = `translateX(${offset}%)`;
         }
-        
+
+        // Initial call to set the first image
+        updateCarousel();
         modal.style.display = 'flex';
     }
 
