@@ -1216,9 +1216,9 @@
 
         /*_________________________home 2_________________________*/
         function toggleMenu() {
-    var menu = document.getElementById("menuDropdown");
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
-}
+        var menu = document.getElementById("menuDropdown");
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+        }
 
 function showView(view) {
     var modal = document.getElementById('viewModal');
@@ -1278,7 +1278,7 @@ function showView(view) {
 
     function updateTemperature() {
     const temperatureElement = document.getElementById('temperature');
-    const temperatureVal = document.getElementById('temperatu-value');
+    const temperatureVal = document.querySelector('temperatu-value');
     const barIndicator = document.getElementById('bar-indicator');
     const barContainer = document.querySelector('.bar-container-with-labels'); 
 
@@ -1312,8 +1312,6 @@ function showView(view) {
 function getRandomTemperature(min, max) {
     return (Math.random() * (max - min) + min).toFixed(1);
 }
-
-
     // Update temperature every 3 seconds
     setInterval(updateTemperature, 3000);
 
