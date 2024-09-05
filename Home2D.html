@@ -887,13 +887,13 @@
 
         /*___________________Garage_____________________*/
         .garage-container {
-        position: relative;
-        width: 100%;
-        height: 400px; /* Điều chỉnh chiều cao cho box */
-        margin: auto;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng */
-        border-radius: 15px; /* Bo tròn các góc */
+            position: relative;
+            width: 100%;
+            height: 400px; /* Điều chỉnh chiều cao cho khung garage */
+            margin: auto;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Đổ bóng */
+            border-radius: 15px; /* Bo tròn các góc */
         }
 
         .carousel {
@@ -910,15 +910,15 @@
     }
 
     .carousel-item img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; /* Đảm bảo hình ảnh phủ đầy mà không bị méo */
-        border-radius: 15px; /* Bo tròn các góc của hình ảnh */
-        transition: transform 0.5s ease, box-shadow 0.5s ease; /* Thêm hiệu ứng mượt */
+        width: 100%; /* Đảm bảo ảnh phủ kín chiều rộng */
+        height: 100%; /* Đảm bảo ảnh phủ kín chiều cao */
+        object-fit: contain; /* Sử dụng object-fit để căn chỉnh ảnh theo khung */
+        border-radius: 15px;
+        transition: transform 0.5s ease, box-shadow 0.5s ease;
     }
 
     .carousel-item img:hover {
-        transform: scale(1.05); /* Phóng to khi hover */
+        transform: scale(1.05); /* Phóng to ảnh khi hover */
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Hiệu ứng đổ bóng khi hover */
     }
 
