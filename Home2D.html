@@ -869,6 +869,11 @@
             box-shadow: 0 0 20px rgba(249, 64, 215, 0.7);
         }
 
+        .temperature-value {
+            color: #000000;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
 
     </style>
 </head>
@@ -1284,7 +1289,9 @@ function updateTemperature() {
 
     // Generate a random temperature between 0 and 40
     const randomTemp = getRandomTemperature(0, 40);
-    
+
+    //___________________________________________________________
+    //Phần đã fix được vấn đề là giá trị không được cập nhật
     // Update the temperature element with the new value
     temperatureElement.innerHTML = `${randomTemp} °C`;
     temperatureVal.innerHTML = `${randomTemp} °C`; // Cập nhật giá trị nhiệt độ cho temperature-value
