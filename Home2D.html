@@ -897,10 +897,7 @@
 
         .carousel {
             display: flex;
-            overflow: hidden; /* Đảm bảo ảnh không vượt quá giới hạn của Carousel */
-            width: 100%;
-            height: auto;
-            position: relative;
+            transition: transform 0.5s ease-in-out;
         }
 
         .carousel-item {
@@ -923,10 +920,6 @@
             display: flex;
             justify-content: space-between;
             transform: translateY(-50%);
-            pointer-events: none; /* Đảm bảo rằng chúng không ảnh hưởng tới sự tương tác ngoài ý muốn */
-        }
-        .navigation:hover {
-            background-color: rgba(130, 127, 127, 0.5);
         }
 
         .navigation button {
@@ -937,7 +930,6 @@
             padding: 10px;
             cursor: pointer;
             border-radius: 50%;
-            pointer-events: auto;/* Đảm bảo rằng chỉ nút bấm là có thể tương tác */
         }
 
     </style>
