@@ -622,6 +622,68 @@
         background-color: rgba(255, 99, 71, 0.8); /* Hover color */
         }
 
+        /*______________CSS pop-up container of home 2______*/
+        /* Modal Container */
+        .modal-container {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Close Button */
+        .close-button-menuDrop {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: black;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .close-button-menuDrop:hover {
+            background-color: red;
+            color: white;
+        }
+
+        /* Keyframes for Fade-In Effect */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
 
     </style>
 </head>
@@ -777,19 +839,29 @@
         </div>
     
         <!-- Menu button and dropdown -->
+        <!-- Menu button and dropdown -->
         <div class="menu-container-dropdown">
             <div class="menu-button-home2" onclick="toggleMenu()">
                 &#9776; <!-- 3-line menu icon -->
             </div>
             <div id="menuDropdown" class="dropdown-content">
-                <a href="#temperature">Temperature</a>
-                <a href="#garage">Garage</a>
-                <a href="#bedroom">Bedroom</a>
-                <a href="#office">Office</a>
+                <a href="javascript:void(0)" onclick="showView('Temperature')">Temperature</a>
+                <a href="javascript:void(0)" onclick="showView('Garage')">Garage</a>
+                <a href="javascript:void(0)" onclick="showView('Bedroom')">Bedroom</a>
+                <a href="javascript:void(0)" onclick="showView('Office')">Office</a>
             </div>
         </div>
+
+        <!-- Modal for displaying selected view -->
+        <div id="viewModal" class="modal-container">
+            <div class="modal-content">
+                <span class="close-button-menuDrop" onclick="closeView()">&times;</span>
+                <h3 id="viewTitle">Title</h3>
+                <p id="viewDescription">Description will go here.</p>
+            </div>
+        </div>
+
     </div>
-    
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -962,6 +1034,43 @@
         var menu = document.getElementById("menuDropdown");
         menu.style.display = menu.style.display === "block" ? "none" : "block";
         }
+
+        function toggleMenu() {
+        var menu = document.getElementById("menuDropdown");
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    function showView(view) {
+        var modal = document.getElementById('viewModal');
+        var title = document.getElementById('viewTitle');
+        var description = document.getElementById('viewDescription');
+        
+        // Set title and description based on the selected menu item
+        title.innerHTML = view;
+
+        switch (view) {
+            case 'Temperature':
+                description.innerHTML = "This is the Temperature control view.";
+                break;
+            case 'Garage':
+                description.innerHTML = "This is the Garage control view.";
+                break;
+            case 'Bedroom':
+                description.innerHTML = "This is the Bedroom control view.";
+                break;
+            case 'Office':
+                description.innerHTML = "This is the Office control view.";
+                break;
+        }
+        // Display the modal
+        modal.style.display = 'flex';
+    }
+
+    function closeView() {
+        var modal = document.getElementById('viewModal');
+        modal.style.display = 'none';
+    }
+
 
 
     </script>
