@@ -844,8 +844,11 @@
             } 
             // For Home 2, hide the light button
             else if (houseId === 'house2') {
-                document.querySelector('.light-button-container').style.display = 'none';
-            }
+            document.querySelector('.light-button-container').style.display = 'none';
+
+            //Cho phpep hien thi menu drop down
+            document.querySelector('.menu-container-dropdown').style.display = 'block'; // Show the dropdown menu
+        }
 
             // Show the back button when a house is selected
             document.querySelector('.back-button-container').style.display = 'block';
