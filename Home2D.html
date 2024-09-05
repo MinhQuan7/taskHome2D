@@ -884,11 +884,11 @@
             font-size: 3em;
             font-weight: bold;
         }
-
         .garage-container {
             position: relative;
-            width: 800px; /* Đặt kích thước cố định cho container */
-            height: 450px; /* Đặt chiều cao cố định */
+            width: 100%; /* Chiều rộng container garage */
+            max-width: 800px; /* Giới hạn chiều rộng tối đa */
+            height: 450px; /* Chiều cao cố định */
             margin: auto;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -897,21 +897,20 @@
 
         .carousel {
             display: flex;
-            transition: transform 0.5s ease-in-out; /* Chuyển động mượt mà */
-            width: calc(800px * 4); /* Tổng chiều rộng của tất cả các items */
+            transition: transform 0.5s ease-in-out;
         }
 
         .carousel-item {
-            flex: 0 0 800px; /* Mỗi item sẽ chiếm 800px chiều rộng */
+            flex: 0 0 100%; /* Mỗi item chiếm 100% chiều rộng của garage-container */
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
         .carousel-item img {
-            width: 100%;
-            height: auto; 
-            object-fit: contain; /* Giữ nguyên tỷ lệ của hình ảnh */
+            max-width: 100%; /* Đảm bảo ảnh không tràn khỏi container */
+            height: auto;
+            object-fit: contain; /* Đảm bảo ảnh giữ đúng tỷ lệ */
         }
 
         .navigation {
@@ -936,6 +935,7 @@
         .navigation button:hover {
             background-color: rgba(0, 0, 0, 0.8);
         }
+
 
     </style>
 </head>
@@ -1337,6 +1337,8 @@ function showView(view) {
         </div>
         `;
     }
+
+    viewContent.innerHTML = '';
     if (view === 'Garage') {
         viewContent.innerHTML = `
         <div class="garage-container">
@@ -1345,13 +1347,13 @@ function showView(view) {
                     <img src="xe1.png" alt="Car Front View">
                 </div>
                 <div class="carousel-item">
-                    <img src=""xe2.png" alt="Car Back View">
+                    <img src="xe2.png" alt="Car Back View">
                 </div>
                 <div class="carousel-item">
                     <img src="xe3.png" alt="Car Left Side View">
                 </div>
                 <div class="carousel-item">
-                    <img src=""xe4.png" alt="Car Right Side View">
+                    <img src="xe4.png" alt="Car Right Side View">
                 </div>
             </div>
             <div class="navigation">
@@ -1361,7 +1363,6 @@ function showView(view) {
         </div>
         `;
 
-        // Carousel navigation logic
         let currentIndex = 0; 
         const items = document.querySelectorAll('.carousel-item');
         const totalItems = items.length;
@@ -1377,17 +1378,16 @@ function showView(view) {
         });
 
         function updateCarousel() {
-            const offset = -currentIndex * 100; // Di chuyển theo phần trăm chiều rộng
+            const offset = -currentIndex * 100; // Di chuyển mỗi ảnh theo 100% chiều rộng của container
             document.querySelector('.carousel').style.transform = `translateX(${offset}%)`;
         }
 
-        // Initial call to set the first image
         updateCarousel();
         modal.style.display = 'flex';
-    }
+}
 
-    // Display the modal
-    modal.style.display = 'flex';
+// Hiển thị modal
+modal.style.display = 'flex';
 }
 
 //_________________JS Temp Widget_________________________
