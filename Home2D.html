@@ -1276,9 +1276,9 @@ function showView(view) {
 
 //_________________JS Temp Widget_________________________
 
-    function updateTemperature() {
+function updateTemperature() {
     const temperatureElement = document.getElementById('temperature');
-    const temperatureVal = document.querySelector('temperatu-value');
+    const temperatureVal = document.getElementById('temperature-value'); // Đã sửa
     const barIndicator = document.getElementById('bar-indicator');
     const barContainer = document.querySelector('.bar-container-with-labels'); 
 
@@ -1287,6 +1287,7 @@ function showView(view) {
     
     // Update the temperature element with the new value
     temperatureElement.innerHTML = `${randomTemp} °C`;
+    temperatureVal.innerHTML = `${randomTemp} °C`; // Cập nhật giá trị nhiệt độ cho temperature-value
 
     // Calculate the position of the bar based on the temperature
     const tempPercent = ((randomTemp - 0) / (40 - 0)) * 100;
@@ -1308,6 +1309,17 @@ function showView(view) {
         barContainer.classList.add('neon-purple');
     }
 }
+
+function getRandomTemperature(min, max) {
+    return (Math.random() * (max - min) + min).toFixed(1);
+}
+
+// Update temperature every 3 seconds
+setInterval(updateTemperature, 3000);
+
+// Initial call to set random temperature on page load
+updateTemperature();
+
 
 function getRandomTemperature(min, max) {
     return (Math.random() * (max - min) + min).toFixed(1);
