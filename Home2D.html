@@ -675,24 +675,16 @@
 
         /* Temperature Widget Styles */
         .widget {
-            text-align: center;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.9); /* Adjust background for better contrast */
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            margin: 0 auto; /* Center the widget */
-            position: relative; /* Ensure content stays inside */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Add shadow for a floating effect */
-        }
-
-        .temperature-section h2 {
             display: flex;
-            align-items: center;
-            margin: 0;
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #ff4500;
+            flex-direction: row;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 15px;
+            width: 80%; /* Use viewport width */
+            height: 210px; /* Use viewport height */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            color: #000000;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
         }
 
         .widget:hover {
@@ -731,7 +723,14 @@
                 font-size: 18px;
             }
         }
-
+        .temperature-section h2 {
+            display: flex;
+            align-items: center;
+            margin: 0;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #ff4500;
+        }
         .temperature-section {
             flex: 1;
             display: flex;
