@@ -1211,8 +1211,7 @@
 function showView(view) {
     var modal = document.getElementById('viewModal');
     var viewContent = document.getElementById('viewContent');
-    /**********************************************************/
-    /*_____________________New Methods______________________*/
+    
     // Clear existing content
     viewContent.innerHTML = '';
 
@@ -1258,32 +1257,39 @@ function showView(view) {
             </div>
         </div>
         `;
+
+        // After the content is loaded, start updating the temperature dynamically
+        updateTemperature(); // Initial call
+        setInterval(updateTemperature, 3000); // Update every 3 seconds
     }
+
     // Display the modal
     modal.style.display = 'flex';
 }
 
 //_________________JS Temp Widget__________________________
-//  function getRandomTemperature(min, max) {
-//         return (Math.random() * (max - min) + min).toFixed(1);
-//     }
+ function getRandomTemperature(min, max) {
+        return (Math.random() * (max - min) + min).toFixed(1);
+    }
 
-function updateTemperature() {
+    function updateTemperature() {
     const temperatureElement = document.getElementById('temperature');
     const barIndicator = document.getElementById('bar-indicator');
-    const barContainer = document.querySelector('.bar-container-with-labels'); // Changed selector to class
+    const barContainer = document.querySelector('.bar-container-with-labels'); 
 
-    // Random temperature between 0 and 40
+    // Generate a random temperature between 0 and 40
     const randomTemp = getRandomTemperature(0, 40);
-    temperatureElement.innerHTML = randomTemp;
+    
+    // Update the temperature element with the new value
+    temperatureElement.innerHTML = `${randomTemp} °C`;
 
     // Calculate the position of the bar based on the temperature
     const tempPercent = ((randomTemp - 0) / (40 - 0)) * 100;
-    barIndicator.style.top = (100 - tempPercent) + '%'; // Move the black bar according to the temperature
+    barIndicator.style.top = (100 - tempPercent) + '%'; // Move the indicator according to the temperature
 
-    // Remove previous neon classes
+    // Remove previous neon classes and apply new based on temperature range
     barContainer.classList.remove('neon-red', 'neon-orange', 'neon-blue', 'neon-green', 'neon-purple');
-
+    
     // Add neon effect based on temperature range
     if (randomTemp >= 30) {
         barContainer.classList.add('neon-red');
@@ -1297,6 +1303,11 @@ function updateTemperature() {
         barContainer.classList.add('neon-purple');
     }
 }
+
+function getRandomTemperature(min, max) {
+    return (Math.random() * (max - min) + min).toFixed(1);
+}
+
 
     // Update temperature every 3 seconds
     setInterval(updateTemperature, 3000);
