@@ -625,13 +625,111 @@
         /*______________CSS pop-up container of home 2______*/
         /*__________________________NEW CHANGE__________________*/
         /* Modal Container */
-        .temperature-section h2 {
+        .modal-container {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Modal Content */
+        .modal-content {
+            /* background-color: white; */
+            border-radius: 12px;
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Close Button */
+        .close-button-menuDrop {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: black;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
             display: flex;
             align-items: center;
-            margin: 0;
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #ff4500;
+            justify-content: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .close-button-menuDrop:hover {
+            background-color: red;
+            color: white;
+        }
+
+        /* Temperature Widget Styles */
+        .widget {
+            display: flex;
+            flex-direction: row;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 15px;
+            width: 80%; /* Use viewport width */
+            height: 210px; /* Use viewport height */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            color: #000000;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .widget:hover {
+            box-shadow: 2 14px 25px rgba(243, 112, 5, 0.2);
+        }
+
+        /* Adjust scaling for smaller screens */
+        @media (max-width: 1200px) {
+            .widget {
+                transform: scale(0.9);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .widget {
+                transform: scale(0.9);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .widget {
+                transform: scale(0.87);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .widget {
+                transform: scale(0.79);
+            }
+
+            .temperature {
+                font-size: 50px;
+            }
+
+            .widget h2 {
+                font-size: 18px;
+            }
+        }
+        .temperature-section h2 {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #ff4500;
         }
         .temperature-section {
             flex: 1;
@@ -642,23 +740,24 @@
             height: 100%;
         }
         .widget h2 {
-            font-size: 28px;
-            color: #130f0f;
-            display: flex;
-            align-items: center;
-            position: absolute;
-            top: 0;
-            left: 0;
-            margin: 15px;
-        }
+        font-size: 28px;
+        color: #130f0f;
+        display: flex;
+        align-items: center;
+        position: absolute; /* Giúp cố định h2 ở góc trên cùng */
+        top: 0; /* Căn lên đầu */
+        left: 0; /* Căn sang trái */
+        margin: 15px; /* Khoảng cách với viền trái và trên */
+    }
 
         .icon-temp {
-            width: 24px;
-            height: 24px;
-            margin-right: 10px;
+            width: 34px;
+            height: 34px;
+            margin-right: 8px;
+            vertical-align: middle;
         }
 
-        .temperature-indexValue {
+        .temperature {
             font-size: 60px;
             font-weight: bold;
             margin: 10px 0;
@@ -669,6 +768,7 @@
             color: #252525;
         }
 
+        /* Temperature bar container with labels */
         .bar-container-with-labels {
             position: relative;
             height: 100%;
@@ -682,12 +782,14 @@
             overflow: hidden;
         }
 
+        /* Row for each label and segment */
         .bar-row {
             display: flex;
             align-items: center;
-            height: calc(100% / 6);
+            height: calc(100% / 6);  /* Chia chiều cao đều cho 6 segment */
         }
 
+        /* Labels for each segment */
         .bar-label {
             width: 40px;
             text-align: right;
@@ -696,11 +798,13 @@
             color: #333;
         }
 
+        /* Temperature bar segments */
         .bar-segment {
             flex: 1;
             height: 100%;
         }
 
+        /* Bar indicator styling */
         .bar-indicator {
             position: absolute;
             left: 0;
@@ -710,6 +814,7 @@
             transition: top 0.5s ease;
         }
 
+        /* Color segments */
         .segment-40 {
             background-color: rgba(255, 69, 0, 0.7);
             border-top-left-radius: 15px;
@@ -738,6 +843,7 @@
             border-bottom-right-radius: 15px;
         }
 
+        /* Neon Effect */
         .neon-red {
             box-shadow: 0 0 20px rgba(255, 87, 87, 0.7);
         }
@@ -757,6 +863,8 @@
         .neon-purple {
             box-shadow: 0 0 20px rgba(249, 64, 215, 0.7);
         }
+
+
     </style>
 </head>
 <body>
@@ -909,28 +1017,32 @@
         <div class="back-button-container">
             <button class="back-button" onclick="goBackToMenu()">Back to Home</button>
         </div>
+    
 
-        <div class="menu-container-dropdown">
-            <div class="menu-button-home2" onclick="toggleMenu()">
-                &#9776;
-            </div>
-            <div id="menuDropdown" class="dropdown-content">
-                <a href="javascript:void(0)" onclick="showView('Temperature')">Temperature</a>
-                <a href="javascript:void(0)" onclick="showView('Garage')">Garage</a>
-                <a href="javascript:void(0)" onclick="showView('Bedroom')">Bedroom</a>
-                <a href="javascript:void(0)" onclick="showView('Office')">Office</a>
-            </div>
+    <!-- Menu button and dropdown -->
+    <div class="menu-container-dropdown">
+        <div class="menu-button-home2" onclick="toggleMenu()">
+            &#9776; <!-- 3-line menu icon -->
         </div>
+        <div id="menuDropdown" class="dropdown-content">
+            <a href="javascript:void(0)" onclick="showView('Temperature')">Temperature</a>
+            <a href="javascript:void(0)" onclick="showView('Garage')">Garage</a>
+            <a href="javascript:void(0)" onclick="showView('Bedroom')">Bedroom</a>
+            <a href="javascript:void(0)" onclick="showView('Office')">Office</a>
+        </div>
+    </div>
 
-        <div id="viewModal" class="modal-container">
-            <div class="modal-content">
-                <span class="close-button" onclick="closeView()">&times;</span>
-                <div id="viewContent">
-                    <!-- Temperature widget will be dynamically inserted here -->
-                </div>
+    <!-- Modal for displaying selected view -->
+    <div id="viewModal" class="modal-container">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeView()">&times;</span>
+            <div id="viewContent">
+                <!-- Temperature widget will be dynamically inserted here -->
             </div>
         </div>
     </div>
+
+</div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -1098,96 +1210,114 @@
         eraWidget.ready();
 
         /*_________________________home 2_________________________*/
-        let temperatureInterval;
-        function showView(view) {
-            clearInterval(temperatureInterval);
-            const viewContent = document.getElementById('viewContent');
-            viewContent.innerHTML = '';
-
-            if (view === 'Temperature') {
-                viewContent.innerHTML = `
-                    <div class="widget">
-                        <div class="temperature-section">
-                            <h2>
-                                <img src="temperature.png" alt="icon" class="icon-temp">
-                                Temperature
-                            </h2>
-                            <div class="temperature-indexValue" id="temperature-indexValue">20.0 °C</div>
-                            <div class="temp-change" id="temp-change">Real-time updated data</div>
-                        </div>
-
-                        <div class="bar-container-with-labels">
-                            <div class="bar-row">
-                                <span class="bar-label">40°C</span>
-                                <div class="bar-segment segment-40"></div>
-                            </div>
-                            <div class="bar-row">
-                                <span class="bar-label">30°C</span>
-                                <div class="bar-segment segment-30"></div>
-                            </div>
-                            <div class="bar-row">
-                                <span class="bar-label">20°C</span>
-                                <div class="bar-segment segment-20"></div>
-                            </div>
-                            <div class="bar-row">
-                                <span class="bar-label">10°C</span>
-                                <div class="bar-segment segment-10"></div>
-                            </div>
-                            <div class="bar-row">
-                                <span class="bar-label">5°C</span>
-                                <div class="bar-segment segment-5"></div>
-                            </div>
-                            <div class="bar-row">
-                                <span class="bar-label">0°C</span>
-                                <div class="bar-segment segment-0"></div>
-                            </div>
-                            <div class="bar-indicator" id="bar-indicator"></div>
-                        </div>
-                    </div>
-                `;
-                updateTemperature();
-                temperatureInterval = setInterval(updateTemperature, 3000);
-            }
-
-            document.getElementById('viewModal').style.display = 'flex';
-        }
-
-        function updateTemperature() {
-            const randomTemp = getRandomTemperature(0, 40);
-            document.getElementById('temperature-indexValue').innerHTML = `${randomTemp} °C`;
-
-            const tempPercent = ((randomTemp - 0) / (40 - 0)) * 100;
-            document.getElementById('bar-indicator').style.top = (100 - tempPercent) + '%';
-
-            const barContainer = document.querySelector('.bar-container-with-labels');
-            barContainer.classList.remove('neon-red', 'neon-orange', 'neon-blue', 'neon-green', 'neon-purple');
-
-            if (randomTemp >= 30) {
-                barContainer.classList.add('neon-red');
-            } else if (randomTemp >= 20) {
-                barContainer.classList.add('neon-orange');
-            } else if (randomTemp >= 10) {
-                barContainer.classList.add('neon-blue');
-            } else if (randomTemp >= 5) {
-                barContainer.classList.add('neon-green');
-            } else {
-                barContainer.classList.add('neon-purple');
-            }
-        }
-
-        function getRandomTemperature(min, max) {
-            return (Math.random() * (max - min) + min).toFixed(1);
-        }
-
         function toggleMenu() {
-            var menu = document.getElementById("menuDropdown");
-            menu.style.display = menu.style.display === "block" ? "none" : "block";
-        }
+    var menu = document.getElementById("menuDropdown");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
 
-        function closeView() {
-            clearInterval(temperatureInterval);
-            document.getElementById('viewModal').style.display = 'none';
-        }
+function showView(view) {
+    var modal = document.getElementById('viewModal');
+    var viewContent = document.getElementById('viewContent');
+    
+    // Clear existing content
+    viewContent.innerHTML = '';
+
+    // Insert the appropriate view based on the selected menu item
+    if (view === 'Temperature') {
+        viewContent.innerHTML = `
+        <div class="widget">
+            <div class="temperature-section">
+                <h2>
+                    <img src="temperature.png" alt="icon" class="icon-temp">
+                    Temperature
+                </h2>
+                <div class="temperature" id="temperature">20.0 °C</div>
+                <div class="temp-change" id="temp-change">Real-time updated data</div>
+            </div>
+
+            <div class="bar-container-with-labels">
+                <div class="bar-row">
+                    <span class="bar-label">40°C</span>
+                    <div class="bar-segment segment-40"></div>
+                </div>
+                <div class="bar-row">
+                    <span class="bar-label">30°C</span>
+                    <div class="bar-segment segment-30"></div>
+                </div>
+                <div class="bar-row">
+                    <span class="bar-label">20°C</span>
+                    <div class="bar-segment segment-20"></div>
+                </div>
+                <div class="bar-row">
+                    <span class="bar-label">10°C</span>
+                    <div class="bar-segment segment-10"></div>
+                </div>
+                <div class="bar-row">
+                    <span class="bar-label">5°C</span>
+                    <div class="bar-segment segment-5"></div>
+                </div>
+                <div class="bar-row">
+                    <span class="bar-label">0°C</span>
+                    <div class="bar-segment segment-0"></div>
+                </div>
+                <div class="bar-indicator" id="bar-indicator"></div>
+            </div>
+        </div>
+        `;
+    }
+    // Display the modal
+    modal.style.display = 'flex';
+}
+
+//_________________JS Temp Widget_________________________
+
+    function updateTemperature() {
+    const temperatureElement = document.getElementById('temperature');
+    const barIndicator = document.getElementById('bar-indicator');
+    const barContainer = document.querySelector('.bar-container-with-labels'); 
+
+    // Generate a random temperature between 0 and 40
+    const randomTemp = getRandomTemperature(0, 40);
+    
+    // Update the temperature element with the new value
+    temperatureElement.innerHTML = `${randomTemp} °C`;
+
+    // Calculate the position of the bar based on the temperature
+    const tempPercent = ((randomTemp - 0) / (40 - 0)) * 100;
+    barIndicator.style.top = (100 - tempPercent) + '%'; // Move the indicator according to the temperature
+
+    // Remove previous neon classes and apply new based on temperature range
+    barContainer.classList.remove('neon-red', 'neon-orange', 'neon-blue', 'neon-green', 'neon-purple');
+    
+    // Add neon effect based on temperature range
+    if (randomTemp >= 30) {
+        barContainer.classList.add('neon-red');
+    } else if (randomTemp >= 20) {
+        barContainer.classList.add('neon-orange');
+    } else if (randomTemp >= 10) {
+        barContainer.classList.add('neon-blue');
+    } else if (randomTemp >= 5) {
+        barContainer.classList.add('neon-green');
+    } else {
+        barContainer.classList.add('neon-purple');
+    }
+}
+
+function getRandomTemperature(min, max) {
+    return (Math.random() * (max - min) + min).toFixed(1);
+}
+
+
+    // Update temperature every 3 seconds
+    setInterval(updateTemperature, 3000);
+
+    // Initial call to set random temperature on page load
+    updateTemperature();
+
+function closeView() {
+    var modal = document.getElementById('viewModal');
+    modal.style.display = 'none';
+}
     </script>
 </body>
 </html>
