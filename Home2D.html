@@ -1171,7 +1171,6 @@
             if (houseId === 'house1') {
                 document.querySelector('.light-button-container').style.display = 'block';
                 updateValues();
-                toggleLight();
                 setInterval(updateValues, 2000); // Update every 2 seconds
             } 
             // For Home 2, hide the light button
@@ -1245,8 +1244,20 @@
             lightButton.textContent = 'Turn On Light';
             lightButton.classList.remove('on');
             lightButton.classList.add('off');
-            lightButton.style.backgroundC
-                    //___________________________ERA CONFIG_______________________________________
+            lightButton.style.backgroundColor = '#555'; // Đổi màu nút sang màu tối khi đèn tắt
+        }
+        }
+        function getRandomValue(min, max) {
+            return (Math.random() * (max - min) + min).toFixed(2);
+        }
+
+        function updateValues() {
+            document.getElementById('temperature').textContent = getRandomValue(18, 30); // Temperature between 18°C and 30°C
+            document.getElementById('humidity').textContent = getRandomValue(30, 70); // Humidity between 30% and 70%
+            document.getElementById('power').textContent = getRandomValue(100, 500); // Power consumption between 100W and 500W
+        }
+
+        //___________________________ERA CONFIG_______________________________________
         const eraWidget = new EraWidget();
         let config = { id: 52855 };
         eraWidget.onConfiguration((configuration) => {
@@ -1264,18 +1275,6 @@
             }
         });
         eraWidget.ready();
-        color = '#555'; // Đổi màu nút sang màu tối khi đèn tắt
-        }
-        }
-        function getRandomValue(min, max) {
-            return (Math.random() * (max - min) + min).toFixed(2);
-        }
-
-        function updateValues() {
-            document.getElementById('temperature').textContent = getRandomValue(18, 30); // Temperature between 18°C and 30°C
-            document.getElementById('humidity').textContent = getRandomValue(30, 70); // Humidity between 30% and 70%
-            document.getElementById('power').textContent = getRandomValue(100, 500); // Power consumption between 100W and 500W
-        }
 
         /*_________________________home 2_________________________*/
         function toggleMenu() {
