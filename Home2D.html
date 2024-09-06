@@ -1171,6 +1171,7 @@
             if (houseId === 'house1') {
                 document.querySelector('.light-button-container').style.display = 'block';
                 updateValues();
+                toggleLight();
                 setInterval(updateValues, 2000); // Update every 2 seconds
             } 
             // For Home 2, hide the light button
@@ -1263,7 +1264,7 @@
             }
         });
         eraWidget.ready();
-        olor = '#555'; // Đổi màu nút sang màu tối khi đèn tắt
+        color = '#555'; // Đổi màu nút sang màu tối khi đèn tắt
         }
         }
         function getRandomValue(min, max) {
