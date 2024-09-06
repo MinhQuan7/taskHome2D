@@ -1229,24 +1229,24 @@
         //_________________________Function : Toggle Light ____________________
         let lightOn = true; // Biến để theo dõi trạng thái của đèn
         function toggleLight() {
-        lightOn = !lightOn; // Đảo ngược trạng thái đèn
-        const houseContainer = document.getElementById('house1');
-        const lightButton = document.getElementById('lightButton');
+            const houseContainer = document.getElementById('house1');
+            const lightButton = document.getElementById('lightButton');
+            
+            if (lightOn) {
+                houseContainer.style.filter = 'brightness(1)'; // Đặt lại độ sáng bình thường
+                lightButton.textContent = 'Turn Off Light';
+                lightButton.classList.remove('off');
+                lightButton.classList.add('on');
+                lightButton.style.backgroundColor = '#32cd32'; // Đổi màu nút sang màu sáng khi đèn bật
+            } else {
+                houseContainer.style.filter = 'brightness(0.15)'; // Giảm độ sáng trang
+                lightButton.textContent = 'Turn On Light';
+                lightButton.classList.remove('on');
+                lightButton.classList.add('off');
+                lightButton.style.backgroundColor = '#555'; // Đổi màu nút sang màu tối khi đèn tắt
+            }
+        }
         
-        if (lightOn) {
-            houseContainer.style.filter = 'brightness(1)'; // Đặt lại độ sáng bình thường
-            lightButton.textContent = 'Turn Off Light';
-            lightButton.classList.remove('off');
-            lightButton.classList.add('on');
-            lightButton.style.backgroundColor = '#32cd32'; // Đổi màu nút sang màu sáng khi đèn bật
-        } else {
-            houseContainer.style.filter = 'brightness(0.15)'; // Giảm độ sáng trang
-            lightButton.textContent = 'Turn On Light';
-            lightButton.classList.remove('on');
-            lightButton.classList.add('off');
-            lightButton.style.backgroundColor = '#555'; // Đổi màu nút sang màu tối khi đèn tắt
-        }
-        }
         function getRandomValue(min, max) {
             return (Math.random() * (max - min) + min).toFixed(2);
         }
@@ -1269,9 +1269,10 @@
             console.log("Received values onValues function:", values);
             if (values[config.id]) {
                 const value = values[config.id].value;
-                if (value !== (lightOn ? 1 : 0)) {
-                    toggleLight(); // Toggle the light if the value changes
-                }
+                toggleLight(); // Toggle the light if the value changes
+                // if (value !== (lightOn ? 1 : 0)) {
+                //     toggleLight(); // Toggle the light if the value changes
+                // }
             }
         });
         eraWidget.ready();
