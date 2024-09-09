@@ -1254,23 +1254,23 @@
         function updateValues() {
         
         eraWidget.onConfiguration((configuration) => {
-        configEc = configuration.realtime_configs.find(config => config.name === 'Humid');
-        configTds = configuration.realtime_configs.find(config => config.name === 'Temp');
-        configDo = configuration.realtime_configs.find(config => config.name === 'power consumption');
+        configHumid = configuration.realtime_configs.find(config => config.name === 'Humid');
+        configTemp = configuration.realtime_configs.find(config => config.name === 'Temp');
+        configPower = configuration.realtime_configs.find(config => config.name === 'power consumption');
         });
 
         eraWidget.onValues((values) => {
           const inputHumid = document.getElementById('humid');
-          humidVal = values[configEc.id].value;
-          inputEc.checked = ecValue > 0;
+          humidVal = values[configHumid.id].value;
+          inputEc.checked = humidVal > 0;
      
           const inputTemp = document.getElementById('temp');
-          tempVal = values[configTds.id].value;
-          inputTds.checked = tdsValue > 0;
+          tempVal = values[configTemp.id].value;
+          inputTds.checked = tempVal > 0;
      
           const inputPower = document.getElementById('power');
-          powerVal = values[configDo.id].value;
-          inputDo.checked = doValue > 0;
+          powerVal = values[configPower.id].value;
+          inputDo.checked = powerVal > 0;
      
           document.getElementById('humid').value = humidVal;
           document.getElementById('temp').value = tempVal;
