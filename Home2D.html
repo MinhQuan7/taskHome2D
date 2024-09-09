@@ -1300,9 +1300,9 @@
 
             //___________________________ERA CONFIG_______________________________________
             const eraWidget = new EraWidget();
-            let config = { id: 52881 };
+            let config = { id: 52438 }; //admin dashboard :52881
             eraWidget.onConfiguration((configuration) => {
-                config = configuration.realtime_configs.find(cfg => cfg.id === 52881);
+                config = configuration.realtime_configs.find(cfg => cfg.id === 52438);
                 console.log("Received configuration:", config);
             });
 
