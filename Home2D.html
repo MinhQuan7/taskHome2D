@@ -1252,9 +1252,36 @@
         }
 
         function updateValues() {
-            document.getElementById('temperature').textContent = getRandomValue(18, 30); // Temperature between 18°C and 30°C
-            document.getElementById('humidity').textContent = getRandomValue(30, 70); // Humidity between 30% and 70%
-            document.getElementById('power').textContent = getRandomValue(100, 500); // Power consumption between 100W and 500W
+        
+        eraWidget.onConfiguration((configuration) => {
+        configEc = configuration.realtime_configs.find(config => config.name === 'Humid');
+        configTds = configuration.realtime_configs.find(config => config.name === 'Temp');
+        configDo = configuration.realtime_configs.find(config => config.name === 'power consumption');
+        });
+
+        eraWidget.onValues((values) => {
+          const inputHumid = document.getElementById('humid');
+          humidVal = values[configEc.id].value;
+          inputEc.checked = ecValue > 0;
+     
+          const inputTemp = document.getElementById('temp');
+          tempVal = values[configTds.id].value;
+          inputTds.checked = tdsValue > 0;
+     
+          const inputPower = document.getElementById('power');
+          powerVal = values[configDo.id].value;
+          inputDo.checked = doValue > 0;
+     
+          document.getElementById('humid').value = humidVal;
+          document.getElementById('temp').value = tempVal;
+          document.getElementById('power').value = powerVal;   
+        });
+        eraWidget.ready();
+
+
+        document.getElementById('temperature').textContent = tempVal; // Temperature between 18°C and 30°C
+        document.getElementById('humidity').textContent = humidVal; // Humidity between 30% and 70%
+        document.getElementById('power').textContent =  powerVal; // Power consumption between 100W and 500W
         }
 
         //___________________________ERA CONFIG_______________________________________
@@ -1384,7 +1411,9 @@ function showView(view) {
 modal.style.display = 'flex';
 }
 
-//_________________JS Temp Widget_________________________
+//________________________E_RA Value_______________________________
+
+
 
 function updateTemperature() {
     const temperatureElement = document.getElementById('temperature');
@@ -1393,7 +1422,7 @@ function updateTemperature() {
     const barContainer = document.querySelector('.bar-container-with-labels'); 
 
     // Generate a random temperature between 0 and 40
-    const randomTemp = getRandomTemperature(0, 40);
+    const randomTemp = getRandomTemperature(30, 40);
 
     //___________________________________________________________
     //Phần đã fix được vấn đề là giá trị không được cập nhật
@@ -1402,7 +1431,7 @@ function updateTemperature() {
     temperatureVal.innerHTML = `${randomTemp} °C`; // Cập nhật giá trị nhiệt độ cho temperature-value
 
     // Calculate the position of the bar based on the temperature
-    const tempPercent = ((randomTemp - 0) / (40 - 0)) * 100;
+    const tempPercent = ((randomTemp - 30) / (40 - 30)) * 100;
     barIndicator.style.top = (100 - tempPercent) + '%'; // Move the indicator according to the temperature
 
     // Remove previous neon classes and apply new based on temperature range
@@ -1426,9 +1455,8 @@ function getRandomTemperature(min, max) {
     return (Math.random() * (max - min) + min).toFixed(1);
 }
 
-// Update temperature every 3 seconds
-setInterval(updateTemperature, 3000);
-
+// Update temperature every 10 seconds
+setInterval(updateTemperature, 10000);
 // Initial call to set random temperature on page load
 updateTemperature();
 
@@ -1436,12 +1464,6 @@ updateTemperature();
 function getRandomTemperature(min, max) {
     return (Math.random() * (max - min) + min).toFixed(1);
 }
-    // Update temperature every 3 seconds
-    setInterval(updateTemperature, 3000);
-
-    // Initial call to set random temperature on page load
-    updateTemperature();
-
 function closeView() {
     var modal = document.getElementById('viewModal');
     modal.style.display = 'none';
