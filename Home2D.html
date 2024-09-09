@@ -1430,35 +1430,32 @@
 
 
     function updateTemperature() {
-        const temperatureElement = document.getElementById('temperature_component');
+        const temperatureElement = document.getElementById('temperature');
         const temperatureVal = document.getElementById('temperature'); // Đã sửa
         const barIndicator = document.getElementById('bar-indicator');
         const barContainer = document.querySelector('.bar-container-with-labels'); 
 
-        // Generate a random temperature between 0 and 40
-        const randomTemp = getRandomTemperature(30, 40);
-
         //___________________________________________________________
         //Phần đã fix được vấn đề là giá trị không được cập nhật
         // Update the temperature element with the new value
-        temperatureElement.innerHTML = `${randomTemp} °C`;
-        temperatureVal.innerHTML = `${randomTemp} °C`; // Cập nhật giá trị nhiệt độ cho temperature-value
+        temperatureElement.innerHTML = `${tempVal} °C`;
+        temperatureVal.innerHTML = `${tempVal} °C`; // Cập nhật giá trị nhiệt độ cho temperature-value
 
         // Calculate the position of the bar based on the temperature
-        const tempPercent = ((randomTemp - 30) / (40 - 30)) * 100;
-        barIndicator.style.top = (100 - tempPercent) + '%'; // Move the indicator according to the temperature
+        const tempPercent = ((tempVal - 30) / (40 - 30)) * 100;
+        barIndicator.style.top = (100 - tempVal) + '%'; // Move the indicator according to the temperature
 
         // Remove previous neon classes and apply new based on temperature range
         barContainer.classList.remove('neon-red', 'neon-orange', 'neon-blue', 'neon-green', 'neon-purple');
         
         // Add neon effect based on temperature range
-        if (randomTemp >= 30) {
+        if (tempVal >= 30) {
             barContainer.classList.add('neon-red');
-        } else if (randomTemp >= 20) {
+        } else if (tempVal >= 20) {
             barContainer.classList.add('neon-orange');
-        } else if (randomTemp >= 10) {
+        } else if (tempVal >= 10) {
             barContainer.classList.add('neon-blue');
-        } else if (randomTemp >= 5) {
+        } else if (tempVal >= 5) {
             barContainer.classList.add('neon-green');
         } else {
             barContainer.classList.add('neon-purple');
