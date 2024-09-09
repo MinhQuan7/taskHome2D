@@ -1291,11 +1291,11 @@
             });
 
             eraWidget.ready();
-            
+
         }
 
             // Gọi hàm để cập nhật giá trị mỗi 2 giây
-        setInterval(updateValues, 2000);
+        setInterval(updateValues, 4000);
 
 
             //___________________________ERA CONFIG_______________________________________
@@ -1430,7 +1430,7 @@
 
 
     function updateTemperature() {
-        const temperatureElement = document.getElementById('temperature');
+        const temperatureElement = document.getElementById('temperature_component');
         const temperatureVal = document.getElementById('temperature-value'); // Đã sửa
         const barIndicator = document.getElementById('bar-indicator');
         const barContainer = document.querySelector('.bar-container-with-labels'); 
