@@ -1287,6 +1287,12 @@
                     document.getElementById('power').textContent = powerVal; // Cập nhật giá trị tiêu thụ điện năng
                 }
 
+                            // Cập nhật cả `temperature-value` nếu có trong view
+                const tempValueElement = document.getElementById('temperature-value');
+                if (tempValueElement) {
+                    tempValueElement.textContent = `${tempVal} °C`; // Cập nhật giá trị trong view modal
+                }
+
                 console.log("Updated values:", { humidVal, tempVal, powerVal });
             });
 
