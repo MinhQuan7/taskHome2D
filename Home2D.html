@@ -1252,7 +1252,15 @@
         }
 
         function updateValues() {
-        
+        const eraWidget = new EraWidget();
+        let configHumid = null;
+        let configTemp = null;
+        let configPower = null;
+
+        let humidVal = 0;
+        let tempVal = 0;
+        let powerVal = 0;
+
         eraWidget.onConfiguration((configuration) => {
         configHumid = configuration.realtime_configs.find(config => config.name === 'Humid');
         configTemp = configuration.realtime_configs.find(config => config.name === 'Temp');
