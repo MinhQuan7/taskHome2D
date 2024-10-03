@@ -1302,9 +1302,9 @@
             const powerConsump = document.getElementById('power consumption');  //Phần tử hiển thị công suất tiêu thụ 
             
             let configTemp = null, configHumid = null, configPower = null;
-            
+            eraWidget.init({
             /* Hàm callback được gọi khi có cấu hình được nhận từ server */
-            eraWidget.onConfiguration((configuration) => {
+            onConfiguration: (configuration) => {
                 // Lưu các cấu hình khi nhận được từ widget
                 if (configuration.realtime_configs.length >= 3) {
                     configTemp = configuration.realtime_configs[0];  // Lưu cấu hình nhiệt độ
@@ -1313,10 +1313,10 @@
                 } else {
                     console.error("Không đủ cấu hình được nhận từ server");
                 }
-            });
+            },
             
             /* Hàm callback được gọi khi có giá trị được nhận từ widget */
-            eraWidget.onValues((values) => {
+            onValues: (values) => {
                 if (configTemp && configHumid && configPower) {
                     // Kiểm tra xem giá trị có tồn tại trước khi cập nhật
                     const valueTemp = values[configTemp.id]?.value || "N/A";  // Giá trị nhiệt độ
@@ -1330,11 +1330,9 @@
                 } else {
                     console.error("Cấu hình chưa được thiết lập");
                 }
-            });
-            
-            eraWidget.ready();
-            
-
+            },
+                
+        });
         }
 
             // Gọi hàm để cập nhật giá trị mỗi 2 giây
