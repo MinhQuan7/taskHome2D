@@ -1273,20 +1273,20 @@
             
             // Hàm lấy giá trị từ các ID và cập nhật giao diện
             eraWidget.onValues((values) => {
-                let humidVal = null, tempVal = null, powerVal = null;
+
             
                 if (configHumid && values[configHumid.id]) {
-                    humidVal = values[configHumid.id].value;
+                    const humidVal = values[configHumid.id].value;
                     document.getElementById('humidity').textContent = humidVal; // Cập nhật giá trị độ ẩm
                 }
             
                 if (configTemp && values[configTemp.id]) {
-                    tempVal = values[configTemp.id].value;
+                    const tempVal = values[configTemp.id].value;
                     document.getElementById('temperature').textContent = tempVal; // Cập nhật giá trị nhiệt độ
                 }
             
                 if (configPower && values[configPower.id]) {
-                    powerVal = values[configPower.id].value;
+                    const powerVal = values[configPower.id].value;
                     document.getElementById('power').textContent = powerVal; // Cập nhật giá trị tiêu thụ điện năng
                 }
             
