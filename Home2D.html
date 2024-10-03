@@ -1253,45 +1253,50 @@
             }
 
             function updateValues() {
-            const eraWidget = new EraWidget();
-
-            // Khai báo các ID cho humid, temp, và power dưới dạng chuỗi
-            const humidId = "Humid"; // ID chuỗi cho độ ẩm
-            const tempId = "Temp"; // ID chuỗi cho nhiệt độ
-            const pwId = 58608 ; // ID chuỗi cho công suất tiêu thụ
+                const eraWidget = new EraWidget();
             
-            // Cấu hình ERA Widget để tìm các ID và gán cho các biến tương ứng
-            eraWidget.onConfiguration((configuration) => {
-                // Tìm cấu hình dựa trên tên ID chuỗi
-                configHumid = configuration.realtime_configs.find(cfg => cfg.name === humidId);
-                configTemp = configuration.realtime_configs.find(cfg => cfg.name === tempId);
-                configPower = configuration.realtime_configs.find(cfg => cfg.name == pwId);
-            
-                console.log("Configuration loaded:", { configHumid, configTemp, configPower });
-            });
-            let configHumid = null, configTemp = null, configPower = null;
-            // Hàm lấy giá trị từ các ID và cập nhật giao diện
-            eraWidget.onValues((values) => {
-                if (configHumid && values[configHumid.id]) {
-                    const humidVal = values[configHumid.id].value;
-                    document.getElementById('humidity').textContent = humidVal; // Cập nhật giá trị độ ẩm
-                }
-            
-                if (configTemp && values[configTemp.id]) {
-                    const tempVal = values[configTemp.id].value;
-                    document.getElementById('temperature').textContent = tempVal; // Cập nhật giá trị nhiệt độ
-                }
-            
-                if (configPower && values[configPower.id]) {
-                    const powerVal = values[configPower.id].value;
-                    document.getElementById('power').textContent = powerVal; // Cập nhật giá trị tiêu thụ điện năng
-                }
-            
-                console.log("Updated values:", { humidVal, tempVal, powerVal });
-            });
+                // Khai báo các ID cho humid, temp, và power
+                const humidId = "Humid"; // ID chuỗi cho độ ẩm
+                const tempId = "Temp"; // ID chuỗi cho nhiệt độ
+                const pwId = 58608; // ID số cho công suất tiêu thụ
+                
+                let configHumid = null, configTemp = null, configPower = null;
+                
+                // Cấu hình ERA Widget để tìm các ID và gán cho các biến tương ứng
+                eraWidget.onConfiguration((configuration) => {
+                    // Tìm cấu hình dựa trên tên cho humid và temp, và ID cho power
+                    configHumid = configuration.realtime_configs.find(cfg => cfg.name === humidId);
+                    configTemp = configuration.realtime_configs.find(cfg => cfg.name === tempId);
+                    configPower = configuration.realtime_configs.find(cfg => cfg.id === pwId); // Tìm theo ID cho power
+                
+                    console.log("Configuration loaded:", { configHumid, configTemp, configPower });
+                });
+                
+                // Hàm lấy giá trị từ các ID và cập nhật giao diện
+                eraWidget.onValues((values) => {
+                    if (configHumid && values[configHumid.id]) {
+                        const humidVal = values[configHumid.id].value;
+                        document.getElementById('humidity').textContent = humidVal + " %"; // Cập nhật giá trị độ ẩm
+                    }
+                
+                    if (configTemp && values[configTemp.id]) {
+                        const tempVal = values[configTemp.id].value;
+                        document.getElementById('temperature').textContent = tempVal + " °C"; // Cập nhật giá trị nhiệt độ
+                    }
+                
+                    if (configPower && values[configPower.id]) {
+                        const powerVal = values[configPower.id].value;
+                        document.getElementById('power').textContent = powerVal + " kWh"; // Cập nhật giá trị công suất tiêu thụ
+                    } else {
+                        console.error("Không tìm thấy cấu hình hoặc giá trị cho Power.");
+                    }
+                
+                    console.log("Updated values:", { humidVal, tempVal, powerVal });
+                });
             
                 eraWidget.ready();
-        }
+            }
+            
 
             // Gọi hàm để cập nhật giá trị mỗi 4 giây
             setInterval(updateValues, 4000);
