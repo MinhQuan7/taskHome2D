@@ -1265,9 +1265,14 @@
 
             // Cấu hình ERA Widget để tìm các ID và gán cho các biến tương ứng
             eraWidget.onConfiguration((configuration) => {
+                /*
                 configHumid = configuration.realtime_configs.find(cfg => cfg.id === humidId);
                 configTemp = configuration.realtime_configs.find(cfg => cfg.id === tempId);
                 configPower = configuration.realtime_configs.find(cfg => cfg.id === powerId);
+                */
+                configHumid = configuration.realtime_configs.find(cfg => cfg.id === "Humid");
+                configTemp = configuration.realtime_configs.find(cfg => cfg.id === "Temp");
+                configPower = configuration.realtime_configs.find(cfg => cfg.id === "power consumption");
 
                 console.log("Configuration loaded:", { configHumid, configTemp, configPower });
             });
