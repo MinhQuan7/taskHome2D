@@ -1260,8 +1260,8 @@
                 const pwId = 58608; // ID số cho công suất tiêu thụ
                 
                 let configHumid = null, configTemp = null, configPower = null;
+
                 eraWidget.init({
-                   
                 // Cấu hình ERA Widget để tìm các ID và gán cho các biến tương ứng
                 onConfiguration: (configuration) => {
                     // Tìm cấu hình dựa trên tên cho humid và temp, và ID cho power
@@ -1302,7 +1302,8 @@
             const eraWidget = new EraWidget();
             let config = { id: "52438" }; // ID ban đầu
 
-            eraWidget.onConfiguration((configuration) => {
+            eraWidget.init({
+            onConfiguration: (configuration) => {
                 config = configuration.realtime_configs.find(cfg => cfg.id === 52438);
                 
                 if (!config) {
@@ -1310,9 +1311,9 @@
                 } else {
                     console.log("Cấu hình nhận được:", config);
                 }
-            });
+            },
 
-            eraWidget.onValues((values) => {
+            onValues: (values) => {
                 console.log("Nhận được giá trị trong hàm onValues:", values);
 
                 // Kiểm tra nếu config không undefined
@@ -1326,9 +1327,9 @@
                 } else {
                     console.error("Không thể truy cập thuộc tính id của config hoặc không có giá trị tương ứng.");
                 }
+            },
+
             });
-            eraWidget.ready();
-            
 
             /*_________________________home 2_________________________*/
             function toggleMenu() {
