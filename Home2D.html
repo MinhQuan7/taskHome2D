@@ -1299,19 +1299,31 @@
             setInterval(updateValues, 4000);
             //___________________________ERA CONFIG_______________________________________
             const eraWidget = new EraWidget();
-            let config = { id: 52438 }; //admin dashboard :52881
+            let config = { id: 52438 }; // ID ban đầu
+
             eraWidget.onConfiguration((configuration) => {
                 config = configuration.realtime_configs.find(cfg => cfg.id === 52438);
-                console.log("Received configuration:", config);
+                
+                if (!config) {
+                    console.error("Cấu hình với ID 52438 không tồn tại!");
+                } else {
+                    console.log("Cấu hình nhận được:", config);
+                }
             });
 
             eraWidget.onValues((values) => {
-                console.log("Received values onValues function:", values);
-                if (values[config.id]) {
+                console.log("Nhận được giá trị trong hàm onValues:", values);
+
+                // Kiểm tra nếu config không undefined
+                if (config && values[config.id]) {
                     const value = values[config.id].value;
+                    
+                    // Kiểm tra nếu giá trị khác với trạng thái hiện tại của đèn và điều khiển đèn
                     if (value !== (lightOn ? 1 : 0)) {
                         toggleLight(); // Toggle the light if the value changes
                     }
+                } else {
+                    console.error("Không thể truy cập thuộc tính id của config hoặc không có giá trị tương ứng.");
                 }
             });
             eraWidget.ready();
