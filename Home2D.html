@@ -1265,9 +1265,9 @@
 
             // Cấu hình ERA Widget để tìm các ID và gán cho các biến tương ứng
             eraWidget.onConfiguration((configuration) => {
-                configHumid = configuration.realtime_configs.find(cfg => cfg.id === 53192);
-                configTemp = configuration.realtime_configs.find(cfg => cfg.id === 53193);
-                configPower = configuration.realtime_configs.find(cfg => cfg.id === 53194);
+                configHumid = configuration.realtime_configs.find(cfg => cfg.id === humidId);
+                configTemp = configuration.realtime_configs.find(cfg => cfg.id === tempId);
+                configPower = configuration.realtime_configs.find(cfg => cfg.id === powerId);
 
                 console.log("Configuration loaded:", { configHumid, configTemp, configPower });
             });
@@ -1276,17 +1276,17 @@
             eraWidget.onValues((values) => {
                 if (configHumid && values[configHumid.id]) {
                     const humidVal = values[configHumid.id].value;
-                    document.getElementById('Humid').textContent = humidVal; // Cập nhật giá trị độ ẩm
+                    document.getElementById('humidId').textContent = humidVal; // Cập nhật giá trị độ ẩm
                 }
 
                 if (configTemp && values[configTemp.id]) {
                     const tempVal = values[configTemp.id].value;
-                    document.getElementById('Temp').textContent = tempVal; // Cập nhật giá trị nhiệt độ
+                    document.getElementById('tempId').textContent = tempVal; // Cập nhật giá trị nhiệt độ
                 }
 
                 if (configPower && values[configPower.id]) {
                     const powerVal = values[configPower.id].value;
-                    document.getElementById('power consumption').textContent = powerVal; // Cập nhật giá trị tiêu thụ điện năng
+                    document.getElementById('powerId').textContent = powerVal; // Cập nhật giá trị tiêu thụ điện năng
                 }
 
                 console.log("Updated values:", { humidVal, tempVal, powerVal });
