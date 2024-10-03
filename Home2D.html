@@ -1300,11 +1300,12 @@
             setInterval(updateValues, 4000);
             //___________________________ERA CONFIG_______________________________________
             const eraWidget = new EraWidget();
-            let config = { id: "52438" }; // ID ban đầu
+            const lightID = 52438;
+            let configLight = null;
 
             eraWidget.init({
             onConfiguration: (configuration) => {
-                config = configuration.realtime_configs.find(cfg => cfg.id === 52438);
+                confconfigLightig = configuration.realtime_configs.find(cfg => cfg.id === lightID);
                 
                 if (!config) {
                     console.error("Cấu hình với ID 52438 không tồn tại!");
@@ -1318,7 +1319,7 @@
 
                 // Kiểm tra nếu config không undefined
                 if (config && values[config.id]) {
-                    const value = values[config.id].value;
+                    const lightVal = values[configLight.id].value = lightVal;
                     
                     // Kiểm tra nếu giá trị khác với trạng thái hiện tại của đèn và điều khiển đèn
                     if (value !== (lightOn ? 1 : 0)) {
