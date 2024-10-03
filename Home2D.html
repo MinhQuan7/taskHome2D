@@ -1267,7 +1267,7 @@
                 // Tìm cấu hình dựa trên tên ID chuỗi
                 configHumid = configuration.realtime_configs.find(cfg => cfg.name === humidId);
                 configTemp = configuration.realtime_configs.find(cfg => cfg.name === tempId);
-                configPower = configuration.realtime_configs.find(cfg => cfg.name === powerId);
+                configPower = configuration.realtime_configs.find(cfg => cfg.name === powerConId);
             
                 console.log("Configuration loaded:", { configHumid, configTemp, configPower });
             });
@@ -1285,7 +1285,7 @@
                 }
             
                 if (configPower && values[configPower.id]) {
-                    let powerVal = values[configPower.id].value;
+                    const powerVal = values[configPower.id].value;
                     document.getElementById('power').textContent = powerVal; // Cập nhật giá trị tiêu thụ điện năng
                 }
             
