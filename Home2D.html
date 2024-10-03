@@ -1307,7 +1307,7 @@
             onConfiguration: (configuration) => {
                 confconfigLightig = configuration.realtime_configs.find(cfg => cfg.id === lightID);
                 
-                if (!config) {
+                if (!confconfigLightig) {
                     console.error("Cấu hình với ID 52438 không tồn tại!");
                 } else {
                     console.log("Cấu hình nhận được:", config);
