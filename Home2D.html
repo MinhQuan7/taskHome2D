@@ -1258,7 +1258,7 @@
             // Khai báo các ID cho humid, temp, và power dưới dạng chuỗi
             const humidId = "Humid"; // ID chuỗi cho độ ẩm
             const tempId = "Temp"; // ID chuỗi cho nhiệt độ
-            const powerConId = "PW"; // ID chuỗi cho công suất tiêu thụ
+            const powerConId = 58608 ; // ID chuỗi cho công suất tiêu thụ
             
             let configHumid = null, configTemp = null, configPower = null;
             
@@ -1286,7 +1286,7 @@
             
                 if (configPower && values[configPower.id]) {
                     const powerVal = values[configPower.id].value;
-                    document.getElementById('powerBox').textContent = powerVal; // Cập nhật giá trị tiêu thụ điện năng
+                    document.getElementById('power').textContent = powerVal; // Cập nhật giá trị tiêu thụ điện năng
                 }
             
                 console.log("Updated values:", { humidVal, tempVal, powerVal });
