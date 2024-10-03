@@ -1305,9 +1305,9 @@
 
             eraWidget.init({
             onConfiguration: (configuration) => {
-                confconfigLightig = configuration.realtime_configs.find(cfg => cfg.id === lightID);
+                configLight = configuration.realtime_configs.find(cfg => cfg.id === lightID);
                 
-                if (!confconfigLightig) {
+                if (!configLight) {
                     console.error("Cấu hình với ID 52438 không tồn tại!");
                 } else {
                     console.log("Cấu hình nhận được:", config);
@@ -1318,7 +1318,7 @@
                 console.log("Nhận được giá trị trong hàm onValues:", values);
 
                 // Kiểm tra nếu config không undefined
-                if (config && values[config.id]) {
+                if (configLight && values[config.id]) {
                     const lightVal = values[configLight.id].value = lightVal;
                     
                     // Kiểm tra nếu giá trị khác với trạng thái hiện tại của đèn và điều khiển đèn
