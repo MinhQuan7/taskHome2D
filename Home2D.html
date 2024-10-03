@@ -1299,10 +1299,10 @@
             setInterval(updateValues, 4000);
             //___________________________ERA CONFIG_______________________________________
             const eraWidget = new EraWidget();
-            let config = { id: 52438 }; // ID ban đầu
+            let config = { id: "ON_OFF_BUTTON" }; // ID ban đầu
 
             eraWidget.onConfiguration((configuration) => {
-                config = configuration.realtime_configs.find(cfg => cfg.id === 52438);
+                config = configuration.realtime_configs.find(cfg => cfg.id === ON_OFF_BUTTON);
                 
                 if (!config) {
                     console.error("Cấu hình với ID 52438 không tồn tại!");
