@@ -1305,7 +1305,7 @@
             let config = { id: "52438" }; // ID ban đầu
 
             eraWidget.onConfiguration((configuration) => {
-                config = configuration.realtime_configs.find(cfg => cfg.id == 52438);
+                config = configuration.realtime_configs.find(cfg => cfg.id === 52438);
                 
                 if (!config) {
                     console.error("Cấu hình với ID 52438 không tồn tại!");
