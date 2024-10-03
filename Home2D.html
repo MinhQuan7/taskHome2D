@@ -1295,33 +1295,45 @@
             */
 
             const eraWidget = new EraWidget();
-            // Lấy các phần tử HTML dựa trên ID, liên kết với giao diện người dùng
-            const humi = document.getElementById('Humid');  // Phần tử hiển thị nhiệt độ
-            const temp = document.getElementById('Temp');  // Phần tử hiển thị độ ẩm
-            const powerConsump = document.getElementById('power consumption');  //Phần tử hiển thị Công suất tiêu thụ 
 
+            // Lấy các phần tử HTML dựa trên ID, liên kết với giao diện người dùng
+            const humi = document.getElementById('Humid');  // Phần tử hiển thị độ ẩm
+            const temp = document.getElementById('Temp');  // Phần tử hiển thị nhiệt độ
+            const powerConsump = document.getElementById('power consumption');  //Phần tử hiển thị công suất tiêu thụ 
+            
             let configTemp = null, configHumid = null, configPower = null;
             
-
             /* Hàm callback được gọi khi có cấu hình được nhận từ server */
             eraWidget.onConfiguration((configuration) => {
                 // Lưu các cấu hình khi nhận được từ widget
-                configTemp = configuration.realtime_configs[0];  // Lưu cấu hình nhiệt độ
-                configHumid = configuration.realtime_configs[1];  // Lưu cấu hình độ ẩm
-                configPower = configuration.realtime_configs[2];  // Lưu cấu hình công suất tiêu thụ
+                if (configuration.realtime_configs.length >= 3) {
+                    configTemp = configuration.realtime_configs[0];  // Lưu cấu hình nhiệt độ
+                    configHumid = configuration.realtime_configs[1];  // Lưu cấu hình độ ẩm
+                    configPower = configuration.realtime_configs[2];  // Lưu cấu hình công suất tiêu thụ
+                } else {
+                    console.error("Không đủ cấu hình được nhận từ server");
+                }
             });
-
+            
+            /* Hàm callback được gọi khi có giá trị được nhận từ widget */
             eraWidget.onValues((values) => {
-                // Cập nhật giá trị nhận được từ widget
-                const valueTemp = values[configTemp.id].value;  // Giá trị nhiệt độ
-                const valueHumi = values[configHumid.id].value;  // Giá trị độ ẩm
-                const valuePower = values[configPower.id].value;  // Giá trị công suất tiêu thụ
+                if (configTemp && configHumid && configPower) {
+                    // Kiểm tra xem giá trị có tồn tại trước khi cập nhật
+                    const valueTemp = values[configTemp.id]?.value || "N/A";  // Giá trị nhiệt độ
+                    const valueHumi = values[configHumid.id]?.value || "N/A";  // Giá trị độ ẩm
+                    const valuePower = values[configPower.id]?.value || "N/A";  // Giá trị công suất tiêu thụ
+            
+                    // Cập nhật giao diện người dùng với các giá trị nhận được
+                    temp.innerHTML = valueTemp;  // Hiển thị nhiệt độ
+                    humi.innerHTML = valueHumi;  // Hiển thị độ ẩm
+                    powerConsump.innerHTML = valuePower;  // Hiển thị công suất tiêu thụ
+                } else {
+                    console.error("Cấu hình chưa được thiết lập");
+                }
             });
-
-            temp.innerHTML = valueTemp ;  // Hiển thị nhiệt độ
-            humi.innerHTML = valueHumi;  // Hiển thị độ ẩm
-            powerConsump.innerHTML = valuePower;
+            
             eraWidget.ready();
+            
 
         }
 
