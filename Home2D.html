@@ -1252,11 +1252,12 @@
             }
 
             function updateValues() {
+            /*
             const eraWidget = new EraWidget();
 
             // Khai báo các ID cho humid, temp, và power
-            //const humidId = 53192;
-            const humidId = "humid"; 
+            //const humidId = 53192
+            const humidId = "Humid";
             const tempId = 53193;
             const powerId = 53194;
 
@@ -1289,6 +1290,31 @@
                 }
 
                 console.log("Updated values:", { humidVal, tempVal, powerVal });
+            });
+
+            */
+
+            // Lấy các phần tử HTML dựa trên ID, liên kết với giao diện người dùng
+            const temp = document.getElementById('Humid');  // Phần tử hiển thị nhiệt độ
+            const humi = document.getElementById('Temp');  // Phần tử hiển thị độ ẩm
+            const turnOn = document.getElementById('power consumption');  //Phần tử hiển thị Công suất tiêu thụ 
+
+            let configTemp = null, configHumid = null, configPower = null;
+            const eraWidget = new EraWidget();
+
+            /* Hàm callback được gọi khi có cấu hình được nhận từ server */
+            eraWidget.onConfiguration((configuration) => {
+                // Lưu các cấu hình khi nhận được từ widget
+                configTemp = configuration.realtime_configs[0];  // Lưu cấu hình nhiệt độ
+                configHumid = configuration.realtime_configs[1];  // Lưu cấu hình độ ẩm
+                configPower = configuration.realtime_configs[2];  // Lưu cấu hình công suất tiêu thụ
+            });
+
+            eraWidget.onValues((values) => {
+                // Cập nhật giá trị nhận được từ widget
+                const valueTemp = values[configTemp.id].value;  // Giá trị nhiệt độ
+                const valueHumi = values[configHumid.id].value;  // Giá trị độ ẩm
+                const valueLed = values[configPower.id].value;  // Giá trị công suất tiêu thụ
             });
 
             eraWidget.ready();
