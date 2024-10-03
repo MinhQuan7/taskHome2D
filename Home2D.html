@@ -1433,13 +1433,12 @@
 
     function updateTemperature() {
         const temperatureElement = document.getElementById('temperature');
-        const temperatureVal = document.getElementById('temperature-value'); // Đã sửa
+        const temperatureVal = document.getElementById('temperature-value'); 
         const barIndicator = document.getElementById('bar-indicator');
         const barContainer = document.querySelector('.bar-container-with-labels'); 
 
 
         //___________________________________________________________
-        //Phần đã fix được vấn đề là giá trị không được cập nhật
         // Update the temperature element with the new value
         temperatureElement.innerHTML = `${tempVal} °C`;
         temperatureVal.innerHTML = `${tempVal} °C`; // Cập nhật giá trị nhiệt độ cho temperature-value
