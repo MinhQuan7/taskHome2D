@@ -1254,12 +1254,17 @@
             function updateValues() {
             
             const eraWidget = new EraWidget();
-
+/*
             // Khai báo các ID cho humid, temp, và power
             const humidId = 53192
             //const humidId = "Humid";
             const tempId = 53193;
             const powerId = 53194;
+*/
+            const humidId = "Humid"
+            //const humidId = "Humid";
+            const tempId = "Temp";
+            const powerId = "power consumption";
 
             let configHumid = null , configTemp = null  , configPower = null;
 
@@ -1270,9 +1275,9 @@
                 configTemp = configuration.realtime_configs.find(cfg => cfg.id === tempId);
                 configPower = configuration.realtime_configs.find(cfg => cfg.id === powerId);
                 */
-                configHumid = configuration.realtime_configs.find(cfg => cfg.id === "Humid");
-                configTemp = configuration.realtime_configs.find(cfg => cfg.id === "Temp");
-                configPower = configuration.realtime_configs.find(cfg => cfg.id === "power consumption");
+                configHumid = configuration.realtime_configs.find(cfg => cfg.id === humidId);
+                configTemp = configuration.realtime_configs.find(cfg => cfg.id === tempId);
+                configPower = configuration.realtime_configs.find(cfg => cfg.id === powerId);
 
                 console.log("Configuration loaded:", { configHumid, configTemp, configPower });
             });
