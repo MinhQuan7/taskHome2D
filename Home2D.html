@@ -1302,27 +1302,26 @@
             setInterval(updateValues, 4000);
             //___________________________ERA CONFIG_______________________________________
             const eraWidget = new EraWidget();
-            let config = null; // Để tránh gán giá trị mặc định chưa đúng
-            
+            let config = { id: "52438" }; // ID ban đầu
+
             eraWidget.onConfiguration((configuration) => {
-                // Tìm cấu hình với keyconfigid 52438 thay vì id
-                config = configuration.realtime_configs.find(cfg => cfg.keyconfigid == 52438);
+                config = configuration.realtime_configs.find(cfg => cfg.id == 52438);
                 
                 if (!config) {
-                    console.error("Cấu hình với keyconfigid 52438 không tồn tại!");
+                    console.error("Cấu hình với ID 52438 không tồn tại!");
                 } else {
                     console.log("Cấu hình nhận được:", config);
                 }
             });
-            
+
             eraWidget.onValues((values) => {
                 console.log("Nhận được giá trị trong hàm onValues:", values);
-            
-                // Kiểm tra nếu config tồn tại và có giá trị tương ứng trong values
+
+                // Kiểm tra nếu config không undefined
                 if (config && values[config.id]) {
                     const value = values[config.id].value;
                     
-                    // Kiểm tra nếu giá trị khác với trạng thái hiện tại của đèn
+                    // Kiểm tra nếu giá trị khác với trạng thái hiện tại của đèn và điều khiển đèn
                     if (value !== (lightOn ? 1 : 0)) {
                         toggleLight(); // Toggle the light if the value changes
                     }
@@ -1330,7 +1329,6 @@
                     console.error("Không thể truy cập thuộc tính id của config hoặc không có giá trị tương ứng.");
                 }
             });
-            
             eraWidget.ready();
             
 
