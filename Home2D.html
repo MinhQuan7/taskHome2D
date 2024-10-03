@@ -1257,7 +1257,7 @@
             // Khai báo các ID cho humid, temp, và power dưới dạng chuỗi
             const humidId = "Humid"; // ID chuỗi cho độ ẩm
             const tempId = "Temp"; // ID chuỗi cho nhiệt độ
-            const powerId = "PWConsump"; // ID chuỗi cho công suất tiêu thụ
+            const powerId = "PW"; // ID chuỗi cho công suất tiêu thụ
             
             let configHumid = null, configTemp = null, configPower = null;
             
@@ -1298,8 +1298,6 @@
 
             // Gọi hàm để cập nhật giá trị mỗi 4 giây
             setInterval(updateValues, 4000);
-
-
             //___________________________ERA CONFIG_______________________________________
             const eraWidget = new EraWidget();
             let config = { id: 52438 }; //admin dashboard :52881
