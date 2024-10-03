@@ -1276,17 +1276,17 @@
             eraWidget.onValues((values) => {
                 if (configHumid && values[configHumid.id]) {
                     const humidVal = values[configHumid.id].value;
-                    document.getElementById('humidId').textContent = humidVal; // Cập nhật giá trị độ ẩm
+                    document.getElementById('humidity').textContent = humidVal; // Cập nhật giá trị độ ẩm
                 }
 
                 if (configTemp && values[configTemp.id]) {
                     const tempVal = values[configTemp.id].value;
-                    document.getElementById('tempId').textContent = tempVal; // Cập nhật giá trị nhiệt độ
+                    document.getElementById('temperature').textContent = tempVal; // Cập nhật giá trị nhiệt độ
                 }
 
                 if (configPower && values[configPower.id]) {
                     const powerVal = values[configPower.id].value;
-                    document.getElementById('powerId').textContent = powerVal; // Cập nhật giá trị tiêu thụ điện năng
+                    document.getElementById('power').textContent = powerVal; // Cập nhật giá trị tiêu thụ điện năng
                 }
 
                 console.log("Updated values:", { humidVal, tempVal, powerVal });
