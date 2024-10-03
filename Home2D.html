@@ -1294,13 +1294,14 @@
 
             */
 
+            const eraWidget = new EraWidget();
             // Lấy các phần tử HTML dựa trên ID, liên kết với giao diện người dùng
-            const temp = document.getElementById('Humid');  // Phần tử hiển thị nhiệt độ
-            const humi = document.getElementById('Temp');  // Phần tử hiển thị độ ẩm
-            const turnOn = document.getElementById('power consumption');  //Phần tử hiển thị Công suất tiêu thụ 
+            const humi = document.getElementById('Humid');  // Phần tử hiển thị nhiệt độ
+            const temp = document.getElementById('Temp');  // Phần tử hiển thị độ ẩm
+            const powerConsump = document.getElementById('power consumption');  //Phần tử hiển thị Công suất tiêu thụ 
 
             let configTemp = null, configHumid = null, configPower = null;
-            const eraWidget = new EraWidget();
+            
 
             /* Hàm callback được gọi khi có cấu hình được nhận từ server */
             eraWidget.onConfiguration((configuration) => {
@@ -1314,9 +1315,12 @@
                 // Cập nhật giá trị nhận được từ widget
                 const valueTemp = values[configTemp.id].value;  // Giá trị nhiệt độ
                 const valueHumi = values[configHumid.id].value;  // Giá trị độ ẩm
-                const valueLed = values[configPower.id].value;  // Giá trị công suất tiêu thụ
+                const valuePower = values[configPower.id].value;  // Giá trị công suất tiêu thụ
             });
 
+            temp.innerHTML = valueTemp ;  // Hiển thị nhiệt độ
+            humi.innerHTML = valueHumi;  // Hiển thị độ ẩm
+            powerConsump.innerHTML = valuePower;
             eraWidget.ready();
 
         }
