@@ -2,9 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <script src="https://www.unpkg.com/@eohjsc/era-widget@1.0.14/src/index.js"></script> -->
-    <script src="https://www.unpkg.com/@eohjsc/era-widget@1.1.3/src/index.js"></script> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Home Selection Menu</title>
     <style>
         body {
@@ -1111,7 +1109,7 @@
         </div>
 
     </div>
-        
+        <script src="https://www.unpkg.com/@eohjsc/era-widget@1.1.3/src/index.js"></script> 
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 const powerElement = document.getElementById('powerBox');
@@ -1307,6 +1305,7 @@
             onConfiguration:(configuration) => {
                 configLight = configuration.realtime_configs.find(cfg => cfg.name === lightID);
                 
+        
                 if (!configLight) {
                     console.error("Cấu hình với ID 52438 không tồn tại!");
                 } else {
