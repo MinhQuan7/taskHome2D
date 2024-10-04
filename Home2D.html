@@ -1319,7 +1319,7 @@
                 // Kiểm tra nếu config không undefined
                 if (configLight && values[configLight.id]) {
                     const lightVal = values[configLight.id].value;
-                    
+                    console.log("Value of Lightvalue :",{lightVal});
                     // Kiểm tra nếu giá trị khác với trạng thái hiện tại của đèn và điều khiển đèn
                     if (lightVal !== (lightOn ? 1 : 0)) {
                         toggleLight(); // Toggle the light if the value changes
