@@ -1300,12 +1300,12 @@
             setInterval(updateValues, 4000);
             //___________________________ERA CONFIG_______________________________________
             const eraWidget = new EraWidget();
-            const lightID = 52438;
+            const lightID = "Light_Home2D";
             let configLight = null;
 
             eraWidget.init({
             onConfiguration: (configuration) => {
-                configLight = configuration.realtime_configs.find(cfg => cfg.id === lightID);
+                configLight = configuration.realtime_configs.find(cfg => cfg.name === lightID);
                 
                 if (!configLight) {
                     console.error("Cấu hình với ID 52438 không tồn tại!");
