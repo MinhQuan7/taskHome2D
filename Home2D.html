@@ -1293,11 +1293,10 @@
                 },
             
             });
-            }
-            // Gọi hàm để cập nhật giá trị mỗi 4 giây
-            setInterval(updateValues, 4000);
+            
+            
             //___________________________ERA CONFIG_______________________________________
-            const eraWidget = new EraWidget();
+            /*const eraWidget = new EraWidget();*/
             const lightID = "Light_Home2D";
             let configLight = null;
 
@@ -1330,7 +1329,10 @@
             },
 
             });
+            // Gọi hàm để cập nhật giá trị mỗi 4 giây
+            setInterval(updateValues, 4000);
 
+        }
             /*_________________________home 2_________________________*/
             function toggleMenu() {
             var menu = document.getElementById("menuDropdown");
