@@ -1304,7 +1304,7 @@
             let configLight = null;
 
             eraWidget.init({
-            onConfiguration: (configuration) => {
+            onConfiguration:(configuration) => {
                 configLight = configuration.realtime_configs.find(cfg => cfg.name === lightID);
                 
                 if (!configLight) {
@@ -1319,7 +1319,7 @@
 
                 // Kiểm tra nếu config không undefined
                 if (configLight && values[config.id]) {
-                    const lightVal = values[configLight.id].value = lightVal;
+                    const lightVal = values[configLight.id].value;
                     
                     // Kiểm tra nếu giá trị khác với trạng thái hiện tại của đèn và điều khiển đèn
                     if (lightVal !== (lightOn ? 1 : 0)) {
