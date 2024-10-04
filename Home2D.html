@@ -1303,7 +1303,7 @@
 
             eraWidget.init({
             onConfiguration:(configuration) => {
-                configLight = configuration.realtime_configs.find(cfg => cfg.id === lightID);
+                configLight = configuration.realtime_configs.find(cfg => cfg.name === lightID);
                 
         
                 if (!configLight) {
